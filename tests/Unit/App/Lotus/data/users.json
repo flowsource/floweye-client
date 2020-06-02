@@ -1,0 +1,95 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 1,
+      "email": "first@ispalliance.cz",
+      "name": "Super",
+      "surname": "Visor",
+      "fullname": "Super Visor",
+      "gravatar": "https://www.gravatar.com/avatar/d9f34a74d2248b5727096a84dce5ee89?default=retro",
+      "last_logged_at": null
+    },
+    {
+      "id": 2,
+      "email": "second@ispalliance.cz",
+      "name": "Michal",
+      "surname": "Jackson",
+      "fullname": "Michal Jackson",
+      "gravatar": "https://www.gravatar.com/avatar/a713045cc218ffcb61617f52836b6edc?default=retro",
+      "last_logged_at": null
+    },
+    {
+      "id": 3,
+      "email": "third@firma.cz",
+      "name": "Marcela",
+      "surname": "Suchá",
+      "fullname": "Marcela Suchá",
+      "gravatar": "https://www.gravatar.com/avatar/e322007324c14ce9e0c8b5013cfc317f?default=retro",
+      "last_logged_at": null
+    },
+    {
+      "id": 4,
+      "email": "fourth@firma.cz",
+      "name": "Zdeněk",
+      "surname": "Novotný",
+      "fullname": "Zdeněk Novotný",
+      "gravatar": "https://www.gravatar.com/avatar/74e2264f12cf1bcbe487684acdbd6543?default=retro",
+      "last_logged_at": null
+    },
+    {
+      "id": 5,
+      "email": "fifth@tlapnet.cz",
+      "name": "Milan",
+      "surname": "Rosol",
+      "fullname": "Milan Rosol",
+      "gravatar": "https://www.gravatar.com/avatar/5e2b985cb929bbc49ce9cded5e92bb90?default=retro",
+      "last_logged_at": null
+    },
+    {
+      "id": 6,
+      "email": "sixth@tlapnet.cz",
+      "name": "Paul",
+      "surname": "Myc",
+      "fullname": "Paul Myc",
+      "gravatar": "https://www.gravatar.com/avatar/3c2a81813704143afe56fa21f40d686f?default=retro",
+      "last_logged_at": null
+    },
+    {
+      "id": 7,
+      "email": "seventh@tlapnet.cz",
+      "name": "Pepik",
+      "surname": "Benino",
+      "fullname": "Josef Benino",
+      "gravatar": "https://www.gravatar.com/avatar/6b257ee9e84b8c59371b8071e75ab87c?default=retro",
+      "last_logged_at": null
+    },
+    {
+      "id": 8,
+      "email": "eighth@grapesc.cz",
+      "name": "Patrik",
+      "surname": "Cepice",
+      "fullname": "Patrik Cepice",
+      "gravatar": "https://www.gravatar.com/avatar/7270a3b80445132230f32e29cdbb61e5?default=retro",
+      "last_logged_at": null
+    },
+    {
+      "id": 9,
+      "email": "ninth@seznam.cz",
+      "name": "Tomas",
+      "surname": "Jedno",
+      "fullname": "Tomas Jedno",
+      "gravatar": "https://www.gravatar.com/avatar/4d32c654ca4e4dfc0af866278020bf27?default=retro",
+      "last_logged_at": "2019-01-14T08:45:46+01:00"
+    },
+    {
+      "id": 10,
+      "email": "tenth@gmail.com",
+      "name": "Filip",
+      "surname": "Soukenik",
+      "fullname": "Filip Soukenik",
+      "gravatar": "https://www.gravatar.com/avatar/557ab5faa0c945c868250eb680a47383?default=retro",
+      "last_logged_at": null
+    }
+  ]
+}

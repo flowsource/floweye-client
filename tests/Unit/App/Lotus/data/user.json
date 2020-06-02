@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "email": "user@ispalliance.cz",
+    "name": "Leopold",
+    "surname": "Augustus",
+    "fullname": "Leopoldus Augustus Ispus",
+    "gravatar": "https://www.gravatar.com/avatar/d9f34a74d2248b5727096a84dce5ee89?default=retro",
+    "last_logged_at": null
+  }
+}
