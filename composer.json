@@ -1,0 +1,57 @@
+{
+  "name": "flowsource/floweye-client",
+  "description": "FlowEye api client",
+  "keywords": [
+    "floweye",
+    "api"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/flowsource/floweye-client",
+  "authors": [
+    {
+      "name": "Milan Felix Šulc",
+      "homepage": "https://f3l1x.io"
+    },
+    {
+      "name": "Marek Bartoš",
+      "homepage": "https://github.com/mabar"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-json": "*",
+    "contributte/utils": "^0.3.2 || ^0.4.0",
+    "guzzlehttp/guzzle": "^6.3.3"
+  },
+  "require-dev": {
+    "nette/di": "^2.4.15 || ^3.0.0",
+    "ninjify/coding-standard": "^0.10.0",
+    "phpstan/extension-installer": "^1.0.0",
+    "phpstan/phpstan": "^0.12.0",
+    "phpstan/phpstan-deprecation-rules": "^0.12.0",
+    "phpstan/phpstan-nette": "^0.12.0",
+    "phpstan/phpstan-strict-rules": "^0.12.0",
+    "phpunit/phpunit": "^9.0.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FlowEye\\ApiClient\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\FlowEye\\ApiClient\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1.x-dev"
+    }
+  }
+}

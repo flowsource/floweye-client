@@ -1,0 +1,9 @@
+extensions:
+	ispa.api: FlowEye\ApiClient\DI\ApiClientsExtension
+
+ispa.api:
+	debug: true
+	app:
+		lotus:
+			http:
+				baseUri: http://lotus.example.com/api/v1/

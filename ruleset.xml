@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset>
+	<!-- Base ruleset -->
+	<rule ref="./vendor/ninjify/coding-standard/contributte.xml"/>
+
+	<!-- Package specific rules -->
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array" value="
+				src   => FlowEye\ApiClient,
+				tests => Tests\FlowEye\ApiClient,
+			"/>
+			<property name="extensions" type="array" value="php,phpt"/>
+		</properties>
+	</rule>
+</ruleset>

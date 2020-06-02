@@ -1,0 +1,6 @@
+includes:
+	- phpstan.base.neon
+
+parameters:
+	excludes_analyse:
+		- src/DI/ApiClientsExtension24.php
