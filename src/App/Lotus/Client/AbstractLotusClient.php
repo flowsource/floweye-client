@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Client;
+namespace Floweye\Client\App\Lotus\Client;
 
 use Contributte\Utils\Validators;
-use FlowEye\ApiClient\Exception\LogicalException;
-use FlowEye\ApiClient\Http\HttpClient;
+use Floweye\Client\Exception\LogicalException;
+use Floweye\Client\Http\HttpClient;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractLotusClient

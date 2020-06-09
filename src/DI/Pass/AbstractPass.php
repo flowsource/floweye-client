@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\DI\Pass;
+namespace Floweye\Client\DI\Pass;
 
-use FlowEye\ApiClient\DI\ApiClientsExtension;
+use Floweye\Client\DI\ApiClientsExtension;
 use Nette\PhpGenerator\ClassType;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;

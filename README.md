@@ -30,9 +30,9 @@ Register DI extension in your NEON file.
 ```yaml
 extensions:
     # For Nette 3.0+
-    floweye.api: FlowEye\ApiClient\DI\ApiClientsExtension
+    floweye.api: Floweye\Client\DI\ApiClientsExtension
     # For Nette 2.4
-    floweye.api: FlowEye\ApiClient\DI\ApiClientsExtension24
+    floweye.api: Floweye\Client\DI\ApiClientsExtension24
 
 floweye.api:
     debug: %debugMode%

@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\DI;
+namespace Floweye\Client\DI;
 
-use FlowEye\ApiClient\DI\Pass\AbstractPass;
-use FlowEye\ApiClient\DI\Pass\AppLotusPass;
+use Floweye\Client\DI\Pass\AbstractPass;
+use Floweye\Client\DI\Pass\AppLotusPass;
 use Nette\Utils\Validators;
 
 class ApiClientsExtension24 extends ApiClientsExtension

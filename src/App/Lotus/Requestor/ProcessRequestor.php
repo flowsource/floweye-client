@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Requestor;
+namespace Floweye\Client\App\Lotus\Requestor;
 
-use FlowEye\ApiClient\App\Lotus\Client\ProcessClient;
-use FlowEye\ApiClient\App\Lotus\Filter\ProcessListFilter;
+use Floweye\Client\App\Lotus\Client\ProcessClient;
+use Floweye\Client\App\Lotus\Filter\ProcessListFilter;
 
 /**
  * @property ProcessClient $client

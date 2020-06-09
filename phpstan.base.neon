@@ -2,4 +2,4 @@ includes:
 	- vendor/phpstan/phpstan/conf/bleedingEdge.neon
 
 parameters:
-	tmpDir: %currentWorkingDirectory%/tmp/PHPStan
+	tmpDir: %currentWorkingDirectory%/tmp/phpstan

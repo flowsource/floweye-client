@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Filter;
+namespace Floweye\Client\App\Lotus\Filter;
 
 class UserListFilter
 {

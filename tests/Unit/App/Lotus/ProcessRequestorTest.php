@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\FlowEye\ApiClient\Unit\App\Lotus;
+namespace Tests\Floweye\Client\Unit\App\Lotus;
 
-use FlowEye\ApiClient\App\Lotus\Client\ProcessClient;
-use FlowEye\ApiClient\App\Lotus\Requestor\ProcessRequestor;
-use Tests\FlowEye\ApiClient\Unit\App\AbstractAppTestCase;
+use Floweye\Client\App\Lotus\Client\ProcessClient;
+use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
+use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;
 
 class ProcessRequestorTest extends AbstractAppTestCase
 {

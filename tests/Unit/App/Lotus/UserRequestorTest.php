@@ -1,14 +1,14 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\FlowEye\ApiClient\Unit\App\Lotus;
+namespace Tests\Floweye\Client\Unit\App\Lotus;
 
-use FlowEye\ApiClient\App\Lotus\Client\UserClient;
-use FlowEye\ApiClient\App\Lotus\Requestor\UserRequestor;
-use FlowEye\ApiClient\Exception\Runtime\ResponseException;
-use FlowEye\ApiClient\Http\HttpClient;
+use Floweye\Client\App\Lotus\Client\UserClient;
+use Floweye\Client\App\Lotus\Requestor\UserRequestor;
+use Floweye\Client\Exception\Runtime\ResponseException;
+use Floweye\Client\Http\HttpClient;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
-use Tests\FlowEye\ApiClient\Unit\App\AbstractAppTestCase;
+use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;
 
 class UserRequestorTest extends AbstractAppTestCase
 {

@@ -1,15 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus;
+namespace Floweye\Client\App\Lotus;
 
-use FlowEye\ApiClient\App\Lotus\Requestor\BaseRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\CalendarRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\PlanRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\ProcessRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\SnippetRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\UserGroupRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\UserRequestor;
-use FlowEye\ApiClient\Exception\Logical\InvalidStateException;
+use Floweye\Client\App\Lotus\Requestor\BaseRequestor;
+use Floweye\Client\App\Lotus\Requestor\CalendarRequestor;
+use Floweye\Client\App\Lotus\Requestor\PlanRequestor;
+use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
+use Floweye\Client\App\Lotus\Requestor\SnippetRequestor;
+use Floweye\Client\App\Lotus\Requestor\UserGroupRequestor;
+use Floweye\Client\App\Lotus\Requestor\UserRequestor;
+use Floweye\Client\Exception\Logical\InvalidStateException;
 
 /**
  * @property-read CalendarRequestor $calendar

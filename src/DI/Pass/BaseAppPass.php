@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\DI\Pass;
+namespace Floweye\Client\DI\Pass;
 
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;

@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\Exception\Logical;
+namespace Floweye\Client\Exception\Logical;
 
-use FlowEye\ApiClient\Exception\LogicalException;
+use Floweye\Client\Exception\LogicalException;
 
 class InvalidStateException extends LogicalException
 {

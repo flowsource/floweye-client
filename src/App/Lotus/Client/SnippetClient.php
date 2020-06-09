@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Client;
+namespace Floweye\Client\App\Lotus\Client;
 
-use FlowEye\ApiClient\Http\Utils\Helpers;
+use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 

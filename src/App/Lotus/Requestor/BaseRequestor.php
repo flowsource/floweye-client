@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Requestor;
+namespace Floweye\Client\App\Lotus\Requestor;
 
-use FlowEye\ApiClient\App\Lotus\Client\AbstractLotusClient;
-use FlowEye\ApiClient\App\Lotus\Entity\LotusResponse;
-use FlowEye\ApiClient\Exception\Runtime\ResponseException;
+use Floweye\Client\App\Lotus\Client\AbstractLotusClient;
+use Floweye\Client\App\Lotus\Entity\LotusResponse;
+use Floweye\Client\Exception\Runtime\ResponseException;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use Psr\Http\Message\ResponseInterface;

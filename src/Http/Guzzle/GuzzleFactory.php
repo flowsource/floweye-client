@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\Http\Guzzle;
+namespace Floweye\Client\Http\Guzzle;
 
 use GuzzleHttp\Client;
 

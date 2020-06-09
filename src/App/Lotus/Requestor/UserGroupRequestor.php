@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Requestor;
+namespace Floweye\Client\App\Lotus\Requestor;
 
-use FlowEye\ApiClient\App\Lotus\Client\UserGroupClient;
-use FlowEye\ApiClient\App\Lotus\Entity\UserGroupCreateEntity;
-use FlowEye\ApiClient\App\Lotus\Entity\UserGroupEditEntity;
+use Floweye\Client\App\Lotus\Client\UserGroupClient;
+use Floweye\Client\App\Lotus\Entity\UserGroupCreateEntity;
+use Floweye\Client\App\Lotus\Entity\UserGroupEditEntity;
 
 /**
  * @property UserGroupClient $client

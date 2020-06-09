@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\Exception\Runtime;
+namespace Floweye\Client\Exception\Runtime;
 
-use FlowEye\ApiClient\Exception\RuntimeException;
+use Floweye\Client\Exception\RuntimeException;
 use Psr\Http\Message\ResponseInterface;
 
 class ResponseException extends RuntimeException

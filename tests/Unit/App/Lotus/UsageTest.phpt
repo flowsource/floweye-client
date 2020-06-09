@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\FlowEye\ApiClient\Unit\App\Lotus;
+namespace Tests\Floweye\Client\Unit\App\Lotus;
 
-use FlowEye\ApiClient\App\Lotus\Client\ProcessClient;
-use FlowEye\ApiClient\App\Lotus\Client\UserClient;
-use FlowEye\ApiClient\App\Lotus\Requestor\ProcessRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\UserRequestor;
-use FlowEye\ApiClient\Http\Guzzle\GuzzleClient;
-use FlowEye\ApiClient\Http\Guzzle\GuzzleFactory;
+use Floweye\Client\App\Lotus\Client\ProcessClient;
+use Floweye\Client\App\Lotus\Client\UserClient;
+use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
+use Floweye\Client\App\Lotus\Requestor\UserRequestor;
+use Floweye\Client\Http\Guzzle\GuzzleClient;
+use Floweye\Client\Http\Guzzle\GuzzleFactory;
 use PHPUnit\Framework\TestCase;
 
 final class UsageTest extends TestCase

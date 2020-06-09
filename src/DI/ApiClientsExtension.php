@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\DI;
+namespace Floweye\Client\DI;
 
-use FlowEye\ApiClient\DI\Pass\AbstractPass;
-use FlowEye\ApiClient\DI\Pass\AppLotusPass;
-use FlowEye\ApiClient\DI\Pass\CorePass;
+use Floweye\Client\DI\Pass\AbstractPass;
+use Floweye\Client\DI\Pass\AppLotusPass;
+use Floweye\Client\DI\Pass\CorePass;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
 use Nette\Schema\Expect;

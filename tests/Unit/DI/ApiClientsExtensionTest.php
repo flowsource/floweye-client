@@ -1,27 +1,27 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\FlowEye\ApiClient\Unit\DI;
+namespace Tests\Floweye\Client\Unit\DI;
 
-use FlowEye\ApiClient\App\Lotus\Client\CalendarClient;
-use FlowEye\ApiClient\App\Lotus\Client\PlanClient;
-use FlowEye\ApiClient\App\Lotus\Client\ProcessClient;
-use FlowEye\ApiClient\App\Lotus\Client\SnippetClient;
-use FlowEye\ApiClient\App\Lotus\Client\UserClient;
-use FlowEye\ApiClient\App\Lotus\Client\UserGroupClient;
-use FlowEye\ApiClient\App\Lotus\LotusRootquestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\CalendarRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\PlanRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\ProcessRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\SnippetRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\UserGroupRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\UserRequestor;
-use FlowEye\ApiClient\DI\ApiClientsExtension;
-use FlowEye\ApiClient\DI\ApiClientsExtension24;
-use FlowEye\ApiClient\Http\Guzzle\GuzzleFactory;
-use FlowEye\ApiClient\Http\HttpClient;
+use Floweye\Client\App\Lotus\Client\CalendarClient;
+use Floweye\Client\App\Lotus\Client\PlanClient;
+use Floweye\Client\App\Lotus\Client\ProcessClient;
+use Floweye\Client\App\Lotus\Client\SnippetClient;
+use Floweye\Client\App\Lotus\Client\UserClient;
+use Floweye\Client\App\Lotus\Client\UserGroupClient;
+use Floweye\Client\App\Lotus\LotusRootquestor;
+use Floweye\Client\App\Lotus\Requestor\CalendarRequestor;
+use Floweye\Client\App\Lotus\Requestor\PlanRequestor;
+use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
+use Floweye\Client\App\Lotus\Requestor\SnippetRequestor;
+use Floweye\Client\App\Lotus\Requestor\UserGroupRequestor;
+use Floweye\Client\App\Lotus\Requestor\UserRequestor;
+use Floweye\Client\DI\ApiClientsExtension;
+use Floweye\Client\DI\ApiClientsExtension24;
+use Floweye\Client\Http\Guzzle\GuzzleFactory;
+use Floweye\Client\Http\HttpClient;
 use Nette\DI\Compiler;
 use Nette\DI\Definitions\ServiceDefinition;
-use Tests\FlowEye\ApiClient\Toolkit\ContainerTestCase;
+use Tests\Floweye\Client\Toolkit\ContainerTestCase;
 
 class ApiClientsExtensionTest extends ContainerTestCase
 {

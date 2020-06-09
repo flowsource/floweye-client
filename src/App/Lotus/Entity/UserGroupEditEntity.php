@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Entity;
+namespace Floweye\Client\App\Lotus\Entity;
 
 class UserGroupEditEntity
 {

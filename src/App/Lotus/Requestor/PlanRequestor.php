@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Requestor;
+namespace Floweye\Client\App\Lotus\Requestor;
 
-use FlowEye\ApiClient\App\Lotus\Client\PlanClient;
-use FlowEye\ApiClient\App\Lotus\Entity\PlanProcessCreateEntity;
+use Floweye\Client\App\Lotus\Client\PlanClient;
+use Floweye\Client\App\Lotus\Entity\PlanProcessCreateEntity;
 
 /**
  * @property-read PlanClient $client

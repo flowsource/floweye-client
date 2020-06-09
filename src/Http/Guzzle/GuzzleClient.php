@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\Http\Guzzle;
+namespace Floweye\Client\Http\Guzzle;
 
-use FlowEye\ApiClient\Exception\Runtime\RequestException;
-use FlowEye\ApiClient\Http\HttpClient;
+use Floweye\Client\Exception\Runtime\RequestException;
+use Floweye\Client\Http\HttpClient;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;

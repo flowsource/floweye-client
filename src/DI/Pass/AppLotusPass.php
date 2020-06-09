@@ -1,21 +1,21 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\DI\Pass;
+namespace Floweye\Client\DI\Pass;
 
-use FlowEye\ApiClient\App\Lotus\Client\CalendarClient;
-use FlowEye\ApiClient\App\Lotus\Client\PlanClient;
-use FlowEye\ApiClient\App\Lotus\Client\ProcessClient;
-use FlowEye\ApiClient\App\Lotus\Client\SnippetClient;
-use FlowEye\ApiClient\App\Lotus\Client\UserClient;
-use FlowEye\ApiClient\App\Lotus\Client\UserGroupClient;
-use FlowEye\ApiClient\App\Lotus\LotusRootquestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\CalendarRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\PlanRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\ProcessRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\SnippetRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\UserGroupRequestor;
-use FlowEye\ApiClient\App\Lotus\Requestor\UserRequestor;
-use FlowEye\ApiClient\Http\HttpClient;
+use Floweye\Client\App\Lotus\Client\CalendarClient;
+use Floweye\Client\App\Lotus\Client\PlanClient;
+use Floweye\Client\App\Lotus\Client\ProcessClient;
+use Floweye\Client\App\Lotus\Client\SnippetClient;
+use Floweye\Client\App\Lotus\Client\UserClient;
+use Floweye\Client\App\Lotus\Client\UserGroupClient;
+use Floweye\Client\App\Lotus\LotusRootquestor;
+use Floweye\Client\App\Lotus\Requestor\CalendarRequestor;
+use Floweye\Client\App\Lotus\Requestor\PlanRequestor;
+use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
+use Floweye\Client\App\Lotus\Requestor\SnippetRequestor;
+use Floweye\Client\App\Lotus\Requestor\UserGroupRequestor;
+use Floweye\Client\App\Lotus\Requestor\UserRequestor;
+use Floweye\Client\Http\HttpClient;
 
 class AppLotusPass extends BaseAppPass
 {

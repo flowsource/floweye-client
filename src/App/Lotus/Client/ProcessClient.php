@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Client;
+namespace Floweye\Client\App\Lotus\Client;
 
-use FlowEye\ApiClient\App\Lotus\Filter\ProcessListFilter;
-use FlowEye\ApiClient\Http\Utils\Helpers;
+use Floweye\Client\App\Lotus\Filter\ProcessListFilter;
+use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 

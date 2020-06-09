@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\FlowEye\ApiClient\Toolkit;
+namespace Tests\Floweye\Client\Toolkit;
 
 use PHPUnit\Framework\TestCase as PUTestCase;
 

@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\App\Lotus\Requestor;
+namespace Floweye\Client\App\Lotus\Requestor;
 
-use FlowEye\ApiClient\App\Lotus\Client\UserClient;
-use FlowEye\ApiClient\App\Lotus\Entity\UserCreateEntity;
-use FlowEye\ApiClient\App\Lotus\Entity\UserEditEntity;
-use FlowEye\ApiClient\App\Lotus\Filter\UserListFilter;
+use Floweye\Client\App\Lotus\Client\UserClient;
+use Floweye\Client\App\Lotus\Entity\UserCreateEntity;
+use Floweye\Client\App\Lotus\Entity\UserEditEntity;
+use Floweye\Client\App\Lotus\Filter\UserListFilter;
 
 /**
  * @property UserClient $client

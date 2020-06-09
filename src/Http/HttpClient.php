@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\Http;
+namespace Floweye\Client\Http;
 
-use FlowEye\ApiClient\Exception\Runtime\RequestException;
+use Floweye\Client\Exception\Runtime\RequestException;
 use Psr\Http\Message\ResponseInterface;
 
 interface HttpClient

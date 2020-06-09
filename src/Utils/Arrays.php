@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\Utils;
+namespace Floweye\Client\Utils;
 
 use Nette\Utils\Arrays as NArrays;
 

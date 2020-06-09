@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\FlowEye\ApiClient\Unit\App;
+namespace Tests\Floweye\Client\Unit\App;
 
-use FlowEye\ApiClient\Http\HttpClient;
+use Floweye\Client\Http\HttpClient;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;

@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\DI\Pass;
+namespace Floweye\Client\DI\Pass;
 
-use FlowEye\ApiClient\Http\Guzzle\GuzzleFactory;
-use FlowEye\ApiClient\Utils\Arrays;
+use Floweye\Client\Http\Guzzle\GuzzleFactory;
+use Floweye\Client\Utils\Arrays;
 
 class CorePass extends AbstractPass
 {

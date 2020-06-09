@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace FlowEye\ApiClient\Http\Utils;
+namespace Floweye\Client\Http\Utils;
 
 class Helpers
 {

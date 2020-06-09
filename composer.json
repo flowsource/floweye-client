@@ -40,12 +40,12 @@
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "FlowEye\\ApiClient\\": "src"
+      "Floweye\\Client\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\FlowEye\\ApiClient\\": "tests"
+      "Tests\\Floweye\\Client\\": "tests"
     }
   },
   "config": {

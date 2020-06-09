@@ -1,7 +1,7 @@
 extensions:
-	ispa.api: FlowEye\ApiClient\DI\ApiClientsExtension
+	floweye.api: Floweye\Client\DI\ApiClientsExtension
 
-ispa.api:
+floweye.api:
 	debug: true
 	app:
 		lotus:
