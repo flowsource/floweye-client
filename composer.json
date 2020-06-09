@@ -1,9 +1,11 @@
 {
-  "name": "flowsource/floweye-client",
-  "description": "FlowEye api client",
+  "name": "floweye/client",
+  "description": "Floweye PHP API client",
   "keywords": [
     "floweye",
-    "api"
+    "api",
+    "sdk",
+    "http"
   ],
   "type": "library",
   "license": "MIT",
