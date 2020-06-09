@@ -1,25 +1,31 @@
-<h1 align="center">FlowEye ApiClient</h1>
+<h1 align="center">Floweye ApiClient</h1>
 
-<p align="center">PHP API client for <a href="https://floweye.app">FlowEye</a> - <a href="https://api.floweye.app">REST API</a></p>
+<p align="center">PHP API client for <a href="https://floweye.app">Floweye</a> - <a href="https://api.floweye.app">REST API</a> - <a href="https://docs.floweye.app">Docs</a></p>
 
 <p align=center>
   <a href="https://github.com/flowsource/floweye-client/actions"><img src="https://badgen.net/github/checks/flowsource/floweye-client/master?cache=300"></a>
   <a href="https://coveralls.io/r/flowsource/floweye-client"><img src="https://badgen.net/coveralls/c/github/flowsource/floweye-client?cache=300"></a>
-  <a href="https://packagist.org/packages/flowsource/floweye-client"><img src="https://badgen.net/packagist/dm/flowsource/floweye-client"></a>
-  <a href="https://packagist.org/packages/flowsource/floweye-client"><img src="https://badgen.net/packagist/v/flowsource/floweye-client"></a>
+  <a href="https://packagist.org/packages/floweye/client"><img src="https://badgen.net/packagist/dm/floweye/client"></a>
+  <a href="https://packagist.org/packages/floweye/client"><img src="https://badgen.net/packagist/v/floweye/client"></a>
 <p>
 
-# Documentation
+-----
+
+## Versions
+
+| State  | Version      | Branch   | Nette        | PHP     |
+|--------|--------------|----------|--------------|---------|
+| dev    | `^0.1.0`     | `master` | `2.4`, `3.0` | `>=7.2` |
 
 ## Setup
 
-Install package
+Install package using Composer.
 
 ```bash
-composer require flowsource/floweye-client
+composer require floweye/client
 ```
 
-Register DI extension in your neon
+Register DI extension in your NEON file.
 
 ```yaml
 extensions:
@@ -32,9 +38,7 @@ floweye.api:
     debug: %debugMode%
 ```
 
-Configure connection
-
-Under key `http` configure [Guzzle HTTP client]([Guzzle doc](https://guzzle.readthedocs.io/en/latest/quickstart.html))
+Configure connection under key `http` configure [Guzzle HTTP client]([Guzzle doc](https://guzzle.readthedocs.io/en/latest/quickstart.html)).
 
 ```yaml
 floweye.api:
@@ -131,27 +135,29 @@ public function magic(): void
 
 **ProcessRequestor**
 
-| Method                                           | API path                           | Type   |
-| ------------------------------------------------ | ---------------------------------- | ------ |
-| listProcesses($limit, $offset, $filter, $include) | /processes                         | GET    |
-| getProcess($id, $include)                        | /processes/{id}                    | GET    |
-| addTag($pid, $ttid)                              | /processes/{pid}/tags/{ttid}       | POST   |
-| removeTag($pid, $ttid)                           | /processes/{pid}/tags/{ttid}       | DELETE |
-| moveProcessToNextStep($id)                       | /processes/{id}/next               | POST   |
-| uploadFile($id, $variable, $fileName, $contents) | /process/{id}/upload               | POST   |
-| listTemplates($limit, $offset, $startableOnly, $include) | /template-processes                | GET    |
-| getTemplate($id, $include)                       | /template-processes/{id}           | GET    |
-| createTemplate($entity)                          | /template-processes                | POST   |
-| deleteTemplate($id)                              | /template-processes/{id}           | DELETE |
-| archiveTemplate($id)                             | /template-processes/{id}/archive   | PATCH  |
-| startProcess($tid, $data, $include)              | /template-processes/{id}/start     | POST   |
+| Method                                                    | API path                           | Type   |
+| ------------------------------------------------ ---------| ---------------------------------- | ------ |
+| listProcesses($limit, $offset, $filter, $include)         | /processes                         | GET    |
+| getProcess($id, $include)                                 | /processes/{id}                    | GET    |
+| addTag($pid, $ttid)                                       | /processes/{pid}/tags/{ttid}       | POST   |
+| removeTag($pid, $ttid)                                    | /processes/{pid}/tags/{ttid}       | DELETE |
+| moveProcessToNextStep($id)                                | /processes/{id}/next               | POST   |
+| uploadFile($id, $variable, $fileName, $contents)          | /process/{id}/upload               | POST   |
+| listTemplates($limit, $offset, $startableOnly, $include)  | /template-processes                | GET    |
+| getTemplate($id, $include)                                | /template-processes/{id}           | GET    |
+| createTemplate($entity)                                   | /template-processes                | POST   |
+| deleteTemplate($id)                                       | /template-processes/{id}           | DELETE |
+| archiveTemplate($id)                                      | /template-processes/{id}/archive   | PATCH  |
+| startProcess($tid, $data, $include)                       | /template-processes/{id}/start     | POST   |
 
 *1 Note: listProcesses $filter expects $variables to be array of variables to search for in format ["name" => "value", ...] eg ["user" => "10", "status" => "active"]
 
 *2 Note: startProcess detailed info:
 
 StartProcess method accepts an optional parameter $data with which you can set process default variables, assign users to roles etc.
+
 Please see example of $data with comments below:
+
 ```php
 $data = [
     // set values to process variables
@@ -168,9 +174,3 @@ $data = [
     'next' => 2,
 ];
 ```
-
-## Versions
-
-| State  | Version      | Branch   | Nette        | PHP     |
-|--------|--------------|----------|--------------|---------|
-| dev    | `^0.1.0`     | `master` | `2.4`, `3.0` | `>=7.2` |
