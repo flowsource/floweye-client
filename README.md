@@ -1,4 +1,4 @@
-<h1 align="center">Floweye ApiClient</h1>
+<h1 align="center">Floweye PHP SDK</h1>
 
 <p align="center">PHP API client for <a href="https://floweye.app">Floweye</a> - <a href="https://api.floweye.app">REST API</a> - <a href="https://docs.floweye.app">Docs</a></p>
 
