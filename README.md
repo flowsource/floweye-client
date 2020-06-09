@@ -45,7 +45,7 @@ floweye.api:
     app:
         lotus:
             http:
-                base_uri: http://lotus.ispa.cz/api/v1/
+                base_uri: https://floweye.tld/api/v1/
                 headers:
                     X-Api-Token: token
 ```
