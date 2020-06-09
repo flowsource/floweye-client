@@ -136,7 +136,7 @@ public function magic(): void
 **ProcessRequestor**
 
 | Method                                                    | API path                           | Type   |
-| ------------------------------------------------ ---------| ---------------------------------- | ------ |
+| ----------------------------------------------------------| ---------------------------------- | ------ |
 | listProcesses($limit, $offset, $filter, $include)         | /processes                         | GET    |
 | getProcess($id, $include)                                 | /processes/{id}                    | GET    |
 | addTag($pid, $ttid)                                       | /processes/{pid}/tags/{ttid}       | POST   |
