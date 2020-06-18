@@ -3,8 +3,8 @@
 <p align="center">PHP API client for <a href="https://floweye.app">Floweye</a> - <a href="https://api.floweye.app">REST API</a> - <a href="https://docs.floweye.app">Docs</a></p>
 
 <p align=center>
-  <a href="https://github.com/flowsource/floweye-client/actions"><img src="https://badgen.net/github/checks/flowsource/floweye-client/master?cache=300"></a>
-  <a href="https://coveralls.io/r/flowsource/floweye-client"><img src="https://badgen.net/coveralls/c/github/flowsource/floweye-client?cache=300"></a>
+  <a href="https://github.com/flowsource/floweye-client/actions"><img src="https://badgen.net/github/status/flowsource/floweye-client/"></a>
+  <a href="https://coveralls.io/r/flowsource/floweye-client"><img src="https://badgen.net/coveralls/c/github/flowsource/floweye-client/"></a>
   <a href="https://packagist.org/packages/floweye/client"><img src="https://badgen.net/packagist/dm/floweye/client"></a>
   <a href="https://packagist.org/packages/floweye/client"><img src="https://badgen.net/packagist/v/floweye/client"></a>
 <p>
