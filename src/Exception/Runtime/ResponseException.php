@@ -18,6 +18,8 @@ class ResponseException extends RuntimeException
 		}
 
 		parent::__construct($message, $response->getStatusCode());
+
+		$this->response = $response;
 	}
 
 	public function getResponse(): ResponseInterface
