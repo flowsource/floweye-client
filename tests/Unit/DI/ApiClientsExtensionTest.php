@@ -8,7 +8,6 @@ use Floweye\Client\App\Lotus\Client\ProcessClient;
 use Floweye\Client\App\Lotus\Client\SnippetClient;
 use Floweye\Client\App\Lotus\Client\UserClient;
 use Floweye\Client\App\Lotus\Client\UserGroupClient;
-use Floweye\Client\App\Lotus\LotusRootquestor;
 use Floweye\Client\App\Lotus\Requestor\CalendarRequestor;
 use Floweye\Client\App\Lotus\Requestor\PlanRequestor;
 use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
@@ -66,16 +65,6 @@ class ApiClientsExtensionTest extends ContainerTestCase
 		static::assertInstanceOf(SnippetRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.snippet'));
 		static::assertInstanceOf(UserRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.user'));
 		static::assertInstanceOf(UserGroupRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.userGroup'));
-
-		static::assertInstanceOf(LotusRootquestor::class, $container->getService('ispa.apis.app.lotus.rootquestor'));
-
-		$rootquestor = $container->getService('ispa.apis.app.lotus.rootquestor');
-		assert($rootquestor instanceof LotusRootquestor);
-		static::assertInstanceOf(CalendarRequestor::class, $rootquestor->calendar);
-		static::assertInstanceOf(ProcessRequestor::class, $rootquestor->process);
-		static::assertInstanceOf(SnippetRequestor::class, $rootquestor->snippet);
-		static::assertInstanceOf(UserRequestor::class, $rootquestor->user);
-		static::assertInstanceOf(UserGroupRequestor::class, $rootquestor->userGroup);
 	}
 
 }
