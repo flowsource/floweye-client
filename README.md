@@ -50,29 +50,23 @@ floweye.api:
                     X-Api-Token: token
 ```
 
-## Architecture
+## Requestors
 
-```
-*Rootquestor(s) -> *Requestor(s) -> endpoint method
-```
-
-### Rootquestor
+Simply inject any requestor and access its endpoints.
 
 ```php
-/** @var LotusRootquestor @inject */
-public $api;
+/** @var UserRequestor @inject */
+public $users;
 
 public function magic(): void
 {
-    $users = $this->api->users->getAll();
+    $user = $this->users->getById(1);
 }
 ```
 
-You can directly pick one of the **rootquestor** and access his **requestors**. This is limited by single API.
+## Guzzle
 
-### Guzzle
-
-This is very low-level of managing our APIs. It's basically only configured
+This is low-level usage of our APIs. It's basically only configured
 Guzzle client with credentials, timeout settings etc for particular application.
 
 Official documentation for [Guzzle is here](https://guzzle.readthedocs.io/en/latest/quickstart.html).
