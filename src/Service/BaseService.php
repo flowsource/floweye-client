@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\Requestor;
+namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\AbstractLotusClient;
 use Floweye\Client\Entity\LotusResponse;
@@ -9,7 +9,7 @@ use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use Psr\Http\Message\ResponseInterface;
 
-class BaseRequestor
+class BaseService
 {
 
 	/** @var AbstractLotusClient */

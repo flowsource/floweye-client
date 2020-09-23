@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\Requestor;
+namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\SnippetClient;
 
 /**
  * @property SnippetClient $client
  */
-class SnippetRequestor extends BaseRequestor
+class SnippetService extends BaseService
 {
 
 	public function __construct(SnippetClient $client)

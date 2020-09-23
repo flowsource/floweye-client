@@ -13,7 +13,7 @@ class GuzzleFactory
 	public function create(array $config): GuzzleClient
 	{
 		// @todo $this->config['debug'] ==> Tracy panel
-		// panel pro tracy máme v contributte/guzzlette - bylo by fajn nevynalézat znovu kolo. @mabar
+		// panel pro tracy máme v contributte/guzzlette
 
 		return new GuzzleClient(new Client($config));
 	}

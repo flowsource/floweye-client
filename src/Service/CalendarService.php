@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\Requestor;
+namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\CalendarClient;
 
 /**
  * @property CalendarClient $client
  */
-class CalendarRequestor extends BaseRequestor
+class CalendarService extends BaseService
 {
 
 	public function __construct(CalendarClient $client)

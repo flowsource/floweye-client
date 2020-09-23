@@ -5,7 +5,7 @@ namespace Tests\Floweye\Client\Unit\App\Lotus;
 use Floweye\Client\Client\UserClient;
 use Floweye\Client\Exception\Runtime\ResponseException;
 use Floweye\Client\Http\HttpClient;
-use Floweye\Client\Requestor\UserRequestor;
+use Floweye\Client\Service\UserService;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;
@@ -55,7 +55,7 @@ class UserRequestorTest extends AbstractAppTestCase
 		});
 
 		$client = new UserClient($httpClient);
-		$requestor = new UserRequestor($client);
+		$requestor = new UserService($client);
 
 		self::assertFalse($requestor->isSudo());
 		$requestor->getById(1);
@@ -74,7 +74,7 @@ class UserRequestorTest extends AbstractAppTestCase
 		});
 
 		$client = new UserClient($httpClient);
-		$requestor = new UserRequestor($client);
+		$requestor = new UserService($client);
 
 		self::assertFalse($requestor->isSudo());
 		$requestor->enableSudo('email@ispa.cz');
@@ -83,12 +83,12 @@ class UserRequestorTest extends AbstractAppTestCase
 		$requestor->getById(1);
 	}
 
-	private function createRequestor(string $file): UserRequestor
+	private function createRequestor(string $file): UserService
 	{
 		$httpClient = $this->createTestClient(200, file_get_contents(__DIR__ . '/data/' . $file));
 		$usersClient = new UserClient($httpClient);
 
-		return new UserRequestor($usersClient);
+		return new UserService($usersClient);
 	}
 
 }

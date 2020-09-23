@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\Requestor;
+namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\UserClient;
 use Floweye\Client\Entity\UserCreateEntity;
@@ -10,7 +10,7 @@ use Floweye\Client\Filter\UserListFilter;
 /**
  * @property UserClient $client
  */
-final class UserRequestor extends BaseRequestor
+final class UserService extends BaseService
 {
 
 	public function __construct(UserClient $client)

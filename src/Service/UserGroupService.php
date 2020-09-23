@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\Requestor;
+namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\UserGroupClient;
 use Floweye\Client\Entity\UserGroupCreateEntity;
@@ -9,7 +9,7 @@ use Floweye\Client\Entity\UserGroupEditEntity;
 /**
  * @property UserGroupClient $client
  */
-class UserGroupRequestor extends BaseRequestor
+class UserGroupService extends BaseService
 {
 
 	public function __construct(UserGroupClient $client)

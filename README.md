@@ -36,26 +36,22 @@ extensions:
 
 floweye.api:
     debug: %debugMode%
+    http:
+        base_uri: https://floweye.tld/api/v1/
+        headers:
+            X-Api-Token: floweye_api_key
 ```
 
 Configure connection under key `http` configure [Guzzle HTTP client]([Guzzle doc](https://guzzle.readthedocs.io/en/latest/quickstart.html)).
 
-```yaml
-floweye.api:
-    app:
-        lotus:
-            http:
-                base_uri: https://floweye.tld/api/v1/
-                headers:
-                    X-Api-Token: token
-```
+## How to use
 
-## Requestors
+### High level
 
-Simply inject any requestor and access its endpoints.
+For high level usage you simply inject desired service and work directly with prepared data.
 
 ```php
-/** @var UserRequestor @inject */
+/** @var UserService @inject */
 public $users;
 
 public function magic(): void
@@ -64,29 +60,47 @@ public function magic(): void
 }
 ```
 
-## Guzzle
+### Psr response level
 
-This is low-level usage of our APIs. It's basically only configured
-Guzzle client with credentials, timeout settings etc for particular application.
-
-Official documentation for [Guzzle is here](https://guzzle.readthedocs.io/en/latest/quickstart.html).
+In case you need specific response information. You can work with our client layer.
 
 ```php
-/** @var GuzzleAppFactory @inject */
+/** @var UserClient @inject */
+public $users;
+
+public function magic(): void
+{
+    $response = $this->users->getById(1);
+}
+```
+
+### Low level
+
+```php
+/** @var GuzzleFactory @inject */
 public $guzzleFactory;
 
 public function magic(): void
 {
-    $client = $this->guzzleFactory->create('lotus');
-    $users = $client->get("users");
+    $guzzleClient = $this->guzzleFactory->create([
+        'base_uri' => 'https://floweye.tld/api/v1/',
+        'http_errors' => false,
+        'headers' => [
+            'X-Api-Token' => 'floweye-api-key',
+        ]
+    ]);
+
+    // You can now use $guzzleClient with our Clients, Services or on its own
+    $client = new UserClient($guzzleClient);
+    $service = new UserService($client);
 }
 ```
 
 ## API definition
 
-### Available requestor's methods
+### Available service's methods
 
-**UserRequestor**
+**UserService**
 
 | Method                         | API path                    | Type   |
 | ------------------------------ | --------------------------- | ------ |
@@ -95,7 +109,7 @@ public function magic(): void
 | create($entity)                | /users                      | POST   |
 | edit($entity)                  | /users/{id}                 | PUT    |
 
-**UserGroupRequestor**
+**UserGroupService**
 
 | Method                                                                | API path                       | Type   |
 | --------------------------------------------------------------------- | ------------------------------ | ------ |
@@ -105,7 +119,7 @@ public function magic(): void
 | editOne($entity)                                                      | /user-groups/{id}              | PUT    |
 | deleteOne($id)                                                        | /user-groups/{id}              | DELETE |
 
-**PlanRequestor**
+**PlanService**
 
 | Method                        | API path    | Type   |
 | ----------------------------- | ----------- | ------ |
@@ -113,7 +127,7 @@ public function magic(): void
 | createOne($entity)            | /plans      | POST   |
 | deleteOne($id)                | /plans/{id} | DELETE |
 
-**SnippetRequestor**
+**SnippetService**
 
 | Method                                       | API path       | Type   |
 | -------------------------------------------- | -------------- | ------ |
@@ -121,13 +135,13 @@ public function magic(): void
 | createSnippet($name, $description, $snippet) | /snippets      | POST   |
 | deleteSnippet($id)                           | /snippets/{id} | DELETE |
 
-**CalendarRequestor**
+**CalendarService**
 
 | Method         | API path       | Type   |
 | -------------- | -------------- | ------ |
 | getFolder($id) | /calendar/{id} | GET    |
 
-**ProcessRequestor**
+**ProcessService**
 
 | Method                                                    | API path                           | Type   |
 | ----------------------------------------------------------| ---------------------------------- | ------ |

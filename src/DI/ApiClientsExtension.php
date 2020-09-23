@@ -10,12 +10,12 @@ use Floweye\Client\Client\UserClient;
 use Floweye\Client\Client\UserGroupClient;
 use Floweye\Client\Http\Guzzle\GuzzleFactory;
 use Floweye\Client\Http\HttpClient;
-use Floweye\Client\Requestor\CalendarRequestor;
-use Floweye\Client\Requestor\PlanRequestor;
-use Floweye\Client\Requestor\ProcessRequestor;
-use Floweye\Client\Requestor\SnippetRequestor;
-use Floweye\Client\Requestor\UserGroupRequestor;
-use Floweye\Client\Requestor\UserRequestor;
+use Floweye\Client\Service\CalendarService;
+use Floweye\Client\Service\PlanService;
+use Floweye\Client\Service\ProcessService;
+use Floweye\Client\Service\SnippetService;
+use Floweye\Client\Service\UserGroupService;
+use Floweye\Client\Service\UserService;
 use Nette\DI\CompilerExtension;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
@@ -33,6 +33,10 @@ class ApiClientsExtension extends CompilerExtension
 			'debug' => Expect::bool(false),
 			'http' => Expect::structure([
 				'http_errors' => Expect::bool(false),
+				'base_uri' => Expect::string()->required(),
+				'headers' => Expect::structure([
+					'X-Api-Token' => Expect::string()->required(),
+				])->castTo('array'),
 			])->otherItems(Expect::mixed())
 				->castTo('array'),
 		])->castTo('array');
@@ -68,17 +72,17 @@ class ApiClientsExtension extends CompilerExtension
 
 		// #3 Requestors
 		$builder->addDefinition($this->prefix('requestor.calendar'))
-			->setFactory(CalendarRequestor::class, [$this->prefix('@client.calendar')]);
+			->setFactory(CalendarService::class, [$this->prefix('@client.calendar')]);
 		$builder->addDefinition($this->prefix('requestor.plan'))
-			->setFactory(PlanRequestor::class, [$this->prefix('@client.plan')]);
+			->setFactory(PlanService::class, [$this->prefix('@client.plan')]);
 		$builder->addDefinition($this->prefix('requestor.process'))
-			->setFactory(ProcessRequestor::class, [$this->prefix('@client.process')]);
+			->setFactory(ProcessService::class, [$this->prefix('@client.process')]);
 		$builder->addDefinition($this->prefix('requestor.snippet'))
-			->setFactory(SnippetRequestor::class, [$this->prefix('@client.snippet')]);
+			->setFactory(SnippetService::class, [$this->prefix('@client.snippet')]);
 		$builder->addDefinition($this->prefix('requestor.user'))
-			->setFactory(UserRequestor::class, [$this->prefix('@client.user')]);
+			->setFactory(UserService::class, [$this->prefix('@client.user')]);
 		$builder->addDefinition($this->prefix('requestor.userGroup'))
-			->setFactory(UserGroupRequestor::class, [$this->prefix('@client.userGroup')]);
+			->setFactory(UserGroupService::class, [$this->prefix('@client.userGroup')]);
 	}
 
 }
