@@ -2,22 +2,22 @@
 
 namespace Tests\Floweye\Client\Unit\DI;
 
-use Floweye\Client\App\Lotus\Client\CalendarClient;
-use Floweye\Client\App\Lotus\Client\PlanClient;
-use Floweye\Client\App\Lotus\Client\ProcessClient;
-use Floweye\Client\App\Lotus\Client\SnippetClient;
-use Floweye\Client\App\Lotus\Client\UserClient;
-use Floweye\Client\App\Lotus\Client\UserGroupClient;
-use Floweye\Client\App\Lotus\Requestor\CalendarRequestor;
-use Floweye\Client\App\Lotus\Requestor\PlanRequestor;
-use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
-use Floweye\Client\App\Lotus\Requestor\SnippetRequestor;
-use Floweye\Client\App\Lotus\Requestor\UserGroupRequestor;
-use Floweye\Client\App\Lotus\Requestor\UserRequestor;
+use Floweye\Client\Client\CalendarClient;
+use Floweye\Client\Client\PlanClient;
+use Floweye\Client\Client\ProcessClient;
+use Floweye\Client\Client\SnippetClient;
+use Floweye\Client\Client\UserClient;
+use Floweye\Client\Client\UserGroupClient;
 use Floweye\Client\DI\ApiClientsExtension;
 use Floweye\Client\DI\ApiClientsExtension24;
 use Floweye\Client\Http\Guzzle\GuzzleFactory;
 use Floweye\Client\Http\HttpClient;
+use Floweye\Client\Requestor\CalendarRequestor;
+use Floweye\Client\Requestor\PlanRequestor;
+use Floweye\Client\Requestor\ProcessRequestor;
+use Floweye\Client\Requestor\SnippetRequestor;
+use Floweye\Client\Requestor\UserGroupRequestor;
+use Floweye\Client\Requestor\UserRequestor;
 use Nette\DI\Compiler;
 use Nette\DI\Definitions\ServiceDefinition;
 use Tests\Floweye\Client\Toolkit\ContainerTestCase;
@@ -34,11 +34,7 @@ class ApiClientsExtensionTest extends ContainerTestCase
 			: new ApiClientsExtension24();
 		$compiler->addExtension('ispa.apis', $extension);
 		$compiler->addConfig([
-			'ispa.apis' => [
-				'app' => [
-					'lotus' => [],
-				],
-			],
+			'ispa.apis' => [],
 		]);
 	}
 
@@ -50,21 +46,21 @@ class ApiClientsExtensionTest extends ContainerTestCase
 		static::assertInstanceOf(GuzzleFactory::class, $container->getService('ispa.apis.guzzleFactory'));
 
 		// AppLotusPass
-		static::assertInstanceOf(HttpClient::class, $container->getService('ispa.apis.app.lotus.http.client'));
+		static::assertInstanceOf(HttpClient::class, $container->getService('ispa.apis.http.client'));
 
-		static::assertInstanceOf(CalendarClient::class, $container->getService('ispa.apis.app.lotus.client.calendar'));
-		static::assertInstanceOf(PlanClient::class, $container->getService('ispa.apis.app.lotus.client.plan'));
-		static::assertInstanceOf(ProcessClient::class, $container->getService('ispa.apis.app.lotus.client.process'));
-		static::assertInstanceOf(SnippetClient::class, $container->getService('ispa.apis.app.lotus.client.snippet'));
-		static::assertInstanceOf(UserClient::class, $container->getService('ispa.apis.app.lotus.client.user'));
-		static::assertInstanceOf(UserGroupClient::class, $container->getService('ispa.apis.app.lotus.client.userGroup'));
+		static::assertInstanceOf(CalendarClient::class, $container->getService('ispa.apis.client.calendar'));
+		static::assertInstanceOf(PlanClient::class, $container->getService('ispa.apis.client.plan'));
+		static::assertInstanceOf(ProcessClient::class, $container->getService('ispa.apis.client.process'));
+		static::assertInstanceOf(SnippetClient::class, $container->getService('ispa.apis.client.snippet'));
+		static::assertInstanceOf(UserClient::class, $container->getService('ispa.apis.client.user'));
+		static::assertInstanceOf(UserGroupClient::class, $container->getService('ispa.apis.client.userGroup'));
 
-		static::assertInstanceOf(CalendarRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.calendar'));
-		static::assertInstanceOf(PlanRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.plan'));
-		static::assertInstanceOf(ProcessRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.process'));
-		static::assertInstanceOf(SnippetRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.snippet'));
-		static::assertInstanceOf(UserRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.user'));
-		static::assertInstanceOf(UserGroupRequestor::class, $container->getService('ispa.apis.app.lotus.requestor.userGroup'));
+		static::assertInstanceOf(CalendarRequestor::class, $container->getService('ispa.apis.requestor.calendar'));
+		static::assertInstanceOf(PlanRequestor::class, $container->getService('ispa.apis.requestor.plan'));
+		static::assertInstanceOf(ProcessRequestor::class, $container->getService('ispa.apis.requestor.process'));
+		static::assertInstanceOf(SnippetRequestor::class, $container->getService('ispa.apis.requestor.snippet'));
+		static::assertInstanceOf(UserRequestor::class, $container->getService('ispa.apis.requestor.user'));
+		static::assertInstanceOf(UserGroupRequestor::class, $container->getService('ispa.apis.requestor.userGroup'));
 	}
 
 }

@@ -2,10 +2,10 @@
 
 namespace Tests\Floweye\Client\Unit\App\Lotus;
 
-use Floweye\Client\App\Lotus\Client\ProcessClient;
-use Floweye\Client\App\Lotus\Client\UserClient;
-use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
-use Floweye\Client\App\Lotus\Requestor\UserRequestor;
+use Floweye\Client\Client\ProcessClient;
+use Floweye\Client\Client\UserClient;
+use Floweye\Client\Requestor\ProcessRequestor;
+use Floweye\Client\Requestor\UserRequestor;
 use Floweye\Client\Http\Guzzle\GuzzleClient;
 use Floweye\Client\Http\Guzzle\GuzzleFactory;
 use PHPUnit\Framework\TestCase;

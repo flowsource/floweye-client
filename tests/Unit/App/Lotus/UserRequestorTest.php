@@ -2,10 +2,10 @@
 
 namespace Tests\Floweye\Client\Unit\App\Lotus;
 
-use Floweye\Client\App\Lotus\Client\UserClient;
-use Floweye\Client\App\Lotus\Requestor\UserRequestor;
+use Floweye\Client\Client\UserClient;
 use Floweye\Client\Exception\Runtime\ResponseException;
 use Floweye\Client\Http\HttpClient;
+use Floweye\Client\Requestor\UserRequestor;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;

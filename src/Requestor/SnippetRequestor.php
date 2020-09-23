@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\App\Lotus\Requestor;
+namespace Floweye\Client\Requestor;
 
-use Floweye\Client\App\Lotus\Client\SnippetClient;
+use Floweye\Client\Client\SnippetClient;
 
 /**
  * @property SnippetClient $client

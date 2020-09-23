@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\App\Lotus\Client;
+namespace Floweye\Client\Client;
 
 use Psr\Http\Message\ResponseInterface;
 

@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\App\Lotus\Client;
+namespace Floweye\Client\Client;
 
-use Floweye\Client\App\Lotus\Entity\UserGroupCreateEntity;
-use Floweye\Client\App\Lotus\Entity\UserGroupEditEntity;
+use Floweye\Client\Entity\UserGroupCreateEntity;
+use Floweye\Client\Entity\UserGroupEditEntity;
 use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;

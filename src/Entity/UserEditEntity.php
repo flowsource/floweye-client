@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\App\Lotus\Entity;
+namespace Floweye\Client\Entity;
 
 class UserEditEntity
 {

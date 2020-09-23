@@ -2,48 +2,23 @@
 
 namespace Floweye\Client\DI;
 
-use Floweye\Client\DI\Pass\AbstractPass;
-use Floweye\Client\DI\Pass\AppLotusPass;
-use Nette\Utils\Validators;
-
 class ApiClientsExtension24 extends ApiClientsExtension
 {
 
 	/** @var mixed[] */
 	private $defaults = [
 		'debug' => false,
-		'app' => [
-			AppLotusPass::APP_NAME => null,
+		'http' => [
+			'http_errors' => false,
 		],
 	];
 
-	public function loadConfiguration(): void
+	/**
+	 * @return mixed
+	 */
+	public function getConfig()
 	{
-		// Validate config on top level
-		$config = $this->validateConfig($this->defaults);
-
-		// Validate right structure of app
-		Validators::assertField($config, 'app', 'array');
-
-		// Validate allowed apps
-		$this->validateConfig($this->defaults['app'], $config['app']);
-
-		// Instantiate enabled passes
-		foreach ($this->map as $passName => $passClass) {
-			$passConfig = $config['app'][$passName] ?? null;
-			if ($passConfig === null) {
-				continue;
-			}
-
-			/** @var AbstractPass $pass */
-			$this->passes[] = $pass = new $passClass($this);
-			$pass->setConfig($passConfig);
-		}
-
-		// Trigger passes
-		foreach ($this->passes as $pass) {
-			$pass->loadPassConfiguration();
-		}
+		return $this->validateConfig($this->defaults, parent::getConfig());
 	}
 
 }
