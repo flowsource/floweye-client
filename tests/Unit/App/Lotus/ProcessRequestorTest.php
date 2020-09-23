@@ -3,7 +3,7 @@
 namespace Tests\Floweye\Client\Unit\App\Lotus;
 
 use Floweye\Client\Client\ProcessClient;
-use Floweye\Client\Requestor\ProcessRequestor;
+use Floweye\Client\Service\ProcessService;
 use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;
 
 class ProcessRequestorTest extends AbstractAppTestCase
@@ -56,12 +56,12 @@ class ProcessRequestorTest extends AbstractAppTestCase
 		self::assertEquals('Úkol', $res['name']);
 	}
 
-	private function createRequestor(string $file): ProcessRequestor
+	private function createRequestor(string $file): ProcessService
 	{
 		$httpClient = $this->createTestClient(200, file_get_contents(__DIR__ . '/data/' . $file));
 		$client = new ProcessClient($httpClient);
 
-		return new ProcessRequestor($client);
+		return new ProcessService($client);
 	}
 
 }

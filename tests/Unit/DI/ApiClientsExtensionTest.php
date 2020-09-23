@@ -12,12 +12,12 @@ use Floweye\Client\DI\ApiClientsExtension;
 use Floweye\Client\DI\ApiClientsExtension24;
 use Floweye\Client\Http\Guzzle\GuzzleFactory;
 use Floweye\Client\Http\HttpClient;
-use Floweye\Client\Requestor\CalendarRequestor;
-use Floweye\Client\Requestor\PlanRequestor;
-use Floweye\Client\Requestor\ProcessRequestor;
-use Floweye\Client\Requestor\SnippetRequestor;
-use Floweye\Client\Requestor\UserGroupRequestor;
-use Floweye\Client\Requestor\UserRequestor;
+use Floweye\Client\Service\CalendarService;
+use Floweye\Client\Service\PlanService;
+use Floweye\Client\Service\ProcessService;
+use Floweye\Client\Service\SnippetService;
+use Floweye\Client\Service\UserGroupService;
+use Floweye\Client\Service\UserService;
 use Nette\DI\Compiler;
 use Nette\DI\Definitions\ServiceDefinition;
 use Tests\Floweye\Client\Toolkit\ContainerTestCase;
@@ -34,7 +34,14 @@ class ApiClientsExtensionTest extends ContainerTestCase
 			: new ApiClientsExtension24();
 		$compiler->addExtension('ispa.apis', $extension);
 		$compiler->addConfig([
-			'ispa.apis' => [],
+			'ispa.apis' => [
+				'http' => [
+					'base_uri' => 'http://floweye.tld/api/v1',
+					'headers' => [
+						'X-Api-Token' => 'foobar',
+					],
+				],
+			],
 		]);
 	}
 
@@ -55,12 +62,12 @@ class ApiClientsExtensionTest extends ContainerTestCase
 		static::assertInstanceOf(UserClient::class, $container->getService('ispa.apis.client.user'));
 		static::assertInstanceOf(UserGroupClient::class, $container->getService('ispa.apis.client.userGroup'));
 
-		static::assertInstanceOf(CalendarRequestor::class, $container->getService('ispa.apis.requestor.calendar'));
-		static::assertInstanceOf(PlanRequestor::class, $container->getService('ispa.apis.requestor.plan'));
-		static::assertInstanceOf(ProcessRequestor::class, $container->getService('ispa.apis.requestor.process'));
-		static::assertInstanceOf(SnippetRequestor::class, $container->getService('ispa.apis.requestor.snippet'));
-		static::assertInstanceOf(UserRequestor::class, $container->getService('ispa.apis.requestor.user'));
-		static::assertInstanceOf(UserGroupRequestor::class, $container->getService('ispa.apis.requestor.userGroup'));
+		static::assertInstanceOf(CalendarService::class, $container->getService('ispa.apis.requestor.calendar'));
+		static::assertInstanceOf(PlanService::class, $container->getService('ispa.apis.requestor.plan'));
+		static::assertInstanceOf(ProcessService::class, $container->getService('ispa.apis.requestor.process'));
+		static::assertInstanceOf(SnippetService::class, $container->getService('ispa.apis.requestor.snippet'));
+		static::assertInstanceOf(UserService::class, $container->getService('ispa.apis.requestor.user'));
+		static::assertInstanceOf(UserGroupService::class, $container->getService('ispa.apis.requestor.userGroup'));
 	}
 
 }

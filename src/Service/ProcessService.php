@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\Requestor;
+namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\ProcessClient;
 use Floweye\Client\Filter\ProcessListFilter;
@@ -8,7 +8,7 @@ use Floweye\Client\Filter\ProcessListFilter;
 /**
  * @property ProcessClient $client
  */
-final class ProcessRequestor extends BaseRequestor
+final class ProcessService extends BaseService
 {
 
 	public function __construct(ProcessClient $client)

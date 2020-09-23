@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\Requestor;
+namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\PlanClient;
 use Floweye\Client\Entity\PlanProcessCreateEntity;
@@ -8,7 +8,7 @@ use Floweye\Client\Entity\PlanProcessCreateEntity;
 /**
  * @property-read PlanClient $client
  */
-class PlanRequestor extends BaseRequestor
+class PlanService extends BaseService
 {
 
 	public function __construct(PlanClient $client)
