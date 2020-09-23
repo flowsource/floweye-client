@@ -1,30 +1,26 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\App\Lotus\Client;
+namespace Floweye\Client\Client;
 
-use Floweye\Client\App\Lotus\Entity\PlanProcessCreateEntity;
 use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
-class PlanClient extends AbstractLotusClient
+class SnippetClient extends AbstractLotusClient
 {
 
-	private const PATH = 'plans';
+	private const PATH = 'snippets';
 
-	public function createOne(PlanProcessCreateEntity $entity): ResponseInterface
+	public function createSnippet(string $name, string $description, string $snippet): ResponseInterface
 	{
 		return $this->request(
 			'POST',
 			sprintf('%s', self::PATH),
 			[
 				'body' => Json::encode([
-					'name' => $entity->getName(),
-					'cron' => $entity->getCron(),
-					'formula' => $entity->getFormula(),
-					'state' => $entity->getState(),
-					'template_id' => $entity->getTemplateId(),
-					'creator_id' => $entity->getCreatorId(),
+					'name' => $name,
+					'description' => $description,
+					'snippet' => $snippet,
 				]),
 				'headers' => [
 					'Content-Type' => 'application/json',
@@ -33,7 +29,7 @@ class PlanClient extends AbstractLotusClient
 		);
 	}
 
-	public function deleteOne(int $id): ResponseInterface
+	public function deleteSnippet(int $id): ResponseInterface
 	{
 		return $this->request('DELETE', sprintf('%s/%s', self::PATH, $id));
 	}
@@ -41,7 +37,7 @@ class PlanClient extends AbstractLotusClient
 	/**
 	 * @param string[] $include
 	 */
-	public function findMultiple(int $limit = 10, int $offset = 0, array $include = []): ResponseInterface
+	public function listSnippets(int $limit = 10, int $offset = 0, array $include = []): ResponseInterface
 	{
 		$query = Helpers::buildQuery([
 			'limit' => $limit > 0 ? $limit : 10,

@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\App\Lotus\Client;
+namespace Floweye\Client\Client;
 
-use Floweye\Client\App\Lotus\Entity\UserCreateEntity;
-use Floweye\Client\App\Lotus\Entity\UserEditEntity;
-use Floweye\Client\App\Lotus\Filter\UserListFilter;
+use Floweye\Client\Entity\UserCreateEntity;
+use Floweye\Client\Entity\UserEditEntity;
+use Floweye\Client\Filter\UserListFilter;
 use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;

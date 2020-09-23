@@ -2,11 +2,21 @@
 
 namespace Floweye\Client\DI;
 
-use Floweye\Client\DI\Pass\AbstractPass;
-use Floweye\Client\DI\Pass\AppLotusPass;
-use Floweye\Client\DI\Pass\CorePass;
+use Floweye\Client\Client\CalendarClient;
+use Floweye\Client\Client\PlanClient;
+use Floweye\Client\Client\ProcessClient;
+use Floweye\Client\Client\SnippetClient;
+use Floweye\Client\Client\UserClient;
+use Floweye\Client\Client\UserGroupClient;
+use Floweye\Client\Http\Guzzle\GuzzleFactory;
+use Floweye\Client\Http\HttpClient;
+use Floweye\Client\Requestor\CalendarRequestor;
+use Floweye\Client\Requestor\PlanRequestor;
+use Floweye\Client\Requestor\ProcessRequestor;
+use Floweye\Client\Requestor\SnippetRequestor;
+use Floweye\Client\Requestor\UserGroupRequestor;
+use Floweye\Client\Requestor\UserRequestor;
 use Nette\DI\CompilerExtension;
-use Nette\PhpGenerator\ClassType;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 
@@ -17,65 +27,58 @@ use Nette\Schema\Schema;
 class ApiClientsExtension extends CompilerExtension
 {
 
-	/** @var AbstractPass[] */
-	protected $passes = [];
-
-	/** @var string[] */
-	protected $map = [
-		AppLotusPass::APP_NAME => AppLotusPass::class,
-	];
-
 	public function getConfigSchema(): Schema
 	{
 		return Expect::structure([
 			'debug' => Expect::bool(false),
-			'app' => Expect::structure([
-				AppLotusPass::APP_NAME => Expect::anyOf(null, AppLotusPass::getConfigSchema()),
-			])->castTo('array'),
+			'http' => Expect::structure([
+				'http_errors' => Expect::bool(false),
+			])->otherItems(Expect::mixed())
+				->castTo('array'),
 		])->castTo('array');
-	}
-
-	public function __construct()
-	{
-		$this->passes[] = new CorePass($this);
 	}
 
 	public function loadConfiguration(): void
 	{
-		$config = $this->config;
+		$config = $this->getConfig();
+		$builder = $this->getContainerBuilder();
 
-		// Instantiate and configure enabled passes
-		foreach ($this->map as $passName => $passClass) {
-			$passConfig = $config['app'][$passName];
-			if ($passConfig === null) {
-				continue;
-			}
+		$builder->addDefinition($this->prefix('guzzleFactory'))
+			->setFactory(GuzzleFactory::class);
 
-			/** @var AbstractPass $pass */
-			$this->passes[] = $pass = new $passClass($this);
-			$pass->setConfig($passConfig);
-		}
+		// #1 HTTP client
+		$builder->addDefinition($this->prefix('http.client'))
+			->setFactory($this->prefix('@guzzleFactory::create'), [$config['http']])
+			->setType(HttpClient::class)
+			->setAutowired(false);
 
-		// Trigger passes
-		foreach ($this->passes as $pass) {
-			$pass->loadPassConfiguration();
-		}
-	}
+		// #2 Clients
+		$builder->addDefinition($this->prefix('client.calendar'))
+			->setFactory(CalendarClient::class, [$this->prefix('@http.client')]);
+		$builder->addDefinition($this->prefix('client.plan'))
+			->setFactory(PlanClient::class, [$this->prefix('@http.client')]);
+		$builder->addDefinition($this->prefix('client.process'))
+			->setFactory(ProcessClient::class, [$this->prefix('@http.client')]);
+		$builder->addDefinition($this->prefix('client.snippet'))
+			->setFactory(SnippetClient::class, [$this->prefix('@http.client')]);
+		$builder->addDefinition($this->prefix('client.user'))
+			->setFactory(UserClient::class, [$this->prefix('@http.client')]);
+		$builder->addDefinition($this->prefix('client.userGroup'))
+			->setFactory(UserGroupClient::class, [$this->prefix('@http.client')]);
 
-	public function beforeCompile(): void
-	{
-		// Trigger passes
-		foreach ($this->passes as $pass) {
-			$pass->beforePassCompile();
-		}
-	}
-
-	public function afterCompile(ClassType $class): void
-	{
-		// Trigger passes
-		foreach ($this->passes as $pass) {
-			$pass->afterPassCompile($class);
-		}
+		// #3 Requestors
+		$builder->addDefinition($this->prefix('requestor.calendar'))
+			->setFactory(CalendarRequestor::class, [$this->prefix('@client.calendar')]);
+		$builder->addDefinition($this->prefix('requestor.plan'))
+			->setFactory(PlanRequestor::class, [$this->prefix('@client.plan')]);
+		$builder->addDefinition($this->prefix('requestor.process'))
+			->setFactory(ProcessRequestor::class, [$this->prefix('@client.process')]);
+		$builder->addDefinition($this->prefix('requestor.snippet'))
+			->setFactory(SnippetRequestor::class, [$this->prefix('@client.snippet')]);
+		$builder->addDefinition($this->prefix('requestor.user'))
+			->setFactory(UserRequestor::class, [$this->prefix('@client.user')]);
+		$builder->addDefinition($this->prefix('requestor.userGroup'))
+			->setFactory(UserGroupRequestor::class, [$this->prefix('@client.userGroup')]);
 	}
 
 }

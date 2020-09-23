@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\App\Lotus\Client;
+namespace Floweye\Client\Client;
 
-use Floweye\Client\App\Lotus\Filter\ProcessListFilter;
+use Floweye\Client\Filter\ProcessListFilter;
 use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;

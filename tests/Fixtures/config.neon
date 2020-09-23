@@ -1,9 +1,0 @@
-extensions:
-	floweye.api: Floweye\Client\DI\ApiClientsExtension
-
-floweye.api:
-	debug: true
-	app:
-		lotus:
-			http:
-				baseUri: http://lotus.example.com/api/v1/

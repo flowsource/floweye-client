@@ -2,8 +2,8 @@
 
 namespace Tests\Floweye\Client\Unit\App\Lotus;
 
-use Floweye\Client\App\Lotus\Client\ProcessClient;
-use Floweye\Client\App\Lotus\Requestor\ProcessRequestor;
+use Floweye\Client\Client\ProcessClient;
+use Floweye\Client\Requestor\ProcessRequestor;
 use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;
 
 class ProcessRequestorTest extends AbstractAppTestCase

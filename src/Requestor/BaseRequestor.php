@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Floweye\Client\App\Lotus\Requestor;
+namespace Floweye\Client\Requestor;
 
-use Floweye\Client\App\Lotus\Client\AbstractLotusClient;
-use Floweye\Client\App\Lotus\Entity\LotusResponse;
+use Floweye\Client\Client\AbstractLotusClient;
+use Floweye\Client\Entity\LotusResponse;
 use Floweye\Client\Exception\Runtime\ResponseException;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
