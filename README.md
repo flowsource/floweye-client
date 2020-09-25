@@ -105,7 +105,7 @@ public function magic(): void
 | export($include)                             | `GET /application/export`       |
 | import($data)                                | `POST /application/import`      |
 | listGlobals($path)                           | `GET /application/globals`      |
-| editGlobals($globals)                                | `PUT /application/globals`      |
+| editGlobals($globals)                        | `PUT /application/globals`      |
 | listSnippets($limit, $offset, $include)      | `GET /snippets`                 |
 | createSnippet($name, $description, $snippet) | `POST /snippets`                |
 | deleteSnippet($id)                           | `DELETE /snippets/{id}`         |
@@ -131,11 +131,11 @@ public function magic(): void
 
 **PlanService**
 
-| Method                                  | API path    | Type   |
-| --------------------------------------- | ----------- | ------ |
-| findMultiple($limit, $offset, $filters) | /plans      | GET    |
-| createOne($entity)                      | /plans      | POST   |
-| deleteOne($id)                          | /plans/{id} | DELETE |
+| Method                                  | API                    |
+| --------------------------------------- | ---------------------- |
+| findMultiple($limit, $offset, $filters) | `GET /plans`           |
+| createOne($entity)                      | `POST /plans`          |
+| deleteOne($id)                          | `DELETE /plans/{id}`   |
 
 **CalendarService**
 
