@@ -9,7 +9,7 @@ use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
-class UserClient extends AbstractLotusClient
+class UserClient extends AbstractClient
 {
 
 	private const PATH = 'users';

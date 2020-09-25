@@ -7,7 +7,7 @@ use Floweye\Client\Exception\LogicalException;
 use Floweye\Client\Http\HttpClient;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class AbstractLotusClient
+abstract class AbstractClient
 {
 
 	/** @var string|null  */

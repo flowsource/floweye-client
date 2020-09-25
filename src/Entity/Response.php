@@ -2,7 +2,7 @@
 
 namespace Floweye\Client\Entity;
 
-final class LotusResponse
+final class Response
 {
 
 	private const STATUS_SUCCESS = 'success';
@@ -16,19 +16,19 @@ final class LotusResponse
 	/** @var int|null */
 	private $code;
 
-	/** @var mixed[]|null */
+	/** @var mixed|null */
 	private $data;
 
 	/** @var mixed[]|null */
 	private $context;
 
 	/**
-	 * @param mixed[]|null  $data
+	 * @param mixed|null  $data
 	 * @param mixed[]|null  $context
 	 */
 	public function __construct(
 		string $status,
-		?array $data = null,
+		$data = null,
 		?int $code = null,
 		?string $message = null,
 		?array $context = null
@@ -57,11 +57,11 @@ final class LotusResponse
 	}
 
 	/**
-	 * @return mixed[]
+	 * @return mixed|null
 	 */
-	public function getData(): array
+	public function getData()
 	{
-		return $this->data ?? [];
+		return $this->data;
 	}
 
 	/**

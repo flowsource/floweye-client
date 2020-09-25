@@ -2,8 +2,8 @@
 
 namespace Floweye\Client\Service;
 
-use Floweye\Client\Client\AbstractLotusClient;
-use Floweye\Client\Entity\LotusResponse;
+use Floweye\Client\Client\AbstractClient;
+use Floweye\Client\Entity\Response;
 use Floweye\Client\Exception\Runtime\ResponseException;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
@@ -12,10 +12,10 @@ use Psr\Http\Message\ResponseInterface;
 class BaseService
 {
 
-	/** @var AbstractLotusClient */
+	/** @var AbstractClient */
 	protected $client;
 
-	public function __construct(AbstractLotusClient $client)
+	public function __construct(AbstractClient $client)
 	{
 		$this->client = $client;
 	}
@@ -35,7 +35,7 @@ class BaseService
 		return $this->client->isSudo();
 	}
 
-	protected function processResponse(ResponseInterface $response): LotusResponse
+	protected function processResponse(ResponseInterface $response): Response
 	{
 		$this->assertResponse($response);
 
@@ -49,7 +49,7 @@ class BaseService
 			throw new ResponseException($response, 'Missing "status" field in response data');
 		}
 
-		$lotusResp = new LotusResponse(
+		$appResp = new Response(
 			$resp['status'],
 			$resp['data'] ?? null,
 			$resp['code'] ?? null,
@@ -57,22 +57,19 @@ class BaseService
 			$resp['context'] ?? null
 		);
 
-		if (!$lotusResp->isSuccess()) {
+		if (!$appResp->isSuccess()) {
 			throw new ResponseException(
 				$response,
-				sprintf('API error. Status: %s, Message: %s', $lotusResp->getStatus(), $lotusResp->getMessage())
+				sprintf('API error. Status: %s, Message: %s', $appResp->getStatus(), $appResp->getMessage())
 			);
 		}
 
-		return $lotusResp;
+		return $appResp;
 	}
 
-	/**
-	 * @param int[] $allowedStatusCodes
-	 */
-	protected function assertResponse(ResponseInterface $response, array $allowedStatusCodes = [200]): void
+	protected function assertResponse(ResponseInterface $response): void
 	{
-		if (!in_array($response->getStatusCode(), $allowedStatusCodes, true)) {
+		if ($response->getStatusCode() < 200 || $response->getStatusCode() > 299) {
 			throw new ResponseException($response);
 		}
 	}

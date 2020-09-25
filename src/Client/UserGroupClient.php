@@ -8,7 +8,7 @@ use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
-class UserGroupClient extends AbstractLotusClient
+class UserGroupClient extends AbstractClient
 {
 
 	private const PATH = 'user-groups';

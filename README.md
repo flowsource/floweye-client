@@ -60,7 +60,7 @@ public function magic(): void
 }
 ```
 
-### Psr response level
+### Psr-7 response level
 
 In case you need specific response information. You can work with our client layer.
 
@@ -96,9 +96,19 @@ public function magic(): void
 }
 ```
 
-## API definition
+## API endpoints overview
 
-### Available service's methods
+** ApplicationService **
+
+| Method                                       | API                             |
+| -------------------------------------------- | ------------------------------- |
+| export($include)                             | `GET /application/export`       |
+| import($data)                                | `POST /application/import`      |
+| listGlobals($path)                           | `GET /application/globals`      |
+| editGlobals($globals)                                | `PUT /application/globals`      |
+| listSnippets($limit, $offset, $include)      | `GET /snippets`                 |
+| createSnippet($name, $description, $snippet) | `POST /snippets`                |
+| deleteSnippet($id)                           | `DELETE /snippets/{id}`         |
 
 **UserService**
 
@@ -121,19 +131,11 @@ public function magic(): void
 
 **PlanService**
 
-| Method                        | API path    | Type   |
-| ----------------------------- | ----------- | ------ |
-| findMultiple($limit, $offset) | /plans      | GET    |
-| createOne($entity)            | /plans      | POST   |
-| deleteOne($id)                | /plans/{id} | DELETE |
-
-**SnippetService**
-
-| Method                                       | API path       | Type   |
-| -------------------------------------------- | -------------- | ------ |
-| listSnippets($limit, $offset, $include)      | /snippets      | GET    |
-| createSnippet($name, $description, $snippet) | /snippets      | POST   |
-| deleteSnippet($id)                           | /snippets/{id} | DELETE |
+| Method                                  | API path    | Type   |
+| --------------------------------------- | ----------- | ------ |
+| findMultiple($limit, $offset, $filters) | /plans      | GET    |
+| createOne($entity)                      | /plans      | POST   |
+| deleteOne($id)                          | /plans/{id} | DELETE |
 
 **CalendarService**
 
