@@ -144,10 +144,9 @@ final class ProcessService extends BaseService
 	}
 
 	/**
-	 * @param string[] $include
 	 * @return mixed[]
 	 */
-	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = NULL): array
+	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = null): array
 	{
 		$response = $this->client->listTemplates($limit, $offset, $filter);
 
