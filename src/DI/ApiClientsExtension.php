@@ -3,7 +3,6 @@
 namespace Floweye\Client\DI;
 
 use Floweye\Client\Client\ApplicationClient;
-use Floweye\Client\Client\CalendarClient;
 use Floweye\Client\Client\PlanClient;
 use Floweye\Client\Client\ProcessClient;
 use Floweye\Client\Client\UserClient;
@@ -11,7 +10,6 @@ use Floweye\Client\Client\UserGroupClient;
 use Floweye\Client\Http\Guzzle\GuzzleFactory;
 use Floweye\Client\Http\HttpClient;
 use Floweye\Client\Service\ApplicationService;
-use Floweye\Client\Service\CalendarService;
 use Floweye\Client\Service\PlanService;
 use Floweye\Client\Service\ProcessService;
 use Floweye\Client\Service\UserGroupService;
@@ -59,8 +57,6 @@ class ApiClientsExtension extends CompilerExtension
 		// #2 Clients
 		$builder->addDefinition($this->prefix('client.application'))
 			->setFactory(ApplicationClient::class, [$this->prefix('@http.client')]);
-		$builder->addDefinition($this->prefix('client.calendar'))
-			->setFactory(CalendarClient::class, [$this->prefix('@http.client')]);
 		$builder->addDefinition($this->prefix('client.plan'))
 			->setFactory(PlanClient::class, [$this->prefix('@http.client')]);
 		$builder->addDefinition($this->prefix('client.process'))
@@ -73,8 +69,6 @@ class ApiClientsExtension extends CompilerExtension
 		// #3 Services
 		$builder->addDefinition($this->prefix('service.application'))
 			->setFactory(ApplicationService::class, [$this->prefix('@client.application')]);
-		$builder->addDefinition($this->prefix('service.calendar'))
-			->setFactory(CalendarService::class, [$this->prefix('@client.calendar')]);
 		$builder->addDefinition($this->prefix('service.plan'))
 			->setFactory(PlanService::class, [$this->prefix('@client.plan')]);
 		$builder->addDefinition($this->prefix('service.process'))

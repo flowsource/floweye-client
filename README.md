@@ -137,12 +137,6 @@ public function magic(): void
 | createOne($entity)                      | `POST /plans`          |
 | deleteOne($id)                          | `DELETE /plans/{id}`   |
 
-**CalendarService**
-
-| Method         | API path       | Type   |
-| -------------- | -------------- | ------ |
-| getFolder($id) | /calendar/{id} | GET    |
-
 **ProcessService**
 
 | Method                                                                   | API                                              |
