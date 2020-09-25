@@ -4,7 +4,7 @@ namespace Floweye\Client\Client;
 
 use Psr\Http\Message\ResponseInterface;
 
-class CalendarClient extends AbstractLotusClient
+class CalendarClient extends AbstractClient
 {
 
 	public function getFolder(int $id): ResponseInterface

@@ -7,7 +7,7 @@ use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
-class ProcessClient extends AbstractLotusClient
+class ProcessClient extends AbstractClient
 {
 
 	private const PATH_PROCESS = 'processes';
