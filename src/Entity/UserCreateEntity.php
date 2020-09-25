@@ -5,6 +5,9 @@ namespace Floweye\Client\Entity;
 class UserCreateEntity
 {
 
+	public const STATES = ['new', 'blocked', 'activated'];
+	public const ROLES = ['superadmin', 'admin', 'system', 'user', 'guest'];
+
 	/** @var string */
 	private $name;
 
@@ -12,37 +15,40 @@ class UserCreateEntity
 	private $surname;
 
 	/** @var string */
-	private $emailAddress;
+	private $email;
 
 	/** @var string */
 	private $password;
 
-	public function __construct(string $name, string $surname, string $emailAddress, string $password)
+	/** @var string */
+	private $role;
+
+	/** @var string */
+	private $state;
+
+	public function __construct(string $name, string $surname, string $email, string $password, string $role, string $state)
 	{
 		$this->name = $name;
 		$this->surname = $surname;
-		$this->emailAddress = $emailAddress;
+		$this->email = $email;
 		$this->password = $password;
+		$this->role = $role;
+		$this->state = $state;
 	}
 
-	public function getName(): string
+	/**
+	 * @return mixed[]
+	 */
+	public function toBody(): array
 	{
-		return $this->name;
-	}
-
-	public function getSurname(): string
-	{
-		return $this->surname;
-	}
-
-	public function getEmailAddress(): string
-	{
-		return $this->emailAddress;
-	}
-
-	public function getPassword(): string
-	{
-		return $this->password;
+		return [
+			'name' => $this->name,
+			'surname' => $this->surname,
+			'email' => $this->email,
+			'password' => $this->password,
+			'role' => $this->role,
+			'state' => $this->state,
+		];
 	}
 
 }

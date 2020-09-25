@@ -119,24 +119,26 @@ public function magic(): void
 
 **UserService**
 
-| Method                         | API path                    | Type   |
-| ------------------------------ | --------------------------- | ------ |
-| list($limit, $offset, $filter) | /users                      | GET    |
-| getById($id)                   | /users/{id}                 | GET    |
-| create($entity)                | /users                      | POST   |
-| edit($entity)                  | /users/{id}                 | PUT    |
+| Method                              | API                              |
+| ----------------------------------- | -------------------------------- |
+| list($limit, $offset, $filter)      | `GET /users`                     |
+| create($entity)                     | `POST /users`                    |
+| getById($id, $include)              | `GET /users/{id}`                |
+| edit($id, $entity)                  | `PUT /users/{id}`                |
+| onTimeLogin($id)                    | `PUT /users/{id}/one-time-login` |
+| passwordReset($id)                  | `PUT /users/{id}/password-reset` |
 
 
 **UserGroupService**
 
-| Method                                                                 | API path                              |
-| ---------------------------------------------------------------------- | ------------------------------------- |
-| listUserGroups($include)                                               | GET /user-groups                      |
-| createOne($entity)                                                     | POST /user-groups                     |
-| findOne($gid, $include)                                                | GET /user-groups/{gid}                 |
-| editOne($gid, $entity)                                                 | PUT /user-groups/{gid}                 |
-| deleteOne($gid)                                                        | DELETE /user-groups/{gid}              |
-| appendUsers($gid, $userIds, $includeSystemUsers, $includeBlockedUsers) | PATCH /user-groups/{gid}/append-users  |
+| Method                                                                 | API                                      |
+| ---------------------------------------------------------------------- | ---------------------------------------- |
+| listUserGroups($include)                                               | `GET /user-groups`                       |
+| createOne($entity)                                                     | `POST /user-groups`                      |
+| findOne($gid, $include)                                                | `GET /user-groups/{gid}`                 |
+| editOne($gid, $entity)                                                 | `PUT /user-groups/{gid}`                 |
+| deleteOne($gid)                                                        | `DELETE /user-groups/{gid}`              |
+| appendUsers($gid, $userIds, $includeSystemUsers, $includeBlockedUsers) | `PATCH /user-groups/{gid}/append-users`  |
 
 
 **PlanService**
