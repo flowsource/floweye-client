@@ -10,13 +10,13 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;
 
-class UserRequestorTest extends AbstractAppTestCase
+class UserServiceTest extends AbstractAppTestCase
 {
 
 	public function testList(): void
 	{
-		$usersRequestor = $this->createRequestor('users.json');
-		$res = $usersRequestor->list();
+		$service = $this->createRequestor('users.json');
+		$res = $service->list();
 
 		self::assertCount(10, $res);
 
@@ -29,8 +29,8 @@ class UserRequestorTest extends AbstractAppTestCase
 
 	public function testGetById(): void
 	{
-		$usersRequestor = $this->createRequestor('user.json');
-		$res = $usersRequestor->getById(1);
+		$service = $this->createRequestor('user.json');
+		$res = $service->getById(1, []);
 
 		self::assertEquals('user@ispalliance.cz', $res['email']);
 		self::assertEquals('Leopoldus Augustus Ispus', $res['fullname']);
@@ -40,8 +40,8 @@ class UserRequestorTest extends AbstractAppTestCase
 	{
 		$this->expectException(ResponseException::class);
 		$this->expectExceptionMessage('API error. Status: error, Message: Client authentication failed');
-		$usersRequestor = $this->createRequestor('error.json');
-		$usersRequestor->getById(1);
+		$service = $this->createRequestor('error.json');
+		$service->getById(1, []);
 	}
 
 	public function testSudoDisabled(): void
@@ -51,14 +51,14 @@ class UserRequestorTest extends AbstractAppTestCase
 		$httpClient->method('request')->willReturnCallback(function (string $method, string $url, array $opts): Response {
 			self::assertArrayNotHasKey('headers', $opts);
 
-			return new Response(200, [], '{"status": "success"}');
+			return new Response(200, [], '{"status": "success", "data": []}');
 		});
 
 		$client = new UserClient($httpClient);
 		$requestor = new UserService($client);
 
 		self::assertFalse($requestor->isSudo());
-		$requestor->getById(1);
+		$requestor->getById(1, []);
 	}
 
 	public function testSudoEnabled(): void
@@ -70,7 +70,7 @@ class UserRequestorTest extends AbstractAppTestCase
 			self::assertArrayHasKey('X-Sudo', $opts['headers']);
 			self::assertEquals('email@ispa.cz', $opts['headers']['X-Sudo']);
 
-			return new Response(200, [], '{"status": "success"}');
+			return new Response(200, [], '{"status": "success", "data": []}');
 		});
 
 		$client = new UserClient($httpClient);
@@ -80,7 +80,7 @@ class UserRequestorTest extends AbstractAppTestCase
 		$requestor->enableSudo('email@ispa.cz');
 		self::assertTrue($requestor->isSudo());
 
-		$requestor->getById(1);
+		$requestor->getById(1, []);
 	}
 
 	private function createRequestor(string $file): UserService

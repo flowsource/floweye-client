@@ -150,6 +150,18 @@ public function magic(): void
 | deleteOne($id)                          | `DELETE /plans/{id}`   |
 
 
+** TimerService **
+
+| Method                                   | API                            |
+| ---------------------------------------- | ------------------------------ |
+| createEntry($entity)                     | `GET /timers`                  |
+| findRunning($resolver, $timer)           | `GET /timers/running`          |
+| listTimers()                             | `GET /timers/{from}/{to}`      |
+| editEntry($id, $entity)                  | `PUT /timers/{id}`             |
+| startEntry($id, $entity)                 | `POST /timers/{id}/start`      |
+| stopEntry($id)                           | `POST /timers/{id}/stop`       |
+
+
 **ProcessService**
 
 | Method                                                                   | API                                              |
