@@ -25,7 +25,6 @@ class PlanClient extends AbstractClient
 					'formula' => $entity->getFormula(),
 					'state' => $entity->getState(),
 					'template_id' => $entity->getTemplateId(),
-					'creator_id' => $entity->getCreatorId(),
 				]),
 				'headers' => [
 					'Content-Type' => 'application/json',

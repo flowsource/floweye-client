@@ -3,6 +3,8 @@
 namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\ProcessClient;
+use Floweye\Client\Entity\ProcessDiscussionCreateEntity;
+use Floweye\Client\Entity\ProcessModifyStepPlanCreateEntity;
 use Floweye\Client\Filter\ProcessListFilter;
 
 /**
@@ -98,6 +100,16 @@ final class ProcessService extends BaseService
 	}
 
 	/**
+	 * @return mixed[]
+	 */
+	public function createDiscussion(int $processId, ProcessDiscussionCreateEntity $entity): array
+	{
+		$response = $this->client->createDiscussion($processId, $entity);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	/**
 	 * @param mixed[]  $data
 	 * @param string[] $include
 	 * @return mixed[]
@@ -105,6 +117,27 @@ final class ProcessService extends BaseService
 	public function startProcess(int $tid, array $data = [], array $include = []): array
 	{
 		$response = $this->client->startProcess($tid, $data, $include);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function modifyPlan(int $processId, string $stepSid, ProcessModifyStepPlanCreateEntity $entity): array
+	{
+		$response = $this->client->modifyPlan($processId, $stepSid, $entity);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	/**
+	 * @param mixed[] $variables
+	 * @return mixed[]
+	 */
+	public function modifyVariables(int $processId, array $variables): array
+	{
+		$response = $this->client->modifyVariables($processId, $variables);
 
 		return $this->processResponse($response)->getData();
 	}
