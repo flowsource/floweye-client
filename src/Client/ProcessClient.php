@@ -178,10 +178,7 @@ class ProcessClient extends AbstractClient
 		);
 	}
 
-	/**
-	 * @param string[] $include
-	 */
-	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = NULL): ResponseInterface
+	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = null): ResponseInterface
 	{
 		$params = [
 			'limit' => $limit > 0 ? $limit : 10,
@@ -189,12 +186,14 @@ class ProcessClient extends AbstractClient
 			'include' => implode(',', $filter !== null ? $filter->getInclude() : []),
 		];
 
-		if ($filter->getStartableOnly() !== NULL) {
-			$params['startableOnly'] = $filter->getStartableOnly();
-		}
+		if ($filter !== null) {
+			if ($filter->getStartableOnly() !== null) {
+				$params['startableOnly'] = $filter->getStartableOnly();
+			}
 
-		if ($filter->getState() !== NULL) {
-			$params['state'] = $filter->getState();
+			if ($filter->getState() !== null) {
+				$params['state'] = $filter->getState();
+			}
 		}
 
 		return $this->request('GET', sprintf('%s?%s', self::PATH_TEMPLATE, Helpers::buildQuery($params)));
