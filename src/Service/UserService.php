@@ -29,11 +29,12 @@ final class UserService extends BaseService
 	}
 
 	/**
+	 * @param string[] $include
 	 * @return mixed[]
 	 */
-	public function getById(int $id): array
+	public function getById(int $id, array $include): array
 	{
-		$response = $this->client->getById($id);
+		$response = $this->client->getById($id, $include);
 
 		return $this->processResponse($response)->getData();
 	}
@@ -51,9 +52,29 @@ final class UserService extends BaseService
 	/**
 	 * @return mixed[]
 	 */
-	public function edit(UserEditEntity $entity): array
+	public function edit(int $id, UserEditEntity $entity): array
 	{
-		$response = $this->client->edit($entity);
+		$response = $this->client->edit($id, $entity);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function passwordReset(int $id): array
+	{
+		$response = $this->client->passwordReset($id);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function oneTimeLogin(int $id): array
+	{
+		$response = $this->client->oneTimeLogin($id);
 
 		return $this->processResponse($response)->getData();
 	}

@@ -5,8 +5,8 @@ namespace Floweye\Client\Entity;
 class UserEditEntity
 {
 
-	/** @var int */
-	private $id;
+	public const STATES = ['new', 'blocked', 'activated'];
+	public const ROLES = ['superadmin', 'admin', 'system', 'user', 'guest'];
 
 	/** @var string */
 	private $name;
@@ -15,43 +15,40 @@ class UserEditEntity
 	private $surname;
 
 	/** @var string */
-	private $userName;
+	private $username;
 
 	/** @var string */
-	private $emailAddress;
+	private $email;
 
-	public function __construct(int $id, string $name, string $surname, string $emailAddress, string $username)
+	/** @var string */
+	private $role;
+
+	/** @var string */
+	private $state;
+
+	public function __construct(string $name, string $surname, string $email, string $username, string $role, string $state)
 	{
-		$this->id = $id;
 		$this->name = $name;
 		$this->surname = $surname;
-		$this->emailAddress = $emailAddress;
-		$this->userName = $username;
+		$this->email = $email;
+		$this->username = $username;
+		$this->role = $role;
+		$this->state = $state;
 	}
 
-	public function getId(): int
+	/**
+	 * @return mixed[]
+	 */
+	public function toBody(): array
 	{
-		return $this->id;
-	}
-
-	public function getName(): string
-	{
-		return $this->name;
-	}
-
-	public function getSurname(): string
-	{
-		return $this->surname;
-	}
-
-	public function getUserName(): string
-	{
-		return $this->userName;
-	}
-
-	public function getEmailAddress(): string
-	{
-		return $this->emailAddress;
+		return [
+			'name' => $this->name,
+			'surname' => $this->surname,
+			'email' => $this->email,
+			'username' => $this->username,
+			'role' => $this->role,
+			'state' => $this->state,
+		];
 	}
 
 }

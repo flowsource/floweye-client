@@ -19,6 +19,7 @@ class UserClient extends AbstractClient
 		$parameters = [
 			'limit' => $limit > 0 ? $limit : 10,
 			'offset' => $offset >= 0 ? $offset : 0,
+			'include' => implode(',', $filter !== null ? $filter->getInclude() : []),
 		];
 
 		if ($filter !== null) {
@@ -46,47 +47,44 @@ class UserClient extends AbstractClient
 		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($parameters)));
 	}
 
-	public function getById(int $id): ResponseInterface
+	/**
+	 * @param string[] $include
+	 */
+	public function getById(int $id, array $include): ResponseInterface
 	{
-		return $this->request('GET', sprintf('%s/%d', self::PATH, $id));
+		$parameters = ['include' => implode(',', $include)];
+
+		return $this->request('GET', sprintf('%s/%s?%s', self::PATH, $id, Helpers::buildQuery($parameters)));
 	}
 
 	public function create(UserCreateEntity $entity): ResponseInterface
 	{
+		return $this->request('POST', sprintf('%s', self::PATH), [
+			'body' => Json::encode($entity->toBody()),
+			'headers' => ['Content-Type' => 'application/json'],
+		]);
+	}
+
+	public function edit(int $id, UserEditEntity $entity): ResponseInterface
+	{
 		return $this->request(
-			'POST',
-			sprintf('%s', self::PATH),
+			'PUT',
+			sprintf('%s/%s', self::PATH, $id),
 			[
-				'body' => Json::encode([
-					'name' => $entity->getName(),
-					'surname' => $entity->getSurname(),
-					'email' => $entity->getEmailAddress(),
-					'password' => $entity->getPassword(),
-				]),
-				'headers' => [
-					'Content-Type' => 'application/json',
-				],
+				'body' => Json::encode($entity->toBody()),
+				'headers' => ['Content-Type' => 'application/json'],
 			]
 		);
 	}
 
-	public function edit(UserEditEntity $entity): ResponseInterface
+	public function oneTimeLogin(int $id): ResponseInterface
 	{
-		return $this->request(
-			'PUT',
-			sprintf('%s/%s', self::PATH, $entity->getId()),
-			[
-				'body' => Json::encode([
-					'name' => $entity->getName(),
-					'surname' => $entity->getSurname(),
-					'username' => $entity->getUserName(),
-					'email' => $entity->getEmailAddress(),
-				]),
-				'headers' => [
-					'Content-Type' => 'application/json',
-				],
-			]
-		);
+		return $this->request('PUT', sprintf('%s/%s/one-time-login', self::PATH, $id));
+	}
+
+	public function passwordReset(int $id): ResponseInterface
+	{
+		return $this->request('PUT', sprintf('%s/%s/password-reset', self::PATH, $id));
 	}
 
 }

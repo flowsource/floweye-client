@@ -21,6 +21,9 @@ class UserListFilter
 	/** @var string|null */
 	private $username;
 
+	/** @var string[] */
+	private $include = [];
+
 	/**
 	 * @return static
 	 */
@@ -79,6 +82,22 @@ class UserListFilter
 	public function getUsername(): ?string
 	{
 		return $this->username;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getInclude(): array
+	{
+		return $this->include;
+	}
+
+	/**
+	 * @param string[] $include
+	 */
+	public function setInclude(array $include): void
+	{
+		$this->include = $include;
 	}
 
 }
