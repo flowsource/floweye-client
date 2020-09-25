@@ -24,16 +24,12 @@ class PlanProcessCreateEntity
 	/** @var int */
 	private $templateId;
 
-	/** @var int */
-	private $creatorId;
-
 	public function __construct(
 		string $name,
 		string $cron,
 		string $formula,
 		string $state,
-		int $templateId,
-		int $creatorId
+		int $templateId
 	)
 	{
 		$this->name = $name;
@@ -41,7 +37,6 @@ class PlanProcessCreateEntity
 		$this->formula = $formula;
 		$this->state = $state;
 		$this->templateId = $templateId;
-		$this->creatorId = $creatorId;
 	}
 
 	public function getName(): string
@@ -67,11 +62,6 @@ class PlanProcessCreateEntity
 	public function getTemplateId(): int
 	{
 		return $this->templateId;
-	}
-
-	public function getCreatorId(): int
-	{
-		return $this->creatorId;
 	}
 
 }

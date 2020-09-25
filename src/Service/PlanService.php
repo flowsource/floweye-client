@@ -4,6 +4,7 @@ namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\PlanClient;
 use Floweye\Client\Entity\PlanProcessCreateEntity;
+use Floweye\Client\Filter\PlanListFilter;
 
 /**
  * @property-read PlanClient $client
@@ -37,12 +38,11 @@ class PlanService extends BaseService
 	}
 
 	/**
-	 * @param string[] $include
 	 * @return mixed[]
 	 */
-	public function findMultiple(int $limit = 10, int $offset = 0, array $include = []): array
+	public function findMultiple(int $limit = 10, int $offset = 0, ?PlanListFilter $filter = null): array
 	{
-		$response = $this->client->findMultiple($limit, $offset, $include);
+		$response = $this->client->findMultiple($limit, $offset, $filter);
 
 		return $this->processResponse($response)->getData();
 	}
