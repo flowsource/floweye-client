@@ -6,7 +6,6 @@ use Floweye\Client\Client\ProcessClient;
 use Floweye\Client\Entity\ProcessDiscussionCreateEntity;
 use Floweye\Client\Entity\ProcessModifyStepPlanCreateEntity;
 use Floweye\Client\Filter\ProcessListFilter;
-use Floweye\Client\Filter\TemplateListFilter;
 
 /**
  * @property ProcessClient $client
@@ -111,18 +110,6 @@ final class ProcessService extends BaseService
 	}
 
 	/**
-	 * @param mixed[]  $data
-	 * @param string[] $include
-	 * @return mixed[]
-	 */
-	public function startProcess(int $tid, array $data = [], array $include = []): array
-	{
-		$response = $this->client->startProcess($tid, $data, $include);
-
-		return $this->processResponse($response)->getData();
-	}
-
-	/**
 	 * @return mixed[]
 	 */
 	public function modifyPlan(int $processId, string $stepSid, ProcessModifyStepPlanCreateEntity $entity): array
@@ -139,57 +126,6 @@ final class ProcessService extends BaseService
 	public function modifyVariables(int $processId, array $variables): array
 	{
 		$response = $this->client->modifyVariables($processId, $variables);
-
-		return $this->processResponse($response)->getData();
-	}
-
-	/**
-	 * @return mixed[]
-	 */
-	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = null): array
-	{
-		$response = $this->client->listTemplates($limit, $offset, $filter);
-
-		return $this->processResponse($response)->getData();
-	}
-
-	/**
-	 * @param string[] $include
-	 * @return mixed[]
-	 */
-	public function getTemplate(int $id, array $include = []): array
-	{
-		$response = $this->client->getTemplate($id, $include);
-
-		return $this->processResponse($response)->getData();
-	}
-
-	/**
-	 * @return mixed[]
-	 */
-	public function createTemplate(string $template): array
-	{
-		$response = $this->client->createTemplate($template);
-
-		return $this->processResponse($response)->getData();
-	}
-
-	/**
-	 * @return mixed[]
-	 */
-	public function deleteTemplate(int $templateId): array
-	{
-		$response = $this->client->deleteTemplate($templateId);
-
-		return $this->processResponse($response)->getData();
-	}
-
-	/**
-	 * @return mixed[]
-	 */
-	public function archiveTemplate(int $templateId): array
-	{
-		$response = $this->client->archiveTemplate($templateId);
 
 		return $this->processResponse($response)->getData();
 	}

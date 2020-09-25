@@ -11,11 +11,13 @@
 
 -----
 
+
 ## Versions
 
 | State  | Version      | Branch   | Nette        | PHP     |
 |--------|--------------|----------|--------------|---------|
 | dev    | `^0.1.0`     | `master` | `2.4`, `3.0` | `>=7.2` |
+
 
 ## Setup
 
@@ -44,6 +46,7 @@ floweye.api:
 
 Configure connection under key `http` configure [Guzzle HTTP client]([Guzzle doc](https://guzzle.readthedocs.io/en/latest/quickstart.html)).
 
+
 ## How to use
 
 ### High level
@@ -60,6 +63,7 @@ public function magic(): void
 }
 ```
 
+
 ### Psr-7 response level
 
 In case you need specific response information. You can work with our client layer.
@@ -73,6 +77,7 @@ public function magic(): void
     $response = $this->users->getById(1);
 }
 ```
+
 
 ### Low level
 
@@ -96,6 +101,7 @@ public function magic(): void
 }
 ```
 
+
 ## API endpoints overview
 
 ** ApplicationService **
@@ -110,6 +116,7 @@ public function magic(): void
 | createSnippet($name, $description, $snippet) | `POST /snippets`                |
 | deleteSnippet($id)                           | `DELETE /snippets/{id}`         |
 
+
 **UserService**
 
 | Method                         | API path                    | Type   |
@@ -118,6 +125,7 @@ public function magic(): void
 | getById($id)                   | /users/{id}                 | GET    |
 | create($entity)                | /users                      | POST   |
 | edit($entity)                  | /users/{id}                 | PUT    |
+
 
 **UserGroupService**
 
@@ -129,6 +137,7 @@ public function magic(): void
 | editOne($entity)                                                      | /user-groups/{id}              | PUT    |
 | deleteOne($id)                                                        | /user-groups/{id}              | DELETE |
 
+
 **PlanService**
 
 | Method                                  | API                    |
@@ -136,6 +145,7 @@ public function magic(): void
 | findMultiple($limit, $offset, $filters) | `GET /plans`           |
 | createOne($entity)                      | `POST /plans`          |
 | deleteOne($id)                          | `DELETE /plans/{id}`   |
+
 
 **ProcessService**
 
@@ -151,12 +161,18 @@ public function magic(): void
 | uploadFileToDiscussion($processId, $discussionId, $fileName, $contents)  | `POST /processes/{pid}/discussion/{id}/upload`   |
 | modifyPlan($processId, $stepSid, $entity)                                | `PUT /processes/{pid}/plans/{sid}`               |
 | modifyVariables($processId, $entity)                                     | `PUT /processes/{pid}/variables`                 |
-| listTemplates($limit, $offset, $filter)                                  | `GET /template-processes`                        |
-| getTemplate($id, $include)                                               | `GET /template-processes/{id}`                   |
-| createTemplate($entity)                                                  | `POST /template-processes`                       |
-| deleteTemplate($id)                                                      | `DELETE /template-processes/{id}`                |
-| archiveTemplate($id)                                                     | `PATCH /template-processes/{id}/archive`         |
-| startProcess($tid, $data, $include)                                      | `POST /template-processes/{id}/start`            |
+
+
+**TemplateProcessService**
+
+| Method                                      | API                                              |
+| ------------------------------------------- | ------------------------------------------------ |
+| listTemplates($limit, $offset, $filter)     | `GET /template-processes`                        |
+| getTemplate($id, $include)                  | `GET /template-processes/{id}`                   |
+| createTemplate($entity)                     | `POST /template-processes`                       |
+| deleteTemplate($id)                         | `DELETE /template-processes/{id}`                |
+| archiveTemplate($id)                        | `PATCH /template-processes/{id}/archive`         |
+| startProcess($tid, $data, $include)         | `POST /template-processes/{id}/start`            |
 
 *1 Note: listProcesses $filter expects $variables as array of
 

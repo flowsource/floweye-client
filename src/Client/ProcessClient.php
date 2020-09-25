@@ -6,7 +6,6 @@ use DateTimeInterface;
 use Floweye\Client\Entity\ProcessDiscussionCreateEntity;
 use Floweye\Client\Entity\ProcessModifyStepPlanCreateEntity;
 use Floweye\Client\Filter\ProcessListFilter;
-use Floweye\Client\Filter\TemplateListFilter;
 use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
@@ -14,8 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 class ProcessClient extends AbstractClient
 {
 
-	private const PATH_PROCESS = 'processes';
-	private const PATH_TEMPLATE = 'template-processes';
+	private const PATH = 'processes';
 
 	public function listProcesses(int $limit = 10, int $offset = 0, ?ProcessListFilter $filter = null): ResponseInterface
 	{
@@ -67,7 +65,7 @@ class ProcessClient extends AbstractClient
 			}
 		}
 
-		return $this->request('GET', sprintf('%s?%s', self::PATH_PROCESS, Helpers::buildQuery($parameters)));
+		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($parameters)));
 	}
 
 	/**
@@ -79,22 +77,22 @@ class ProcessClient extends AbstractClient
 			'include' => implode(',', $include),
 		]);
 
-		return $this->request('GET', sprintf('%s/%d?%s', self::PATH_PROCESS, $id, $query));
+		return $this->request('GET', sprintf('%s/%d?%s', self::PATH, $id, $query));
 	}
 
 	public function addTag(int $pid, int $ttid): ResponseInterface
 	{
-		return $this->request('POST', sprintf('%s/%d/tags/%d', self::PATH_PROCESS, $pid, $ttid));
+		return $this->request('POST', sprintf('%s/%d/tags/%d', self::PATH, $pid, $ttid));
 	}
 
 	public function removeTag(int $pid, int $ttid): ResponseInterface
 	{
-		return $this->request('DELETE', sprintf('%s/%d/tags/%d', self::PATH_PROCESS, $pid, $ttid));
+		return $this->request('DELETE', sprintf('%s/%d/tags/%d', self::PATH, $pid, $ttid));
 	}
 
 	public function moveProcessToNextStep(int $processId): ResponseInterface
 	{
-		return $this->request('POST', sprintf('%s/%s/next', self::PATH_PROCESS, $processId), [
+		return $this->request('POST', sprintf('%s/%s/next', self::PATH, $processId), [
 			'headers' => ['Content-Type' => 'application/json'],
 		]);
 	}
@@ -107,7 +105,7 @@ class ProcessClient extends AbstractClient
 	): ResponseInterface
 	{
 		return $this->upload(
-			sprintf('%s/%s/upload?variable=%s', self::PATH_PROCESS, $processId, $variable),
+			sprintf('%s/%s/upload?variable=%s', self::PATH, $processId, $variable),
 			$fileName,
 			$contents
 		);
@@ -115,7 +113,7 @@ class ProcessClient extends AbstractClient
 
 	public function modifyPlan(int $processId, string $stepSid, ProcessModifyStepPlanCreateEntity $entity): ResponseInterface
 	{
-		return $this->request('PUT', sprintf('%s/%s/plans/%s', self::PATH_PROCESS, $processId, $stepSid), [
+		return $this->request('PUT', sprintf('%s/%s/plans/%s', self::PATH, $processId, $stepSid), [
 			'body' => Json::encode($entity->toBody()),
 			'headers' => ['Content-Type' => 'application/json'],
 		]);
@@ -125,7 +123,7 @@ class ProcessClient extends AbstractClient
 	{
 		return $this->request(
 			'POST',
-			sprintf('%s/%s/discussion', self::PATH_PROCESS, $processId),
+			sprintf('%s/%s/discussion', self::PATH, $processId),
 			[
 				'body' => Json::encode($entity->toBody()),
 				'headers' => ['Content-Type' => 'application/json'],
@@ -141,7 +139,7 @@ class ProcessClient extends AbstractClient
 	): ResponseInterface
 	{
 		return $this->upload(
-			sprintf('%s/%s/discussion/%s/upload', self::PATH_PROCESS, $processId, $discussionId),
+			sprintf('%s/%s/discussion/%s/upload', self::PATH, $processId, $discussionId),
 			$fileName,
 			$contents
 		);
@@ -152,89 +150,10 @@ class ProcessClient extends AbstractClient
 	 */
 	public function modifyVariables(int $processId, array $variables): ResponseInterface
 	{
-		return $this->request('PUT', sprintf('%s/%s/variables', self::PATH_PROCESS, $processId), [
+		return $this->request('PUT', sprintf('%s/%s/variables', self::PATH, $processId), [
 			'body' => Json::encode(['variables' => $variables]),
 			'headers' => ['Content-Type' => 'application/json'],
 		]);
-	}
-
-	/**
-	 * @param mixed[] $data
-	 * @param string[] $include
-	 */
-	public function startProcess(int $tid, array $data = [], array $include = []): ResponseInterface
-	{
-		$query = Helpers::buildQuery([
-			'include' => implode(',', $include),
-		]);
-
-		return $this->request(
-			'POST',
-			sprintf('%s/%s/start-process?%s', self::PATH_TEMPLATE, $tid, $query),
-			[
-				'body' => Json::encode($data),
-				'headers' => ['Content-Type' => 'application/json'],
-			]
-		);
-	}
-
-	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = null): ResponseInterface
-	{
-		$params = [
-			'limit' => $limit > 0 ? $limit : 10,
-			'offset' => $offset >= 0 ? $offset : 0,
-			'include' => implode(',', $filter !== null ? $filter->getInclude() : []),
-		];
-
-		if ($filter !== null) {
-			if ($filter->getStartableOnly() !== null) {
-				$params['startableOnly'] = $filter->getStartableOnly();
-			}
-
-			if ($filter->getState() !== null) {
-				$params['state'] = $filter->getState();
-			}
-		}
-
-		return $this->request('GET', sprintf('%s?%s', self::PATH_TEMPLATE, Helpers::buildQuery($params)));
-	}
-
-	/**
-	 * @param string[] $include
-	 */
-	public function getTemplate(int $id, array $include = []): ResponseInterface
-	{
-		$query = Helpers::buildQuery([
-			'include' => implode(',', $include),
-		]);
-
-		return $this->request('GET', sprintf('%s/%d?%s', self::PATH_TEMPLATE, $id, $query));
-	}
-
-	public function createTemplate(string $template): ResponseInterface
-	{
-		return $this->request(
-			'POST',
-			sprintf('%s', self::PATH_TEMPLATE),
-			[
-				'body' => Json::encode([
-					'template' => $template,
-				]),
-				'headers' => [
-					'Content-Type' => 'application/json',
-				],
-			]
-		);
-	}
-
-	public function deleteTemplate(int $templateId): ResponseInterface
-	{
-		return $this->request('DELETE', sprintf('%s/%s', self::PATH_TEMPLATE, $templateId));
-	}
-
-	public function archiveTemplate(int $templateId): ResponseInterface
-	{
-		return $this->request('PATCH', sprintf('%s/%s/archive', self::PATH_TEMPLATE, $templateId));
 	}
 
 	private function upload(string $path, string $fileName, string $fileContent): ResponseInterface
