@@ -6,6 +6,7 @@ use DateTimeInterface;
 use Floweye\Client\Entity\ProcessDiscussionCreateEntity;
 use Floweye\Client\Entity\ProcessModifyStepPlanCreateEntity;
 use Floweye\Client\Filter\ProcessListFilter;
+use Floweye\Client\Filter\TemplateListFilter;
 use Floweye\Client\Http\Utils\Helpers;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
@@ -172,9 +173,7 @@ class ProcessClient extends AbstractClient
 			sprintf('%s/%s/start-process?%s', self::PATH_TEMPLATE, $tid, $query),
 			[
 				'body' => Json::encode($data),
-				'headers' => [
-					'Content-Type' => 'application/json',
-				],
+				'headers' => ['Content-Type' => 'application/json'],
 			]
 		);
 	}
@@ -182,15 +181,23 @@ class ProcessClient extends AbstractClient
 	/**
 	 * @param string[] $include
 	 */
-	public function listTemplates(int $limit = 10, int $offset = 0, bool $startableOnly = false, array $include = []): ResponseInterface
+	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = NULL): ResponseInterface
 	{
-		$query = Helpers::buildQuery([
+		$params = [
 			'limit' => $limit > 0 ? $limit : 10,
 			'offset' => $offset >= 0 ? $offset : 0,
-			'startableOnly' => $startableOnly ? 'true' : 'false',
-			'include' => implode(',', $include),
-		]);
-		return $this->request('GET', sprintf('%s?%s', self::PATH_TEMPLATE, $query));
+			'include' => implode(',', $filter !== null ? $filter->getInclude() : []),
+		];
+
+		if ($filter->getStartableOnly() !== NULL) {
+			$params['startableOnly'] = $filter->getStartableOnly();
+		}
+
+		if ($filter->getState() !== NULL) {
+			$params['state'] = $filter->getState();
+		}
+
+		return $this->request('GET', sprintf('%s?%s', self::PATH_TEMPLATE, Helpers::buildQuery($params)));
 	}
 
 	/**

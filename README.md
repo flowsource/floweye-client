@@ -157,7 +157,7 @@ public function magic(): void
 | uploadFileToDiscussion($processId, $discussionId, $fileName, $contents)  | `POST /processes/{pid}/discussion/{id}/upload`   |
 | modifyPlan($processId, $stepSid, $entity)                                | `PUT /processes/{pid}/plans/{sid}`               |
 | modifyVariables($processId, $entity)                                     | `PUT /processes/{pid}/variables`                 |
-| listTemplates($limit, $offset, $startableOnly, $include)                 | `GET /template-processes`                        |
+| listTemplates($limit, $offset, $filter)                                  | `GET /template-processes`                        |
 | getTemplate($id, $include)                                               | `GET /template-processes/{id}`                   |
 | createTemplate($entity)                                                  | `POST /template-processes`                       |
 | deleteTemplate($id)                                                      | `DELETE /template-processes/{id}`                |

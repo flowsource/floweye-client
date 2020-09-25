@@ -6,6 +6,7 @@ use Floweye\Client\Client\ProcessClient;
 use Floweye\Client\Entity\ProcessDiscussionCreateEntity;
 use Floweye\Client\Entity\ProcessModifyStepPlanCreateEntity;
 use Floweye\Client\Filter\ProcessListFilter;
+use Floweye\Client\Filter\TemplateListFilter;
 
 /**
  * @property ProcessClient $client
@@ -146,9 +147,9 @@ final class ProcessService extends BaseService
 	 * @param string[] $include
 	 * @return mixed[]
 	 */
-	public function listTemplates(int $limit = 10, int $offset = 0, bool $startableOnly = false, array $include = []): array
+	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = NULL): array
 	{
-		$response = $this->client->listTemplates($limit, $offset, $startableOnly, $include);
+		$response = $this->client->listTemplates($limit, $offset, $filter);
 
 		return $this->processResponse($response)->getData();
 	}
