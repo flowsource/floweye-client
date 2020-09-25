@@ -145,22 +145,33 @@ public function magic(): void
 
 **ProcessService**
 
-| Method                                                    | API path                           | Type   |
-| ----------------------------------------------------------| ---------------------------------- | ------ |
-| listProcesses($limit, $offset, $filter, $include)         | /processes                         | GET    |
-| getProcess($id, $include)                                 | /processes/{id}                    | GET    |
-| addTag($pid, $ttid)                                       | /processes/{pid}/tags/{ttid}       | POST   |
-| removeTag($pid, $ttid)                                    | /processes/{pid}/tags/{ttid}       | DELETE |
-| moveProcessToNextStep($id)                                | /processes/{id}/next               | POST   |
-| uploadFile($id, $variable, $fileName, $contents)          | /process/{id}/upload               | POST   |
-| listTemplates($limit, $offset, $startableOnly, $include)  | /template-processes                | GET    |
-| getTemplate($id, $include)                                | /template-processes/{id}           | GET    |
-| createTemplate($entity)                                   | /template-processes                | POST   |
-| deleteTemplate($id)                                       | /template-processes/{id}           | DELETE |
-| archiveTemplate($id)                                      | /template-processes/{id}/archive   | PATCH  |
-| startProcess($tid, $data, $include)                       | /template-processes/{id}/start     | POST   |
+| Method                                                                   | API                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------ |
+| listProcesses($limit, $offset, $filter)                                  | `GET /processes`                                 |
+| getProcess($id, $include)                                                | `GET /processes/{id}`                            |
+| moveProcessToNextStep($id)                                               | `POST /processes/{id}/next`                      |
+| addTag($pid, $ttid)                                                      | `POST /processes/{pid}/tags/{ttid}`              |
+| removeTag($pid, $ttid)                                                   | `DELETE /processes/{pid}/tags/{ttid}`            |
+| uploadFile($id, $variable, $fileName, $contents)                         | `POST /process/{id}/upload`                      |
+| createDiscussion($processId, $entity)                                    | `POST /processes/{pid}/discussion`               |
+| uploadFileToDiscussion($processId, $discussionId, $fileName, $contents)  | `POST /processes/{pid}/discussion/{id}/upload`   |
+| modifyPlan($processId, $stepSid, $entity)                                | `PUT /processes/{pid}/plans/{sid}`               |
+| modifyVariables($processId, $entity)                                     | `PUT /processes/{pid}/variables`                 |
+| listTemplates($limit, $offset, $startableOnly, $include)                 | `GET /template-processes`                        |
+| getTemplate($id, $include)                                               | `GET /template-processes/{id}`                   |
+| createTemplate($entity)                                                  | `POST /template-processes`                       |
+| deleteTemplate($id)                                                      | `DELETE /template-processes/{id}`                |
+| archiveTemplate($id)                                                     | `PATCH /template-processes/{id}/archive`         |
+| startProcess($tid, $data, $include)                                      | `POST /template-processes/{id}/start`            |
 
-*1 Note: listProcesses $filter expects $variables to be array of variables to search for in format ["name" => "value", ...] eg ["user" => "10", "status" => "active"]
+*1 Note: listProcesses $filter expects $variables as array of
+
+- `name` (required, scalar|array)
+- `value` (required, null|scalar)
+- `operator` (optional, ['=', '!=', '~', '!~', '<', '>'], default '=')
+- `cast` (optional, [null, 'number', 'json'], default null)
+
+Example: `[{"name":"var1","value":"Joe Doe"},{"name":"var2","value":159,"operator":">","cast":"number"},{"name":["variableName", "person", "name"],"value":"John","operator":"=","cast":"json"}]`
 
 *2 Note: startProcess detailed info:
 

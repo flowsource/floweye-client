@@ -2,6 +2,8 @@
 
 namespace Floweye\Client\Filter;
 
+use DateTimeInterface;
+
 class ProcessListFilter
 {
 
@@ -15,7 +17,19 @@ class ProcessListFilter
 	private $creatorId;
 
 	/** @var int|null */
+	private $resolverId;
+
+	/** @var int|null */
 	private $possibleResolverId;
+
+	/** @var int|null */
+	private $templateId;
+
+	/** @var DateTimeInterface|null */
+	private $plannedFrom;
+
+	/** @var DateTimeInterface|null */
+	private $plannedTo;
 
 	/** @var mixed[]|null */
 	private $variables;
@@ -101,6 +115,46 @@ class ProcessListFilter
 	public function setInclude(array $include): void
 	{
 		$this->include = $include;
+	}
+
+	public function getResolverId(): ?int
+	{
+		return $this->resolverId;
+	}
+
+	public function setResolverId(?int $resolverId): void
+	{
+		$this->resolverId = $resolverId;
+	}
+
+	public function getTemplateId(): ?int
+	{
+		return $this->templateId;
+	}
+
+	public function setTemplateId(?int $templateId): void
+	{
+		$this->templateId = $templateId;
+	}
+
+	public function getPlannedFrom(): ?DateTimeInterface
+	{
+		return $this->plannedFrom;
+	}
+
+	public function setPlannedFrom(?DateTimeInterface $plannedFrom): void
+	{
+		$this->plannedFrom = $plannedFrom;
+	}
+
+	public function getPlannedTo(): ?DateTimeInterface
+	{
+		return $this->plannedTo;
+	}
+
+	public function setPlannedTo(?DateTimeInterface $plannedTo): void
+	{
+		$this->plannedTo = $plannedTo;
 	}
 
 }
