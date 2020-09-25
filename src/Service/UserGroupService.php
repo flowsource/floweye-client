@@ -18,12 +18,23 @@ class UserGroupService extends BaseService
 	}
 
 	/**
+	 * @param string[] $include
+	 * @return mixed[]
+	 */
+	public function listUserGroups(array $include = []): array
+	{
+		$response = $this->client->listUserGroups($include);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	/**
 	 * @param int[] $userIds
 	 * @return mixed[]
 	 */
-	public function appendUsers(string $id, array $userIds, bool $includeSystemUsers = false, bool $includeBlockedUsers = false): array
+	public function appendUsers(string $gid, array $userIds, bool $includeSystemUsers = false, bool $includeBlockedUsers = false): array
 	{
-		$response = $this->client->appendUsers($id, $userIds, $includeSystemUsers, $includeBlockedUsers);
+		$response = $this->client->appendUsers($gid, $userIds, $includeSystemUsers, $includeBlockedUsers);
 
 		return $this->processResponse($response)->getData();
 	}
@@ -32,9 +43,9 @@ class UserGroupService extends BaseService
 	 * @param string[] $include
 	 * @return mixed[]
 	 */
-	public function findOne(int $id, array $include = []): array
+	public function findOne(string $gid, array $include = []): array
 	{
-		$response = $this->client->findOne($id, $include);
+		$response = $this->client->findOne($gid, $include);
 
 		return $this->processResponse($response)->getData();
 	}
@@ -52,9 +63,9 @@ class UserGroupService extends BaseService
 	/**
 	 * @return mixed[]
 	 */
-	public function editOne(UserGroupEditEntity $entity): array
+	public function editOne(string $gid, UserGroupEditEntity $entity): array
 	{
-		$response = $this->client->editOne($entity);
+		$response = $this->client->editOne($gid, $entity);
 
 		return $this->processResponse($response)->getData();
 	}
@@ -62,9 +73,9 @@ class UserGroupService extends BaseService
 	/**
 	 * @return mixed[]
 	 */
-	public function deleteOne(int $id): array
+	public function deleteOne(string $gid): array
 	{
-		$response = $this->client->deleteOne($id);
+		$response = $this->client->deleteOne($gid);
 
 		return $this->processResponse($response)->getData();
 	}

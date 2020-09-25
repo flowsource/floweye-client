@@ -14,23 +14,32 @@ class UserGroupClient extends AbstractClient
 	private const PATH = 'user-groups';
 
 	/**
+	 * @param string[] $include
+	 */
+	public function listUserGroups(array $include = []): ResponseInterface
+	{
+		$parameters = [
+			'include' => implode(',', $include),
+		];
+
+		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($parameters)));
+	}
+
+	/**
 	 * @param int[] $userIds
 	 */
-	public function appendUsers(string $id, array $userIds, bool $includeSystemUsers = false, bool $includeBlockedUsers = false): ResponseInterface
+	public function appendUsers(string $gid, array $userIds, bool $includeSystemUsers = false, bool $includeBlockedUsers = false): ResponseInterface
 	{
-		$query = [
+		$params = [
 			'system' => $includeSystemUsers ? 'true' : 'false',
 			'blocked' => $includeBlockedUsers ? 'true' : 'false',
 		];
-		$query = Helpers::buildQuery($query);
 
 		return $this->request(
 			'PATCH',
-			sprintf('%s/%s/append-users?%s', self::PATH, $id, $query),
+			sprintf('%s/%s/append-users?%s', self::PATH, $gid, Helpers::buildQuery($params)),
 			[
-				'body' => Json::encode([
-					'ids' => $userIds,
-				]),
+				'body' => Json::encode(['ids' => $userIds]),
 				'headers' => [
 					'Content-Type' => 'application/json',
 				],
@@ -41,13 +50,13 @@ class UserGroupClient extends AbstractClient
 	/**
 	 * @param string[] $include
 	 */
-	public function findOne(int $id, array $include = []): ResponseInterface
+	public function findOne(string $gid, array $include = []): ResponseInterface
 	{
 		$query = Helpers::buildQuery([
 			'include' => implode(',', $include),
 		]);
 
-		return $this->request('GET', sprintf('%s/%d?%s', self::PATH, $id, $query));
+		return $this->request('GET', sprintf('%s/%d?%s', self::PATH, $gid, $query));
 	}
 
 	public function createOne(UserGroupCreateEntity $entity): ResponseInterface
@@ -67,16 +76,13 @@ class UserGroupClient extends AbstractClient
 		);
 	}
 
-	public function editOne(UserGroupEditEntity $entity): ResponseInterface
+	public function editOne(string $gid, UserGroupEditEntity $entity): ResponseInterface
 	{
 		return $this->request(
 			'PUT',
-			sprintf('%s/%s', self::PATH, $entity->getId()),
+			sprintf('%s/%s', self::PATH, $gid),
 			[
-				'body' => Json::encode([
-					'gid' => $entity->getGid(),
-					'name' => $entity->getName(),
-				]),
+				'body' => Json::encode($entity->toBody()),
 				'headers' => [
 					'Content-Type' => 'application/json',
 				],
@@ -84,9 +90,9 @@ class UserGroupClient extends AbstractClient
 		);
 	}
 
-	public function deleteOne(int $id): ResponseInterface
+	public function deleteOne(string $gid): ResponseInterface
 	{
-		return $this->request('DELETE', sprintf('%s/%s', self::PATH, $id));
+		return $this->request('DELETE', sprintf('%s/%s', self::PATH, $gid));
 	}
 
 }

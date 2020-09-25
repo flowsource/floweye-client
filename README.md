@@ -129,13 +129,14 @@ public function magic(): void
 
 **UserGroupService**
 
-| Method                                                                | API path                       | Type   |
-| --------------------------------------------------------------------- | ------------------------------ | ------ |
-| appendUsers($id, $userIds, $includeSystemUsers, $includeBlockedUsers) | /user-groups/{id}/append-users | PATCH  |
-| findOne($id, $include)                                                | /user-groups/{id}              | GET    |
-| createOne($entity)                                                    | /user-groups                   | POST   |
-| editOne($entity)                                                      | /user-groups/{id}              | PUT    |
-| deleteOne($id)                                                        | /user-groups/{id}              | DELETE |
+| Method                                                                 | API path                              |
+| ---------------------------------------------------------------------- | ------------------------------------- |
+| listUserGroups($include)                                               | GET /user-groups                      |
+| createOne($entity)                                                     | POST /user-groups                     |
+| findOne($gid, $include)                                                | GET /user-groups/{gid}                 |
+| editOne($gid, $entity)                                                 | PUT /user-groups/{gid}                 |
+| deleteOne($gid)                                                        | DELETE /user-groups/{gid}              |
+| appendUsers($gid, $userIds, $includeSystemUsers, $includeBlockedUsers) | PATCH /user-groups/{gid}/append-users  |
 
 
 **PlanService**
