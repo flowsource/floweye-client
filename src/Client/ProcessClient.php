@@ -2,12 +2,10 @@
 
 namespace Floweye\Client\Client;
 
-use DateTimeInterface;
 use Floweye\Client\Entity\ProcessDiscussionCreateEntity;
 use Floweye\Client\Entity\ProcessModifyStepPlanCreateEntity;
 use Floweye\Client\Filter\ProcessListFilter;
 use Floweye\Client\Http\Utils\Helpers;
-use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
 class ProcessClient extends AbstractClient
@@ -15,57 +13,9 @@ class ProcessClient extends AbstractClient
 
 	private const PATH = 'processes';
 
-	public function listProcesses(int $limit = 10, int $offset = 0, ?ProcessListFilter $filter = null): ResponseInterface
+	public function listProcesses(ProcessListFilter $filter): ResponseInterface
 	{
-		$parameters = [
-			'limit' => $limit > 0 ? $limit : 10,
-			'offset' => $offset >= 0 ? $offset : 0,
-			'include' => implode(',', $filter !== null ? $filter->getInclude() : []),
-		];
-
-		if ($filter !== null) {
-			$state = $filter->getState();
-			if ($state !== null) {
-				$parameters['state'] = $state;
-			}
-
-			$creatorId = $filter->getCreatorId();
-			if ($creatorId !== null) {
-				$parameters['creatorId'] = $creatorId;
-			}
-
-			$resolverId = $filter->getResolverId();
-			if ($creatorId !== null) {
-				$parameters['resolverId'] = $resolverId;
-			}
-
-			$possibleResolverId = $filter->getPossibleResolverId();
-			if ($possibleResolverId !== null) {
-				$parameters['possibleResolverId'] = $possibleResolverId;
-			}
-
-			$templateId = $filter->getTemplateId();
-			if ($templateId !== null) {
-				$parameters['templateId'] = $templateId;
-			}
-
-			$plannedFrom = $filter->getPlannedFrom();
-			if ($plannedFrom !== null) {
-				$parameters['plannedFrom'] = $plannedFrom->format(DateTimeInterface::ATOM);
-			}
-
-			$plannedTo = $filter->getPlannedTo();
-			if ($plannedTo !== null) {
-				$parameters['plannedTo'] = $plannedTo->format(DateTimeInterface::ATOM);
-			}
-
-			$variables = $filter->getVariables();
-			if ($variables !== null) {
-				$parameters['variables'] = Json::encode($variables);
-			}
-		}
-
-		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($parameters)));
+		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($filter->toParameters())));
 	}
 
 	/**
@@ -113,22 +63,12 @@ class ProcessClient extends AbstractClient
 
 	public function modifyPlan(int $processId, string $stepSid, ProcessModifyStepPlanCreateEntity $entity): ResponseInterface
 	{
-		return $this->request('PUT', sprintf('%s/%s/plans/%s', self::PATH, $processId, $stepSid), [
-			'body' => Json::encode($entity->toBody()),
-			'headers' => ['Content-Type' => 'application/json'],
-		]);
+		return $this->request('PUT', sprintf('%s/%s/plans/%s', self::PATH, $processId, $stepSid), ['json' => $entity->toBody()]);
 	}
 
 	public function createDiscussion(int $processId, ProcessDiscussionCreateEntity $entity): ResponseInterface
 	{
-		return $this->request(
-			'POST',
-			sprintf('%s/%s/discussion', self::PATH, $processId),
-			[
-				'body' => Json::encode($entity->toBody()),
-				'headers' => ['Content-Type' => 'application/json'],
-			]
-		);
+		return $this->request('POST', sprintf('%s/%s/discussion', self::PATH, $processId), ['json' => $entity->toBody()]);
 	}
 
 	public function uploadFileToDiscussion(
@@ -150,10 +90,7 @@ class ProcessClient extends AbstractClient
 	 */
 	public function modifyVariables(int $processId, array $variables): ResponseInterface
 	{
-		return $this->request('PUT', sprintf('%s/%s/variables', self::PATH, $processId), [
-			'body' => Json::encode(['variables' => $variables]),
-			'headers' => ['Content-Type' => 'application/json'],
-		]);
+		return $this->request('PUT', sprintf('%s/%s/variables', self::PATH, $processId), ['json' => ['variables' => $variables]]);
 	}
 
 	private function upload(string $path, string $fileName, string $fileContent): ResponseInterface

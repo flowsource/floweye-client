@@ -27,22 +27,19 @@ class PlanService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function deleteOne(int $id): array
+	public function deleteOne(int $id): void
 	{
 		$response = $this->client->deleteOne($id);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**
 	 * @return mixed[]
 	 */
-	public function findMultiple(int $limit = 10, int $offset = 0, ?PlanListFilter $filter = null): array
+	public function findMultiple(PlanListFilter $filter): array
 	{
-		$response = $this->client->findMultiple($limit, $offset, $filter);
+		$response = $this->client->findMultiple($filter);
 
 		return $this->processResponse($response)->getData();
 	}

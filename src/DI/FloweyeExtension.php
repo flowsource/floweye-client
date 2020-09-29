@@ -26,7 +26,7 @@ use Nette\Schema\Schema;
  * @method mixed[] getConfig()
  * @property-read mixed[] $config
  */
-class ApiClientsExtension extends CompilerExtension
+class FloweyeExtension extends CompilerExtension
 {
 
 	public function getConfigSchema(): Schema
@@ -38,7 +38,8 @@ class ApiClientsExtension extends CompilerExtension
 				'base_uri' => Expect::string()->required(),
 				'headers' => Expect::structure([
 					'X-Api-Token' => Expect::string()->required(),
-				])->castTo('array'),
+				])->otherItems(Expect::mixed())
+					->castTo('array'),
 			])->otherItems(Expect::mixed())
 				->castTo('array'),
 		])->castTo('array');

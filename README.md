@@ -14,12 +14,13 @@
 
 ## Versions
 
-| State  | Version      | Branch   | Nette        | PHP     |
-|--------|--------------|----------|--------------|---------|
-| dev    | `^0.1.0`     | `master` | `2.4`, `3.0` | `>=7.2` |
+| State     | Version      | Branch   | Nette        | PHP     |
+|-----------|--------------|----------|--------------|---------|
+| dev       | `^0.2.0`     | `master` | `2.4`, `3.0` | `>=7.2` |
+| stable    | `^0.1.0`     | `master` | `2.4`, `3.0` | `>=7.2` |
 
 
-## Setup
+## Instalation
 
 Install package using Composer.
 
@@ -27,7 +28,10 @@ Install package using Composer.
 composer require floweye/client
 ```
 
-Register DI extension in your NEON file.
+
+## How to use
+
+### Nette framework DI bridge
 
 ```yaml
 extensions:
@@ -44,67 +48,53 @@ floweye.api:
             X-Api-Token: floweye_api_key
 ```
 
-Configure connection under key `http` configure [Guzzle HTTP client]([Guzzle doc](https://guzzle.readthedocs.io/en/latest/quickstart.html)).
-
-
-## How to use
+Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io/en/latest/quickstart.html) under `http` option.
 
 ### High level
 
-For high level usage you simply inject desired service and work directly with prepared data.
+Simply inject desired services which allow you to work directly with processed data.
 
 ```php
-/** @var UserService @inject */
-public $users;
-
-public function magic(): void
-{
-    $user = $this->users->getById(1);
-}
+$userService = $context->getService(Floweye\Client\Service\UserService::class);
+$user = $userService->getById(1);
 ```
 
 
-### Psr-7 response level
+### PSR-7 level
 
-In case you need specific response information. You can work with our client layer.
+In case you need to access PSR-7 response. You can work with our client layer.
 
 ```php
-/** @var UserClient @inject */
-public $users;
+$userClient = $context->getService(Floweye\Client\Client\UserClient::class);
 
-public function magic(): void
-{
-    $response = $this->users->getById(1);
-}
+/** @var Psr\Http\Message\ResponseInterface $response */
+$response = $userClient->getById(1);
 ```
 
 
 ### Low level
 
+This example showcases the manual service instantiation.
+
 ```php
-/** @var GuzzleFactory @inject */
-public $guzzleFactory;
+$guzzleFactory = $context->getService(Floweye\Client\Http\Guzzle\GuzzleFactory::class);
+$httpClient = $guzzleFactory->create([
+    'base_uri' => 'https://floweye.tld/api/v1/',
+    'http_errors' => false,
+    'headers' => [
+        'X-Api-Token' => 'floweye-api-key',
+    ]
+]);
 
-public function magic(): void
-{
-    $guzzleClient = $this->guzzleFactory->create([
-        'base_uri' => 'https://floweye.tld/api/v1/',
-        'http_errors' => false,
-        'headers' => [
-            'X-Api-Token' => 'floweye-api-key',
-        ]
-    ]);
-
-    // You can now use $guzzleClient with our Clients, Services or on its own
-    $client = new UserClient($guzzleClient);
-    $service = new UserService($client);
-}
+// You can now use $httpClient with our Clients, Services or on its own
+$userClient = new Floweye\Client\Client\UserClient($httpClient);
+$userService = new Floweye\Client\Service\UserService($userClient);
 ```
 
 
 ## API endpoints overview
 
-** ApplicationService **
+**ApplicationService**
 
 | Method                                       | API                             |
 | -------------------------------------------- | ------------------------------- |
@@ -119,14 +109,14 @@ public function magic(): void
 
 **UserService**
 
-| Method                              | API                              |
-| ----------------------------------- | -------------------------------- |
-| list($limit, $offset, $filter)      | `GET /users`                     |
-| create($entity)                     | `POST /users`                    |
-| getById($id, $include)              | `GET /users/{id}`                |
-| edit($id, $entity)                  | `PUT /users/{id}`                |
-| onTimeLogin($id)                    | `PUT /users/{id}/one-time-login` |
-| passwordReset($id)                  | `PUT /users/{id}/password-reset` |
+| Method                       | API                              |
+| ---------------------------- | -------------------------------- |
+| list($filter)                | `GET /users`                     |
+| create($entity)              | `POST /users`                    |
+| getById($id, $include)       | `GET /users/{id}`                |
+| edit($id, $entity)           | `PUT /users/{id}`                |
+| onTimeLogin($id)             | `PUT /users/{id}/one-time-login` |
+| passwordReset($id)           | `PUT /users/{id}/password-reset` |
 
 
 **UserGroupService**
@@ -143,14 +133,14 @@ public function magic(): void
 
 **PlanService**
 
-| Method                                  | API                    |
-| --------------------------------------- | ---------------------- |
-| findMultiple($limit, $offset, $filters) | `GET /plans`           |
-| createOne($entity)                      | `POST /plans`          |
-| deleteOne($id)                          | `DELETE /plans/{id}`   |
+| Method                          | API                    |
+| ------------------------------- | ---------------------- |
+| findMultiple($filters)          | `GET /plans`           |
+| createOne($entity)              | `POST /plans`          |
+| deleteOne($id)                  | `DELETE /plans/{id}`   |
 
 
-** TimerService **
+**TimerService**
 
 | Method                                   | API                            |
 | ---------------------------------------- | ------------------------------ |
@@ -166,7 +156,7 @@ public function magic(): void
 
 | Method                                                                   | API                                              |
 | ------------------------------------------------------------------------ | ------------------------------------------------ |
-| listProcesses($limit, $offset, $filter)                                  | `GET /processes`                                 |
+| listProcesses($filter)                                                   | `GET /processes`                                 |
 | getProcess($id, $include)                                                | `GET /processes/{id}`                            |
 | moveProcessToNextStep($id)                                               | `POST /processes/{id}/next`                      |
 | addTag($pid, $ttid)                                                      | `POST /processes/{pid}/tags/{ttid}`              |
@@ -182,41 +172,9 @@ public function magic(): void
 
 | Method                                      | API                                              |
 | ------------------------------------------- | ------------------------------------------------ |
-| listTemplates($limit, $offset, $filter)     | `GET /template-processes`                        |
+| listTemplates($filter)                      | `GET /template-processes`                        |
 | getTemplate($id, $include)                  | `GET /template-processes/{id}`                   |
 | createTemplate($entity)                     | `POST /template-processes`                       |
 | deleteTemplate($id)                         | `DELETE /template-processes/{id}`                |
 | archiveTemplate($id)                        | `PATCH /template-processes/{id}/archive`         |
 | startProcess($tid, $data, $include)         | `POST /template-processes/{id}/start`            |
-
-*1 Note: listProcesses $filter expects $variables as array of
-
-- `name` (required, scalar|array)
-- `value` (required, null|scalar)
-- `operator` (optional, ['=', '!=', '~', '!~', '<', '>'], default '=')
-- `cast` (optional, [null, 'number', 'json'], default null)
-
-Example: `[{"name":"var1","value":"Joe Doe"},{"name":"var2","value":159,"operator":">","cast":"number"},{"name":["variableName", "person", "name"],"value":"John","operator":"=","cast":"json"}]`
-
-*2 Note: startProcess detailed info:
-
-StartProcess method accepts an optional parameter $data with which you can set process default variables, assign users to roles etc.
-
-Please see example of $data with comments below:
-
-```php
-$data = [
-    // set values to process variables
-    'variables' => [
-        'foo' => 'bar',
-        'baz' => 'bat',
-    ],
-    // assign users to roles by their user ids and role names
-    'roles' => [
-        'medic' => [152578, 24557],
-        'coroner' => [666]
-    ],
-    // how many times the process should proceed to next step automatically
-    'next' => 2,
-];
-```

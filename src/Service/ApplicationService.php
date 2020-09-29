@@ -4,7 +4,6 @@ namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\ApplicationClient;
 use Floweye\Client\Exception\Runtime\RequestException;
-use Floweye\Client\Exception\Runtime\ResponseException;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use function GuzzleHttp\Psr7\stream_for;
@@ -28,20 +27,13 @@ class ApplicationService extends BaseService
 	{
 		$response = $this->client->export($include);
 
-		$this->assertResponse($response);
-
-		try {
-			return Json::decode($response->getBody()->getContents(), Json::FORCE_ARRAY);
-		} catch (JsonException $e) {
-			throw new ResponseException($response, 'Response is not valid JSON.');
-		}
+		return $this->processResponse($response)->getData();
 	}
 
 	/**
 	 * @param mixed[] $data
-	 * @return mixed[]
 	 */
-	public function import(array $data): array
+	public function import(array $data): void
 	{
 		try {
 			$response = $this->client->import(stream_for(Json::encode($data)));
@@ -49,7 +41,7 @@ class ApplicationService extends BaseService
 			throw new RequestException('Request data cannot be encoded to JSON.');
 		}
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**
@@ -64,13 +56,12 @@ class ApplicationService extends BaseService
 
 	/**
 	 * @param mixed[] $globals
-	 * @return mixed[]
 	 */
-	public function editGlobals(array $globals): array
+	public function editGlobals(array $globals): void
 	{
 		$response = $this->client->editGlobals($globals);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**
@@ -83,14 +74,11 @@ class ApplicationService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function deleteSnippet(int $id): array
+	public function deleteSnippet(int $id): void
 	{
 		$response = $this->client->deleteSnippet($id);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**

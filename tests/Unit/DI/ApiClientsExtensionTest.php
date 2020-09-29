@@ -9,8 +9,8 @@ use Floweye\Client\Client\TemplateProcessClient;
 use Floweye\Client\Client\TimerClient;
 use Floweye\Client\Client\UserClient;
 use Floweye\Client\Client\UserGroupClient;
-use Floweye\Client\DI\ApiClientsExtension;
-use Floweye\Client\DI\ApiClientsExtension24;
+use Floweye\Client\DI\FloweyeExtension;
+use Floweye\Client\DI\FloweyeExtension24;
 use Floweye\Client\Http\Guzzle\GuzzleFactory;
 use Floweye\Client\Http\HttpClient;
 use Floweye\Client\Service\ApplicationService;
@@ -32,8 +32,8 @@ class ApiClientsExtensionTest extends ContainerTestCase
 		parent::setUpCompileContainer($compiler);
 
 		$extension = class_exists(ServiceDefinition::class)
-			? new ApiClientsExtension()
-			: new ApiClientsExtension24();
+			? new FloweyeExtension()
+			: new FloweyeExtension24();
 		$compiler->addExtension('ispa.apis', $extension);
 		$compiler->addConfig([
 			'ispa.apis' => [

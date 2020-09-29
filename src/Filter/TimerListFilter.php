@@ -2,33 +2,31 @@
 
 namespace Floweye\Client\Filter;
 
-class TimerListFilter
+class TimerListFilter extends AbstractListFilter
 {
 
-	/** @var int|null */
-	private $resolver;
-
-	/** @var string|null */
-	private $timer;
-
-	public function getResolver(): ?int
+	final protected function __construct()
 	{
-		return $this->resolver;
+		parent::__construct();
 	}
 
-	public function setResolver(?int $resolver): void
+	public static function create(): self
 	{
-		$this->resolver = $resolver;
+		return new static();
 	}
 
-	public function getTimer(): ?string
+	public function withResolver(?int $resolver): self
 	{
-		return $this->timer;
+		$this->parameters['resolver'] = $resolver;
+
+		return $this;
 	}
 
-	public function setTimer(?string $timer): void
+	public function withTimer(?string $timer): self
 	{
-		$this->timer = $timer;
+		$this->parameters['timer'] = $timer;
+
+		return $this;
 	}
 
 }

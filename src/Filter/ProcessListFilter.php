@@ -3,158 +3,78 @@
 namespace Floweye\Client\Filter;
 
 use DateTimeInterface;
+use Nette\Utils\Json;
 
-class ProcessListFilter
+class ProcessListFilter extends BaseListFilter
 {
 
 	public const STATE_ACTIVE = 'active';
 	public const STATE_COMPLETE = 'complete';
 
-	/** @var string|null */
-	private $state;
-
-	/** @var int|null */
-	private $creatorId;
-
-	/** @var int|null */
-	private $resolverId;
-
-	/** @var int|null */
-	private $possibleResolverId;
-
-	/** @var int|null */
-	private $templateId;
-
-	/** @var DateTimeInterface|null */
-	private $plannedFrom;
-
-	/** @var DateTimeInterface|null */
-	private $plannedTo;
-
-	/** @var mixed[]|null */
-	private $variables;
-
-	/** @var string[] */
-	private $include = [];
-
-	/**
-	 * @return static
-	 */
-	public function setState(string $state): self
+	public function withState(string $state): self
 	{
-		$this->state = $state;
+		$this->parameters['state'] = $state;
 
 		return $this;
 	}
 
-	public function getState(): ?string
+	public function withCreatorId(int $userId): self
 	{
-		return $this->state;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function setCreatorId(int $userId): self
-	{
-		$this->creatorId = $userId;
+		$this->parameters['creatorId'] = $userId;
 
 		return $this;
 	}
 
-	public function getCreatorId(): ?int
+	public function withPossibleResolverId(int $userId): self
 	{
-		return $this->creatorId;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function setPossibleResolverId(int $userId): self
-	{
-		$this->possibleResolverId = $userId;
+		$this->parameters['possibleResolverId'] = $userId;
 
 		return $this;
 	}
 
-	public function getPossibleResolverId(): ?int
+	public function withVariables(ProcessListVariablesFilter $variables): self
 	{
-		return $this->possibleResolverId;
-	}
-
-	/**
-	 * @param mixed[] $variables
-	 * @return static
-	 */
-	public function setVariables(array $variables): self
-	{
-		$this->variables = $variables;
+		$this->parameters['variables'] = Json::encode($variables->toParameters());
 
 		return $this;
-	}
-
-	/**
-	 * @return mixed[]|null
-	 */
-	public function getVariables(): ?array
-	{
-		return $this->variables;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public function getInclude(): array
-	{
-		return $this->include;
 	}
 
 	/**
 	 * @param string[] $include
 	 */
-	public function setInclude(array $include): void
+	public function withInclude(array $include): self
 	{
-		$this->include = $include;
+		$this->parameters['include'] = implode(',', $include);
+
+		return $this;
 	}
 
-	public function getResolverId(): ?int
+	public function withResolverId(int $resolverId): self
 	{
-		return $this->resolverId;
+		$this->parameters['resolverId'] = $resolverId;
+
+		return $this;
 	}
 
-	public function setResolverId(?int $resolverId): void
+	public function withTemplateId(int $templateId): self
 	{
-		$this->resolverId = $resolverId;
+		$this->parameters['templateId'] = $templateId;
+
+		return $this;
 	}
 
-	public function getTemplateId(): ?int
+	public function withPlannedFrom(DateTimeInterface $plannedFrom): self
 	{
-		return $this->templateId;
+		$this->parameters['plannedFrom'] = $plannedFrom->format(DateTimeInterface::ATOM);
+
+		return $this;
 	}
 
-	public function setTemplateId(?int $templateId): void
+	public function withPlannedTo(DateTimeInterface $plannedTo): self
 	{
-		$this->templateId = $templateId;
-	}
+		$this->parameters['plannedTo'] = $plannedTo->format(DateTimeInterface::ATOM);
 
-	public function getPlannedFrom(): ?DateTimeInterface
-	{
-		return $this->plannedFrom;
-	}
-
-	public function setPlannedFrom(?DateTimeInterface $plannedFrom): void
-	{
-		$this->plannedFrom = $plannedFrom;
-	}
-
-	public function getPlannedTo(): ?DateTimeInterface
-	{
-		return $this->plannedTo;
-	}
-
-	public function setPlannedTo(?DateTimeInterface $plannedTo): void
-	{
-		$this->plannedTo = $plannedTo;
+		return $this;
 	}
 
 }

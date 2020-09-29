@@ -14,37 +14,9 @@ class UserClient extends AbstractClient
 
 	private const PATH = 'users';
 
-	public function list(int $limit = 10, int $offset = 0, ?UserListFilter $filter = null): ResponseInterface
+	public function list(UserListFilter $filter): ResponseInterface
 	{
-		$parameters = [
-			'limit' => $limit > 0 ? $limit : 10,
-			'offset' => $offset >= 0 ? $offset : 0,
-			'include' => implode(',', $filter !== null ? $filter->getInclude() : []),
-		];
-
-		if ($filter !== null) {
-			$state = $filter->getState();
-			if ($state !== null) {
-				$parameters['state'] = $state;
-			}
-
-			$email = $filter->getEmail();
-			if ($email !== null) {
-				$parameters['email'] = $email;
-			}
-
-			$id = $filter->getId();
-			if ($id !== null) {
-				$parameters['id'] = $id;
-			}
-
-			$username = $filter->getUsername();
-			if ($username !== null) {
-				$parameters['username'] = $username;
-			}
-		}
-
-		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($parameters)));
+		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($filter->toParameters())));
 	}
 
 	/**
@@ -59,22 +31,12 @@ class UserClient extends AbstractClient
 
 	public function create(UserCreateEntity $entity): ResponseInterface
 	{
-		return $this->request('POST', sprintf('%s', self::PATH), [
-			'body' => Json::encode($entity->toBody()),
-			'headers' => ['Content-Type' => 'application/json'],
-		]);
+		return $this->request('POST', sprintf('%s', self::PATH), ['json' => $entity->toBody()]);
 	}
 
 	public function edit(int $id, UserEditEntity $entity): ResponseInterface
 	{
-		return $this->request(
-			'PUT',
-			sprintf('%s/%s', self::PATH, $id),
-			[
-				'body' => Json::encode($entity->toBody()),
-				'headers' => ['Content-Type' => 'application/json'],
-			]
-		);
+		return $this->request('PUT', sprintf('%s/%s', self::PATH, $id), ['json' => Json::encode($entity->toBody())]);
 	}
 
 	public function oneTimeLogin(int $id): ResponseInterface

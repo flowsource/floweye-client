@@ -30,13 +30,12 @@ class UserGroupService extends BaseService
 
 	/**
 	 * @param int[] $userIds
-	 * @return mixed[]
 	 */
-	public function appendUsers(string $gid, array $userIds, bool $includeSystemUsers = false, bool $includeBlockedUsers = false): array
+	public function appendUsers(string $gid, array $userIds, bool $includeSystemUsers = false, bool $includeBlockedUsers = false): void
 	{
 		$response = $this->client->appendUsers($gid, $userIds, $includeSystemUsers, $includeBlockedUsers);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**
@@ -60,14 +59,11 @@ class UserGroupService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function editOne(string $gid, UserGroupEditEntity $entity): array
+	public function editOne(string $gid, UserGroupEditEntity $entity): void
 	{
 		$response = $this->client->editOne($gid, $entity);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**

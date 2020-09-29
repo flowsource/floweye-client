@@ -2,5 +2,5 @@ includes:
 	- phpstan.base.neon
 
 parameters:
-	excludes_analyse:
-		- src/DI/ApiClientsExtension24.php
+	ignoreErrors:
+		- '#Call to deprecated method validateConfig\(\) of class Nette\\DI\\CompilerExtension:\suse getConfigSchema\(\)#'

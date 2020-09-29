@@ -39,29 +39,23 @@ class BaseService
 	{
 		$this->assertResponse($response);
 
-		//todo just hotfix for now
-		if ($response->getStatusCode() === 204) {
-			// No content
-			$appResp = new Response('success', []);
-		} else {
-			try {
-				$resp = Json::decode($response->getBody()->getContents(), Json::FORCE_ARRAY);
-			} catch (JsonException $e) {
-				throw new ResponseException($response, 'Response is not valid JSON.');
-			}
-
-			if (!isset($resp['status'])) {
-				throw new ResponseException($response, 'Missing "status" field in response data');
-			}
-
-			$appResp = new Response(
-				$resp['status'],
-				$resp['data'] ?? null,
-				$resp['code'] ?? null,
-				$resp['message'] ?? null,
-				$resp['context'] ?? null
-			);
+		try {
+			$resp = Json::decode($response->getBody()->getContents(), Json::FORCE_ARRAY);
+		} catch (JsonException $e) {
+			throw new ResponseException($response, 'Response is not valid JSON.');
 		}
+
+		if (!isset($resp['status'])) {
+			throw new ResponseException($response, 'Missing "status" field in response data');
+		}
+
+		$appResp = new Response(
+			$resp['status'],
+			$resp['data'] ?? null,
+			$resp['code'] ?? null,
+			$resp['message'] ?? null,
+			$resp['context'] ?? null
+		);
 
 		if (!$appResp->isSuccess()) {
 			throw new ResponseException(

@@ -4,6 +4,7 @@ namespace Tests\Floweye\Client\Unit\App\Lotus;
 
 use Floweye\Client\Client\UserClient;
 use Floweye\Client\Exception\Runtime\ResponseException;
+use Floweye\Client\Filter\UserListFilter;
 use Floweye\Client\Http\HttpClient;
 use Floweye\Client\Service\UserService;
 use GuzzleHttp\Psr7\Response;
@@ -16,7 +17,7 @@ class UserServiceTest extends AbstractAppTestCase
 	public function testList(): void
 	{
 		$service = $this->createRequestor('users.json');
-		$res = $service->list();
+		$res = $service->list(UserListFilter::create());
 
 		self::assertCount(10, $res);
 

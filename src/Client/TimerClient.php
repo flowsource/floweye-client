@@ -8,7 +8,6 @@ use Floweye\Client\Entity\TimerEntryEditEntity;
 use Floweye\Client\Entity\TimerEntryStartEntity;
 use Floweye\Client\Filter\TimerListFilter;
 use Floweye\Client\Http\Utils\Helpers;
-use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
 class TimerClient extends AbstractClient
@@ -18,26 +17,17 @@ class TimerClient extends AbstractClient
 
 	public function createEntry(TimerEntryCreateEntity $entity): ResponseInterface
 	{
-		return $this->request('POST', sprintf('%s', self::PATH), [
-			'body' => Json::encode($entity->toBody()),
-			'headers' => ['Content-Type' => 'application/json'],
-		]);
+		return $this->request('POST', sprintf('%s', self::PATH), ['json' => $entity->toBody()]);
 	}
 
 	public function editEntry(int $id, TimerEntryEditEntity $entity): ResponseInterface
 	{
-		return $this->request('PUT', sprintf('%s/%s', self::PATH, $id), [
-			'body' => Json::encode($entity->toBody()),
-			'headers' => ['Content-Type' => 'application/json'],
-		]);
+		return $this->request('PUT', sprintf('%s/%s', self::PATH, $id), ['json' => $entity->toBody()]);
 	}
 
 	public function startEntry(int $id, TimerEntryStartEntity $entity): ResponseInterface
 	{
-		return $this->request('POST', sprintf('%s/%s/start', self::PATH, $id), [
-			'body' => Json::encode($entity->toBody()),
-			'headers' => ['Content-Type' => 'application/json'],
-		]);
+		return $this->request('POST', sprintf('%s/%s/start', self::PATH, $id), ['json' => $entity->toBody()]);
 	}
 
 	public function stopEntry(int $id): ResponseInterface
@@ -63,10 +53,7 @@ class TimerClient extends AbstractClient
 	public function listTimers(DateTimeInterface $from, DateTimeInterface $to, ?TimerListFilter $filter = null): ResponseInterface
 	{
 		if ($filter !== null) {
-			$parameters = [
-				'resolver' => $filter->getResolver(),
-				'title' => $filter->getTimer(),
-			];
+			$parameters = $filter->toParameters();
 		}
 
 		return $this->request('GET', sprintf(
