@@ -30,24 +30,18 @@ class TimerService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function editEntry(int $id, TimerEntryEditEntity $entity): array
+	public function editEntry(int $id, TimerEntryEditEntity $entity): void
 	{
 		$response = $this->client->editEntry($id, $entity);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function deleteEntry(int $id): array
+	public function deleteEntry(int $id): void
 	{
 		$response = $this->client->deleteEntry($id);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**
@@ -60,14 +54,11 @@ class TimerService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function stopEntry(int $id): array
+	public function stopEntry(int $id): void
 	{
 		$response = $this->client->stopEntry($id);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**

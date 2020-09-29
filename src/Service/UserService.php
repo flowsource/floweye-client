@@ -21,9 +21,9 @@ final class UserService extends BaseService
 	/**
 	 * @return mixed[]
 	 */
-	public function list(int $limit = 10, int $offset = 0, ?UserListFilter $filter = null): array
+	public function list(UserListFilter $filter): array
 	{
-		$response = $this->client->list($limit, $offset, $filter);
+		$response = $this->client->list($filter);
 
 		return $this->processResponse($response)->getData();
 	}
@@ -49,34 +49,25 @@ final class UserService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function edit(int $id, UserEditEntity $entity): array
+	public function edit(int $id, UserEditEntity $entity): void
 	{
 		$response = $this->client->edit($id, $entity);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function passwordReset(int $id): array
+	public function passwordReset(int $id): void
 	{
 		$response = $this->client->passwordReset($id);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function oneTimeLogin(int $id): array
+	public function oneTimeLogin(int $id): void
 	{
 		$response = $this->client->oneTimeLogin($id);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 }

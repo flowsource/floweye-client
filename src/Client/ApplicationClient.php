@@ -3,7 +3,6 @@
 namespace Floweye\Client\Client;
 
 use Floweye\Client\Http\Utils\Helpers;
-use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -42,22 +41,16 @@ class ApplicationClient extends AbstractClient
 	 */
 	public function editGlobals(array $globals): ResponseInterface
 	{
-		return $this->request('PUT', sprintf('%s/globals', self::PATH), [
-			'body' => Json::encode($globals),
-			'headers' => ['Content-Type' => 'application/json'],
-		]);
+		return $this->request('PUT', sprintf('%s/globals', self::PATH), ['json' => $globals]);
 	}
 
 	public function createSnippet(string $name, string $description, string $snippet): ResponseInterface
 	{
 		return $this->request('POST', sprintf('%s/snippets', self::PATH), [
-			'body' => Json::encode([
+			'json' => [
 				'name' => $name,
 				'description' => $description,
 				'snippet' => $snippet,
-			]),
-			'headers' => [
-				'Content-Type' => 'application/json',
 			],
 		]);
 	}

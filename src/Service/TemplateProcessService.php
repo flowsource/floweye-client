@@ -19,9 +19,9 @@ class TemplateProcessService extends BaseService
 	/**
 	 * @return mixed[]
 	 */
-	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = null): array
+	public function listTemplates(TemplateListFilter $filter): array
 	{
-		$response = $this->client->listTemplates($limit, $offset, $filter);
+		$response = $this->client->listTemplates($filter);
 
 		return $this->processResponse($response)->getData();
 	}
@@ -47,24 +47,18 @@ class TemplateProcessService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function deleteTemplate(int $templateId): array
+	public function deleteTemplate(int $templateId): void
 	{
 		$response = $this->client->deleteTemplate($templateId);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function archiveTemplate(int $templateId): array
+	public function archiveTemplate(int $templateId): void
 	{
 		$response = $this->client->archiveTemplate($templateId);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**

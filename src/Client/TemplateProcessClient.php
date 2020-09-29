@@ -4,7 +4,6 @@ namespace Floweye\Client\Client;
 
 use Floweye\Client\Filter\TemplateListFilter;
 use Floweye\Client\Http\Utils\Helpers;
-use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
 class TemplateProcessClient extends AbstractClient
@@ -12,25 +11,9 @@ class TemplateProcessClient extends AbstractClient
 
 	private const PATH = 'template-processes';
 
-	public function listTemplates(int $limit = 10, int $offset = 0, ?TemplateListFilter $filter = null): ResponseInterface
+	public function listTemplates(TemplateListFilter $filter): ResponseInterface
 	{
-		$params = [
-			'limit' => $limit > 0 ? $limit : 10,
-			'offset' => $offset >= 0 ? $offset : 0,
-			'include' => implode(',', $filter !== null ? $filter->getInclude() : []),
-		];
-
-		if ($filter !== null) {
-			if ($filter->getStartableOnly() !== null) {
-				$params['startableOnly'] = $filter->getStartableOnly();
-			}
-
-			if ($filter->getState() !== null) {
-				$params['state'] = $filter->getState();
-			}
-		}
-
-		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($params)));
+		return $this->request('GET', sprintf('%s?%s', self::PATH, Helpers::buildQuery($filter->toParameters())));
 	}
 
 	/**
@@ -47,18 +30,7 @@ class TemplateProcessClient extends AbstractClient
 
 	public function createTemplate(string $template): ResponseInterface
 	{
-		return $this->request(
-			'POST',
-			sprintf('%s', self::PATH),
-			[
-				'body' => Json::encode([
-					'template' => $template,
-				]),
-				'headers' => [
-					'Content-Type' => 'application/json',
-				],
-			]
-		);
+		return $this->request('POST', sprintf('%s', self::PATH), ['json' => ['template' => $template]]);
 	}
 
 	public function deleteTemplate(int $templateId): ResponseInterface
@@ -81,14 +53,7 @@ class TemplateProcessClient extends AbstractClient
 			'include' => implode(',', $include),
 		]);
 
-		return $this->request(
-			'POST',
-			sprintf('%s/%s/start-process?%s', self::PATH, $tid, $query),
-			[
-				'body' => Json::encode($data),
-				'headers' => ['Content-Type' => 'application/json'],
-			]
-		);
+		return $this->request('POST', sprintf('%s/%s/start-process?%s', self::PATH, $tid, $query), ['json' => $data]);
 	}
 
 }

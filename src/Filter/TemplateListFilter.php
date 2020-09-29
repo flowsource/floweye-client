@@ -2,57 +2,31 @@
 
 namespace Floweye\Client\Filter;
 
-class TemplateListFilter
+class TemplateListFilter extends BaseListFilter
 {
 
-	/** @var string|null */
-	private $state;
-
-	/** @var bool|null */
-	private $startableOnly;
-
-	/** @var string[] */
-	private $include = [];
-
-	/**
-	 * @return static
-	 */
 	public function setState(string $state): self
 	{
-		$this->state = $state;
+		$this->parameters['state'] = $state;
 
 		return $this;
-	}
-
-	public function getState(): ?string
-	{
-		return $this->state;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public function getInclude(): array
-	{
-		return $this->include;
 	}
 
 	/**
 	 * @param string[] $include
 	 */
-	public function setInclude(array $include): void
+	public function setInclude(array $include): self
 	{
-		$this->include = $include;
+		$this->parameters['include'] = implode(',', $include);
+
+		return $this;
 	}
 
-	public function getStartableOnly(): ?bool
+	public function setStartableOnly(bool $startableOnly): self
 	{
-		return $this->startableOnly;
-	}
+		$this->parameters['startableOnly'] = $startableOnly;
 
-	public function setStartableOnly(?bool $startableOnly): void
-	{
-		$this->startableOnly = $startableOnly;
+		return $this;
 	}
 
 }

@@ -21,9 +21,9 @@ final class ProcessService extends BaseService
 	/**
 	 * @return mixed[]
 	 */
-	public function listProcesses(int $limit = 10, int $offset = 0, ?ProcessListFilter $filter = null): array
+	public function listProcesses(ProcessListFilter $filter): array
 	{
-		$response = $this->client->listProcesses($limit, $offset, $filter);
+		$response = $this->client->listProcesses($filter);
 
 		return $this->processResponse($response)->getData();
 	}
@@ -39,30 +39,24 @@ final class ProcessService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function addTag(int $pid, int $ttid): array
+	public function addTag(int $pid, int $ttid): void
 	{
 		$response = $this->client->addTag($pid, $ttid);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function removeTag(int $pid, int $ttid): array
+	public function removeTag(int $pid, int $ttid): void
 	{
 		$response = $this->client->removeTag($pid, $ttid);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**
-	 * @return mixed[]
+	 * @return mixed[]|null
 	 */
-	public function moveProcessToNextStep(int $processId): array
+	public function moveProcessToNextStep(int $processId): ?array
 	{
 		$response = $this->client->moveProcessToNextStep($processId);
 
@@ -121,13 +115,12 @@ final class ProcessService extends BaseService
 
 	/**
 	 * @param mixed[] $variables
-	 * @return mixed[]
 	 */
-	public function modifyVariables(int $processId, array $variables): array
+	public function modifyVariables(int $processId, array $variables): void
 	{
 		$response = $this->client->modifyVariables($processId, $variables);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 }

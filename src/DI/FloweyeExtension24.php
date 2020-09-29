@@ -2,7 +2,7 @@
 
 namespace Floweye\Client\DI;
 
-class ApiClientsExtension24 extends ApiClientsExtension
+class FloweyeExtension24 extends FloweyeExtension
 {
 
 	/** @var mixed[] */
@@ -14,9 +14,9 @@ class ApiClientsExtension24 extends ApiClientsExtension
 	];
 
 	/**
-	 * @return mixed
+	 * @return mixed[]
 	 */
-	public function getConfig()
+	public function getConfig(): array
 	{
 		return $this->validateConfig($this->defaults, parent::getConfig());
 	}

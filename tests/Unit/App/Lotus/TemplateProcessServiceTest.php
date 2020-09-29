@@ -3,6 +3,7 @@
 namespace Tests\Floweye\Client\Unit\App\Lotus;
 
 use Floweye\Client\Client\TemplateProcessClient;
+use Floweye\Client\Filter\TemplateListFilter;
 use Floweye\Client\Service\TemplateProcessService;
 use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;
 
@@ -12,7 +13,7 @@ class TemplateProcessServiceTest extends AbstractAppTestCase
 	public function testListTemplates(): void
 	{
 		$service = $this->createService('templates.json');
-		$res = $service->listTemplates();
+		$res = $service->listTemplates(TemplateListFilter::create());
 
 		self::assertCount(4, $res);
 	}

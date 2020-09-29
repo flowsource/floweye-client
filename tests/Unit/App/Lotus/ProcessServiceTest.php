@@ -3,6 +3,7 @@
 namespace Tests\Floweye\Client\Unit\App\Lotus;
 
 use Floweye\Client\Client\ProcessClient;
+use Floweye\Client\Filter\ProcessListFilter;
 use Floweye\Client\Service\ProcessService;
 use Tests\Floweye\Client\Unit\App\AbstractAppTestCase;
 
@@ -12,7 +13,7 @@ class ProcessServiceTest extends AbstractAppTestCase
 	public function testListProcesses(): void
 	{
 		$service = $this->createService('processes.json');
-		$res = $service->listProcesses();
+		$res = $service->listProcesses(ProcessListFilter::create());
 
 		self::assertCount(10, $res);
 	}

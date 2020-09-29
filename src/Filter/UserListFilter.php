@@ -2,102 +2,49 @@
 
 namespace Floweye\Client\Filter;
 
-class UserListFilter
+class UserListFilter extends BaseListFilter
 {
 
 	public const STATE_NEW = 'new';
 	public const STATE_BLOCKED = 'blocked';
 	public const STATE_ACTIVATED = 'activated';
 
-	/** @var string|null */
-	private $state;
-
-	/** @var string|null */
-	private $email;
-
-	/** @var int|null */
-	private $id;
-
-	/** @var string|null */
-	private $username;
-
-	/** @var string[] */
-	private $include = [];
-
-	/**
-	 * @return static
-	 */
-	public function setState(string $state): self
+	public function withState(string $state): self
 	{
-		$this->state = $state;
+		$this->parameters['state'] = $state;
 
 		return $this;
 	}
 
-	public function getState(): ?string
+	public function withEmail(string $email): self
 	{
-		return $this->state;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function setEmail(string $email): self
-	{
-		$this->email = $email;
+		$this->parameters['email'] = $email;
 
 		return $this;
 	}
 
-	public function getEmail(): ?string
+	public function withId(int $id): self
 	{
-		return $this->email;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function setId(int $id): self
-	{
-		$this->id = $id;
+		$this->parameters['id'] = $id;
 
 		return $this;
 	}
 
-	public function getId(): ?int
+	public function withUsername(string $username): self
 	{
-		return $this->id;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function setUsername(string $username): self
-	{
-		$this->username = $username;
+		$this->parameters['username'] = $username;
 
 		return $this;
 	}
 
-	public function getUsername(): ?string
-	{
-		return $this->username;
-	}
-
 	/**
-	 * @return string[]
+	 * @param mixed[] $include
 	 */
-	public function getInclude(): array
+	public function withInclude(array $include): self
 	{
-		return $this->include;
-	}
+		$this->parameters['include'] = implode(',', $include);
 
-	/**
-	 * @param string[] $include
-	 */
-	public function setInclude(array $include): void
-	{
-		$this->include = $include;
+		return $this;
 	}
 
 }

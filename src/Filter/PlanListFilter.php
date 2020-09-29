@@ -2,39 +2,24 @@
 
 namespace Floweye\Client\Filter;
 
-class PlanListFilter
+class PlanListFilter extends BaseListFilter
 {
 
-	/** @var string[] */
-	private $include = [];
-
-	/** @var int|null */
-	private $templateId;
-
 	/**
-	 * @return string[]
+	 * @param mixed[] $include
 	 */
-	public function getInclude(): array
+	public function withInclude(array $include): self
 	{
-		return $this->include;
+		$this->parameters['include'] = implode(',', $include);
+
+		return $this;
 	}
 
-	/**
-	 * @param string[] $include
-	 */
-	public function setInclude(array $include): void
+	public function withTemplateId(int $templateId): self
 	{
-		$this->include = $include;
-	}
+		$this->parameters['templateId'] = $templateId;
 
-	public function getTemplateId(): ?int
-	{
-		return $this->templateId;
-	}
-
-	public function setTemplateId(?int $templateId): void
-	{
-		$this->templateId = $templateId;
+		return $this;
 	}
 
 }
