@@ -31,24 +31,6 @@ composer require floweye/client
 
 ## How to use
 
-### Nette framework DI bridge
-
-```yaml
-extensions:
-    # For Nette 3.0+
-    floweye.api: Floweye\Client\DI\ApiClientsExtension
-    # For Nette 2.4
-    floweye.api: Floweye\Client\DI\ApiClientsExtension24
-
-floweye.api:
-    debug: %debugMode%
-    http:
-        base_uri: https://floweye.tld/api/v1/
-        headers:
-            X-Api-Token: floweye_api_key
-```
-
-Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io/en/latest/quickstart.html) under `http` option.
 
 ### High level
 
@@ -90,6 +72,26 @@ $httpClient = $guzzleFactory->create([
 $userClient = new Floweye\Client\Client\UserClient($httpClient);
 $userService = new Floweye\Client\Service\UserService($userClient);
 ```
+
+
+### Nette bridge
+
+```yaml
+extensions:
+    # For Nette 3.0+
+    floweye.api: Floweye\Client\DI\ApiClientsExtension
+    # For Nette 2.4
+    floweye.api: Floweye\Client\DI\ApiClientsExtension24
+
+floweye.api:
+    debug: %debugMode%
+    http:
+        base_uri: https://floweye.tld/api/v1/
+        headers:
+            X-Api-Token: floweye_api_key
+```
+
+Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io/en/latest/quickstart.html) under `http` option.
 
 
 ## API endpoints overview
