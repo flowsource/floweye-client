@@ -2,7 +2,7 @@
 
 namespace Floweye\Client\Filter;
 
-class ProcessListVariablesFilter extends BaseListFilter
+class ProcessListVariablesFilter extends AbstractListFilter
 {
 
 	public const OPERATORS_EQ = '=';
@@ -14,6 +14,11 @@ class ProcessListVariablesFilter extends BaseListFilter
 
 	public const CAST_JSON = 'json';
 	public const CAST_NUMBER = 'number';
+
+	public static function create(): self
+	{
+		return new self();
+	}
 
 	/**
 	 * @param mixed $name
