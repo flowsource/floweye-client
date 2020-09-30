@@ -5,8 +5,15 @@ namespace Floweye\Client\Entity;
 class UserEditEntity
 {
 
-	public const STATES = ['new', 'blocked', 'activated'];
-	public const ROLES = ['superadmin', 'admin', 'system', 'user', 'guest'];
+	public const STATES_NEW = 'new';
+	public const STATES_BLOCKED = 'blocked';
+	public const STATES_ACTIVATED = 'activated';
+
+	public const ROLES_SUPERADMIN = 'superadmin';
+	public const ROLES_ADMIN = 'admin';
+	public const ROLES_SYSTEM = 'system';
+	public const ROLES_USER = 'user';
+	public const ROLES_GUEST = 'guest';
 
 	/** @var string */
 	private $name;
