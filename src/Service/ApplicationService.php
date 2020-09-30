@@ -4,9 +4,9 @@ namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\ApplicationClient;
 use Floweye\Client\Exception\Runtime\RequestException;
+use GuzzleHttp\Psr7\Utils;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
-use function GuzzleHttp\Psr7\stream_for;
 
 /**
  * @property ApplicationClient $client
@@ -36,7 +36,7 @@ class ApplicationService extends BaseService
 	public function import(array $data): void
 	{
 		try {
-			$response = $this->client->import(stream_for(Json::encode($data)));
+			$response = $this->client->import(Utils::streamFor(Json::encode($data)));
 		} catch (JsonException $e) {
 			throw new RequestException('Request data cannot be encoded to JSON.');
 		}
