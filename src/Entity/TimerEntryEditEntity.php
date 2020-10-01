@@ -4,40 +4,24 @@ namespace Floweye\Client\Entity;
 
 use DateTimeInterface;
 
-class TimerEntryEditEntity
+class TimerEntryEditEntity extends AbstractBodyEntity
 {
 
-	/** @var int */
-	private $resolver;
-
-	/** @var DateTimeInterface */
-	private $start;
-
-	/** @var DateTimeInterface */
-	private $end;
-
-	/** @var string|null */
-	private $note;
-
-	public function __construct(int $resolver, DateTimeInterface $start, DateTimeInterface $end, ?string $note = null)
+	public static function create(int $resolver, DateTimeInterface $start, DateTimeInterface $end): self
 	{
-		$this->resolver = $resolver;
-		$this->start = $start;
-		$this->end = $end;
-		$this->note = $note;
+		$self = new self();
+		$self->body['resolver'] = $resolver;
+		$self->body['start'] = $start->format(DateTimeInterface::RFC3339);
+		$self->body['end'] = $end->format(DateTimeInterface::RFC3339);
+
+		return $self;
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function toBody(): array
+	public function withNote(string $note): self
 	{
-		return [
-			'resolver' => $this->resolver,
-			'start' => $this->start->format(DateTimeInterface::RFC3339),
-			'end' => $this->end->format(DateTimeInterface::RFC3339),
-			'note' => $this->note,
-		];
+		$this->body['note'] = $note;
+
+		return $this;
 	}
 
 }

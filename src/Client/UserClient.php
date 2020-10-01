@@ -6,7 +6,6 @@ use Floweye\Client\Entity\UserCreateEntity;
 use Floweye\Client\Entity\UserEditEntity;
 use Floweye\Client\Filter\UserListFilter;
 use Floweye\Client\Http\Utils\Helpers;
-use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
 class UserClient extends AbstractClient
@@ -36,7 +35,7 @@ class UserClient extends AbstractClient
 
 	public function edit(int $id, UserEditEntity $entity): ResponseInterface
 	{
-		return $this->request('PUT', sprintf('%s/%s', self::PATH, $id), ['json' => Json::encode($entity->toBody())]);
+		return $this->request('PUT', sprintf('%s/%s', self::PATH, $id), ['json' => $entity->toBody()]);
 	}
 
 	public function oneTimeLogin(int $id): ResponseInterface

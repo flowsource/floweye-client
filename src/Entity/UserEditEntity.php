@@ -2,7 +2,7 @@
 
 namespace Floweye\Client\Entity;
 
-class UserEditEntity
+class UserEditEntity extends AbstractBodyEntity
 {
 
 	public const STATES_NEW = 'new';
@@ -15,47 +15,17 @@ class UserEditEntity
 	public const ROLES_USER = 'user';
 	public const ROLES_GUEST = 'guest';
 
-	/** @var string */
-	private $name;
-
-	/** @var string */
-	private $surname;
-
-	/** @var string */
-	private $username;
-
-	/** @var string */
-	private $email;
-
-	/** @var string */
-	private $role;
-
-	/** @var string */
-	private $state;
-
-	public function __construct(string $name, string $surname, string $email, string $username, string $role, string $state)
+	public static function create(string $name, string $surname, string $email, string $username, string $role, string $state): self
 	{
-		$this->name = $name;
-		$this->surname = $surname;
-		$this->email = $email;
-		$this->username = $username;
-		$this->role = $role;
-		$this->state = $state;
-	}
+		$self = new self();
+		$self->body['name'] = $name;
+		$self->body['surname'] = $surname;
+		$self->body['email'] = $email;
+		$self->body['username'] = $username;
+		$self->body['role'] = $role;
+		$self->body['state'] = $state;
 
-	/**
-	 * @return mixed[]
-	 */
-	public function toBody(): array
-	{
-		return [
-			'name' => $this->name,
-			'surname' => $this->surname,
-			'email' => $this->email,
-			'username' => $this->username,
-			'role' => $this->role,
-			'state' => $this->state,
-		];
+		return $self;
 	}
 
 }

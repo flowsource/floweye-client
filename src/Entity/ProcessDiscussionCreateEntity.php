@@ -2,50 +2,40 @@
 
 namespace Floweye\Client\Entity;
 
-final class ProcessDiscussionCreateEntity
+class ProcessDiscussionCreateEntity extends AbstractBodyEntity
 {
 
 	public const TYPE_NORMAL = 'normal';
 	public const TYPE_SYSTEM = 'system';
 
-	/** @var string */
-	private $comment;
-
-	/** @var string */
-	private $type;
-
-	/** @var string */
-	private $notificationSubject;
-
-	/** @var bool */
-	private $notificationEnabled;
-
-	public function __construct(
-		string $comment,
-		string $type,
-		string $notificationSubject,
-		bool $notificationEnabled
-	)
+	public static function create(string $comment): self
 	{
-		$this->comment = $comment;
-		$this->type = $type;
-		$this->notificationSubject = $notificationSubject;
-		$this->notificationEnabled = $notificationEnabled;
+		$self = new self();
+		$self->body['comment'] = $comment;
+		$self->body['notification'] = [];
+
+		return $self;
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function toBody(): array
+	public function withType(string $type): self
 	{
-		return [
-			'comment' => $this->comment,
-			'type' => $this->type,
-			'notification' => [
-				'subject' => $this->notificationSubject,
-				'enabled' => $this->notificationEnabled,
-			],
-		];
+		$this->body['type'] = $type;
+
+		return $this;
+	}
+
+	public function withNotificationEnabled(bool $enabled): self
+	{
+		$this->body['notification']['enabled'] = $enabled;
+
+		return $this;
+	}
+
+	public function withNotificationSubject(string $subject): self
+	{
+		$this->body['notification']['subject'] = $subject;
+
+		return $this;
 	}
 
 }

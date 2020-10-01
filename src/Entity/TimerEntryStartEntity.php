@@ -2,25 +2,19 @@
 
 namespace Floweye\Client\Entity;
 
-class TimerEntryStartEntity
+class TimerEntryStartEntity extends AbstractBodyEntity
 {
 
-	/** @var int|null */
-	private $resolver;
-
-	public function __construct(?int $resolver)
+	public static function create(): self
 	{
-		$this->resolver = $resolver;
+		return new self();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function toBody(): array
+	public function withResolver(int $resolver): self
 	{
-		return [
-			'resolver' => $this->resolver,
-		];
+		$this->body['resolver'] = $resolver;
+
+		return $this;
 	}
 
 }

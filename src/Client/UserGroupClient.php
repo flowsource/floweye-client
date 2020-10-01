@@ -5,7 +5,6 @@ namespace Floweye\Client\Client;
 use Floweye\Client\Entity\UserGroupCreateEntity;
 use Floweye\Client\Entity\UserGroupEditEntity;
 use Floweye\Client\Http\Utils\Helpers;
-use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 
 class UserGroupClient extends AbstractClient
@@ -35,16 +34,7 @@ class UserGroupClient extends AbstractClient
 			'blocked' => $includeBlockedUsers ? 'true' : 'false',
 		];
 
-		return $this->request(
-			'PATCH',
-			sprintf('%s/%s/append-users?%s', self::PATH, $gid, Helpers::buildQuery($params)),
-			[
-				'body' => Json::encode(['ids' => $userIds]),
-				'headers' => [
-					'Content-Type' => 'application/json',
-				],
-			]
-		);
+		return $this->request('PATCH', sprintf('%s/%s/append-users?%s', self::PATH, $gid, Helpers::buildQuery($params)), ['json' => ['ids' => $userIds]]);
 	}
 
 	/**
@@ -61,33 +51,12 @@ class UserGroupClient extends AbstractClient
 
 	public function createOne(UserGroupCreateEntity $entity): ResponseInterface
 	{
-		return $this->request(
-			'POST',
-			sprintf('%s', self::PATH),
-			[
-				'body' => Json::encode([
-					'gid' => $entity->getGid(),
-					'name' => $entity->getName(),
-				]),
-				'headers' => [
-					'Content-Type' => 'application/json',
-				],
-			]
-		);
+		return $this->request('POST', sprintf('%s', self::PATH), ['json' => $entity->toBody()]);
 	}
 
 	public function editOne(string $gid, UserGroupEditEntity $entity): ResponseInterface
 	{
-		return $this->request(
-			'PUT',
-			sprintf('%s/%s', self::PATH, $gid),
-			[
-				'body' => Json::encode($entity->toBody()),
-				'headers' => [
-					'Content-Type' => 'application/json',
-				],
-			]
-		);
+		return $this->request('PUT', sprintf('%s/%s', self::PATH, $gid), ['json' => $entity->toBody()]);
 	}
 
 	public function deleteOne(string $gid): ResponseInterface

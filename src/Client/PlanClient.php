@@ -14,15 +14,7 @@ class PlanClient extends AbstractClient
 
 	public function createOne(PlanProcessCreateEntity $entity): ResponseInterface
 	{
-		return $this->request('POST', sprintf('%s', self::PATH), [
-			'json' => [
-				'name' => $entity->getName(),
-				'cron' => $entity->getCron(),
-				'formula' => $entity->getFormula(),
-				'state' => $entity->getState(),
-				'template_id' => $entity->getTemplateId(),
-			],
-		]);
+		return $this->request('POST', sprintf('%s', self::PATH), ['json' => $entity->toBody()]);
 	}
 
 	public function deleteOne(int $id): ResponseInterface

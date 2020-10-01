@@ -2,29 +2,16 @@
 
 namespace Floweye\Client\Entity;
 
-class UserGroupCreateEntity
+class UserGroupCreateEntity extends AbstractBodyEntity
 {
 
-	/** @var string */
-	private $gid;
-
-	/** @var string */
-	private $name;
-
-	public function __construct(string $gid, string $name)
+	public static function create(string $gid, string $name): self
 	{
-		$this->gid = $gid;
-		$this->name = $name;
-	}
+		$self = new self();
+		$self->body['gid'] = $gid;
+		$self->body['name'] = $name;
 
-	public function getGid(): string
-	{
-		return $this->gid;
-	}
-
-	public function getName(): string
-	{
-		return $this->name;
+		return $self;
 	}
 
 }

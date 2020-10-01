@@ -4,50 +4,44 @@ namespace Floweye\Client\Entity;
 
 use DateTimeInterface;
 
-class TimerEntryCreateEntity
+class TimerEntryCreateEntity extends AbstractBodyEntity
 {
 
-	/** @var string */
-	private $timer;
-
-	/** @var int */
-	private $stepId;
-
-	/** @var bool */
-	private $unique;
-
-	/** @var int|null */
-	private $resolver;
-
-	/** @var DateTimeInterface|null */
-	private $start;
-
-	/** @var DateTimeInterface|null */
-	private $end;
-
-	public function __construct(string $timer, int $stepId, bool $unique, ?int $resolver = null, ?DateTimeInterface $start = null, ?DateTimeInterface $end = null)
+	public static function create(string $timer, int $stepId): self
 	{
-		$this->timer = $timer;
-		$this->stepId = $stepId;
-		$this->unique = $unique;
-		$this->resolver = $resolver;
-		$this->start = $start;
-		$this->end = $end;
+		$self = new self();
+		$self->body['timer'] = $timer;
+		$self->body['stepId'] = $stepId;
+
+		return $self;
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function toBody(): array
+	public function withStart(DateTimeInterface $start): self
 	{
-		return [
-			'timer' => $this->timer,
-			'stepId' => $this->stepId,
-			'unique' => $this->unique,
-			'resolver' => $this->resolver,
-			'start' => $this->start === null ? null : $this->start->format(DateTimeInterface::RFC3339),
-			'end' => $this->end === null ? null : $this->end->format(DateTimeInterface::RFC3339),
-		];
+		$this->body['start'] = $start->format(DateTimeInterface::RFC3339);
+
+		return $this;
+	}
+
+	public function withEnd(DateTimeInterface $end): self
+	{
+		$this->body['end'] = $end->format(DateTimeInterface::RFC3339);
+
+		return $this;
+	}
+
+	public function withResolver(int $resolver): self
+	{
+		$this->body['resolver'] = $resolver;
+
+		return $this;
+	}
+
+	public function withUniqueTimer(bool $unique): self
+	{
+		$this->body['unique'] = $unique;
+
+		return $this;
 	}
 
 }

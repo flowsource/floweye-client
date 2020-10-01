@@ -2,30 +2,15 @@
 
 namespace Floweye\Client\Entity;
 
-class UserGroupEditEntity
+class UserGroupEditEntity extends AbstractBodyEntity
 {
 
-	/** @var string */
-	private $name;
-
-	public function __construct(string $name)
+	public static function create(string $name): self
 	{
-		$this->name = $name;
-	}
+		$self = new self();
+		$self->body['name'] = $name;
 
-	public function getName(): string
-	{
-		return $this->name;
-	}
-
-	/**
-	 * @return mixed[]
-	 */
-	public function toBody(): array
-	{
-		return [
-			'name' => $this->name,
-		];
+		return $self;
 	}
 
 }

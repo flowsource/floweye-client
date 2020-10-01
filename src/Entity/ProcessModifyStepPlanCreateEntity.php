@@ -2,39 +2,23 @@
 
 namespace Floweye\Client\Entity;
 
-class ProcessModifyStepPlanCreateEntity
+class ProcessModifyStepPlanCreateEntity extends AbstractBodyEntity
 {
 
-	/** @var string|null */
-	private $from;
-
-	/** @var string|null */
-	private $to;
-
-	/** @var bool */
-	private $modifyExpiration;
-
-	public function __construct(
-		?string $from,
-		?string $to,
-		bool $modifyExpiration
-	)
+	public static function create(?string $from, ?string $to): self
 	{
-		$this->from = $from;
-		$this->to = $to;
-		$this->modifyExpiration = $modifyExpiration;
+		$self = new self();
+		$self->body['from'] = $from;
+		$self->body['to'] = $to;
+
+		return $self;
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function toBody(): array
+	public function withModifyExpiration(bool $modify): self
 	{
-		return [
-			'from' => $this->from,
-			'to' => $this->to,
-			'modify' => $this->modifyExpiration,
-		];
+		$this->body['modify'] = $modify;
+
+		return $this;
 	}
 
 }

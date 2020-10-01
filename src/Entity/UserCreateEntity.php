@@ -2,7 +2,7 @@
 
 namespace Floweye\Client\Entity;
 
-class UserCreateEntity
+class UserCreateEntity extends AbstractBodyEntity
 {
 
 	public const STATES_NEW = 'new';
@@ -15,47 +15,29 @@ class UserCreateEntity
 	public const ROLES_USER = 'user';
 	public const ROLES_GUEST = 'guest';
 
-	/** @var string */
-	private $name;
-
-	/** @var string */
-	private $surname;
-
-	/** @var string */
-	private $email;
-
-	/** @var string */
-	private $password;
-
-	/** @var string */
-	private $role;
-
-	/** @var string */
-	private $state;
-
-	public function __construct(string $name, string $surname, string $email, string $password, string $role, string $state)
+	public static function create(string $name, string $surname, string $email, string $password): self
 	{
-		$this->name = $name;
-		$this->surname = $surname;
-		$this->email = $email;
-		$this->password = $password;
-		$this->role = $role;
-		$this->state = $state;
+		$self = new self();
+		$self->body['name'] = $name;
+		$self->body['surname'] = $surname;
+		$self->body['email'] = $email;
+		$self->body['password'] = $password;
+
+		return $self;
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function toBody(): array
+	public function withRole(string $role): self
 	{
-		return [
-			'name' => $this->name,
-			'surname' => $this->surname,
-			'email' => $this->email,
-			'password' => $this->password,
-			'role' => $this->role,
-			'state' => $this->state,
-		];
+		$this->body['role'] = $role;
+
+		return $this;
+	}
+
+	public function withState(string $state): self
+	{
+		$this->body['state'] = $state;
+
+		return $this;
 	}
 
 }
