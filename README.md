@@ -178,6 +178,8 @@ Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io
 | listTemplates($filter)                      | `GET /template-processes`                        |
 | getTemplate($id, $include)                  | `GET /template-processes/{id}`                   |
 | createTemplate($entity)                     | `POST /template-processes`                       |
+| checkTemplate($entity)                      | `POST /template-processes/check`                 |
+| editTemplate($id, $entity)                  | `PUT /template-processes/{id}`                   |
 | deleteTemplate($id)                         | `DELETE /template-processes/{id}`                |
 | archiveTemplate($id)                        | `PATCH /template-processes/{id}/archive`         |
 | startProcess($tid, $data, $include)         | `POST /template-processes/{id}/start`            |
