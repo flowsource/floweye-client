@@ -7,12 +7,14 @@ use DateTimeInterface;
 class TimerEntryEditEntity extends AbstractBodyEntity
 {
 
-	public static function create(int $resolver, DateTimeInterface $start, DateTimeInterface $end): self
+	public static function create(int $resolver, DateTimeInterface $start, ?DateTimeInterface $end): self
 	{
 		$self = new self();
 		$self->body['resolver'] = $resolver;
 		$self->body['start'] = $start->format(DateTimeInterface::RFC3339);
-		$self->body['end'] = $end->format(DateTimeInterface::RFC3339);
+		if ($end !== null) {
+			$self->body['end'] = $end->format(DateTimeInterface::RFC3339);
+		}
 
 		return $self;
 	}

@@ -8,6 +8,7 @@ use Floweye\Client\Entity\TimerEntryCreateEntity;
 use Floweye\Client\Entity\TimerEntryEditEntity;
 use Floweye\Client\Entity\TimerEntryStartEntity;
 use Floweye\Client\Filter\TimerListFilter;
+use Floweye\Client\Filter\TimerRunningFilter;
 
 /**
  * @property TimerClient $client
@@ -62,11 +63,22 @@ class TimerService extends BaseService
 	}
 
 	/**
+	 * @param string[] $include
 	 * @return mixed[]
 	 */
-	public function findRunning(?int $resolver = null, ?string $timer = null): array
+	public function getEntry(int $id, array $include = []): array
 	{
-		$response = $this->client->findRunning($resolver, $timer);
+		$response = $this->client->getEntry($id, $include);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function findRunning(?TimerRunningFilter $filter = null): array
+	{
+		$response = $this->client->findRunning($filter);
 
 		return $this->processResponse($response)->getData();
 	}

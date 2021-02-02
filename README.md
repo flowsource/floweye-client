@@ -117,7 +117,7 @@ Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io
 | create($entity)              | `POST /users`                    |
 | getById($id, $include)       | `GET /users/{id}`                |
 | edit($id, $entity)           | `PUT /users/{id}`                |
-| onTimeLogin($id)             | `PUT /users/{id}/one-time-login` |
+| oneTimeLogin($id)            | `PUT /users/{id}/one-time-login` |
 | passwordReset($id)           | `PUT /users/{id}/password-reset` |
 
 
@@ -146,10 +146,11 @@ Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io
 
 | Method                                   | API                            |
 | ---------------------------------------- | ------------------------------ |
+| listTimers($from, $to, $filter)          | `GET /timers/{from}/{to}`      |
+| findRunning($filter)                     | `GET /timers/running`          |
 | createEntry($entity)                     | `GET /timers`                  |
-| findRunning($resolver, $timer)           | `GET /timers/running`          |
-| listTimers()                             | `GET /timers/{from}/{to}`      |
 | editEntry($id, $entity)                  | `PUT /timers/{id}`             |
+| getEntry($id, $entity)                   | `GET /timers/{id}`             |
 | startEntry($id, $entity)                 | `POST /timers/{id}/start`      |
 | stopEntry($id)                           | `POST /timers/{id}/stop`       |
 

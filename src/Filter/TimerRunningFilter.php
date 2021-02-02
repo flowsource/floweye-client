@@ -2,7 +2,7 @@
 
 namespace Floweye\Client\Filter;
 
-class TimerListFilter extends AbstractListFilter
+class TimerRunningFilter extends AbstractListFilter
 {
 
 	public static function create(): self
