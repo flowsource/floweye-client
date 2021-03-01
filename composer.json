@@ -19,13 +19,12 @@
   "require": {
     "php": ">=7.2",
     "ext-json": "*",
-    "contributte/utils": "^0.3.2 || ^0.4.0",
+    "contributte/utils": "^0.3.2 || ^0.4.0 || ^0.5.0",
     "guzzlehttp/guzzle": "^7.1.0"
   },
   "require-dev": {
     "nette/di": "^2.4.15 || ^3.0.0",
-    "ninjify/coding-standard": "^0.10.0",
-    "phpstan/extension-installer": "^1.0.0",
+    "ninjify/coding-standard": "^0.12.0",
     "phpstan/phpstan": "^0.12.0",
     "phpstan/phpstan-deprecation-rules": "^0.12.0",
     "phpstan/phpstan-nette": "^0.12.0",
