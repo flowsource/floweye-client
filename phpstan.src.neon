@@ -1,6 +1,0 @@
-includes:
-	- phpstan.base.neon
-
-parameters:
-	ignoreErrors:
-		- '#Call to deprecated method validateConfig\(\) of class Nette\\DI\\CompilerExtension:\suse getConfigSchema\(\)#'

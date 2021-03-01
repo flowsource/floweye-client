@@ -17,17 +17,16 @@ cs: tmp ## Check PHP files coding style
 csf: tmp ## Fix PHP files coding style
 	vendor/bin/phpcbf --cache=tmp/codesniffer.dat --standard=ruleset.xml --extensions=php --colors -nsp src tests
 
-phpstan: dirs ## Analyse code with PHPStan
-	vendor/bin/phpstan analyse -l max -c phpstan.src.neon src
-	vendor/bin/phpstan analyse -l 1 -c phpstan.tests.neon tests
+phpstan: tmp ## Analyse code with PHPStan
+	vendor/bin/phpstan analyse -l max -c phpstan.neon src
 
 # Tests
 
-tests: dirs ## Run all tests
+tests: tmp ## Run all tests
 	vendor/bin/phpunit -c phpunit.xml
 
-coverage-clover: dirs ## Generate code coverage in Clover XML format
+coverage-clover: tmp ## Generate code coverage in Clover XML format
 	php -d pcov.enabled=1 -d pcov.directory=./src vendor/bin/phpunit -c phpunit.xml --coverage-clover tmp/coverage.xml
 
-coverage-html: dirs ## Generate code coverage in HTML format
+coverage-html: tmp ## Generate code coverage in HTML format
 	php -d pcov.enabled=1 -d pcov.directory=./src vendor/bin/phpunit -c phpunit.xml --coverage-html tmp/coverage-html
