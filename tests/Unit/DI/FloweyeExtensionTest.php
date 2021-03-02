@@ -24,7 +24,7 @@ use Nette\DI\Compiler;
 use Nette\DI\Definitions\ServiceDefinition;
 use Tests\Floweye\Client\Toolkit\ContainerTestCase;
 
-class ApiClientsExtensionTest extends ContainerTestCase
+class FloweyeExtensionTest extends ContainerTestCase
 {
 
 	protected function setUpCompileContainer(Compiler $compiler): void

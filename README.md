@@ -38,7 +38,7 @@ Simply inject desired services which allow you to work directly with processed d
 
 ```php
 $userService = $context->getService(Floweye\Client\Service\UserService::class);
-$user = $userService->getById(1);
+$user = $userService->getById(1, []);
 ```
 
 
@@ -50,7 +50,7 @@ In case you need to access PSR-7 response. You can work with our client layer.
 $userClient = $context->getService(Floweye\Client\Client\UserClient::class);
 
 /** @var Psr\Http\Message\ResponseInterface $response */
-$response = $userClient->getById(1);
+$response = $userClient->getById(1, []);
 ```
 
 
@@ -79,9 +79,9 @@ $userService = new Floweye\Client\Service\UserService($userClient);
 ```yaml
 extensions:
     # For Nette 3.0+
-    floweye.api: Floweye\Client\DI\ApiClientsExtension
+    floweye.api: Floweye\Client\DI\FloweyeExtension
     # For Nette 2.4
-    floweye.api: Floweye\Client\DI\ApiClientsExtension24
+    floweye.api: Floweye\Client\DI\FloweyeExtension24
 
 floweye.api:
     debug: %debugMode%
