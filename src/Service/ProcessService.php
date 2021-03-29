@@ -63,34 +63,28 @@ final class ProcessService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
 	public function uploadFile(
 		int $processId,
 		string $variable,
 		string $fileName,
 		string $contents
-	): array
+	): void
 	{
 		$response = $this->client->uploadFile($processId, $variable, $fileName, $contents);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
-	/**
-	 * @return mixed[]
-	 */
 	public function uploadFileToDiscussion(
 		int $processId,
 		int $discussionId,
 		string $fileName,
 		string $contents
-	): array
+	): void
 	{
 		$response = $this->client->uploadFileToDiscussion($processId, $discussionId, $fileName, $contents);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**
@@ -114,7 +108,7 @@ final class ProcessService extends BaseService
 	}
 
 	/**
-	 * @param mixed[] $variables
+	 * @param array<mixed> $variables
 	 */
 	public function modifyVariables(int $processId, array $variables): void
 	{

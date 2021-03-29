@@ -66,14 +66,11 @@ class UserGroupService extends BaseService
 		$this->assertResponse($response);
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function deleteOne(string $gid): array
+	public function deleteOne(string $gid): void
 	{
 		$response = $this->client->deleteOne($gid);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 }

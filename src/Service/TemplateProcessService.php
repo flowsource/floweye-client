@@ -47,14 +47,11 @@ class TemplateProcessService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function checkTemplate(string $template): array
+	public function checkTemplate(string $template): void
 	{
 		$response = $this->client->checkTemplate($template);
 
-		return $this->processResponse($response)->getData();
+		$this->assertResponse($response);
 	}
 
 	/**
