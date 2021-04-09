@@ -164,7 +164,7 @@ Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io
 | moveProcessToNextStep($id)                                               | `POST /processes/{id}/next`                      |
 | addTag($pid, $ttid)                                                      | `POST /processes/{pid}/tags/{ttid}`              |
 | removeTag($pid, $ttid)                                                   | `DELETE /processes/{pid}/tags/{ttid}`            |
-| uploadFile($id, $variable, $fileName, $contents)                         | `POST /process/{id}/upload`                      |
+| uploadFile($id, $variable, $fileName, $contents, $mode)                  | `POST /process/{id}/upload`                      |
 | createDiscussion($processId, $entity)                                    | `POST /processes/{pid}/discussion`               |
 | uploadFileToDiscussion($processId, $discussionId, $fileName, $contents)  | `POST /processes/{pid}/discussion/{id}/upload`   |
 | modifyPlan($processId, $stepSid, $entity)                                | `PUT /processes/{pid}/plans/{sid}`               |
@@ -181,5 +181,4 @@ Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io
 | checkTemplate($entity)                      | `POST /template-processes/check`                 |
 | editTemplate($id, $entity)                  | `PUT /template-processes/{id}`                   |
 | deleteTemplate($id)                         | `DELETE /template-processes/{id}`                |
-| archiveTemplate($id)                        | `PATCH /template-processes/{id}/archive`         |
 | startProcess($tid, $data, $include)         | `POST /template-processes/{id}/start`            |

@@ -48,11 +48,6 @@ class TemplateProcessClient extends AbstractClient
 		return $this->request('DELETE', sprintf('%s/%s', self::PATH, $templateId));
 	}
 
-	public function archiveTemplate(int $templateId): ResponseInterface
-	{
-		return $this->request('PATCH', sprintf('%s/%s/archive', self::PATH, $templateId));
-	}
-
 	/**
 	 * @param mixed[] $data
 	 * @param string[] $include

@@ -51,11 +51,17 @@ class ProcessClient extends AbstractClient
 		int $processId,
 		string $variable,
 		string $fileName,
-		string $contents
+		string $contents,
+		?string $mode = null
 	): ResponseInterface
 	{
+		$query = Helpers::buildQuery([
+			'variable' => $variable,
+			'mode' => $mode,
+		]);
+
 		return $this->upload(
-			sprintf('%s/%s/upload?variable=%s', self::PATH, $processId, $variable),
+			sprintf('%s/%s/upload?%s', self::PATH, $processId, $query),
 			$fileName,
 			$contents
 		);

@@ -71,13 +71,6 @@ class TemplateProcessService extends BaseService
 		$this->assertResponse($response);
 	}
 
-	public function archiveTemplate(int $templateId): void
-	{
-		$response = $this->client->archiveTemplate($templateId);
-
-		$this->assertResponse($response);
-	}
-
 	/**
 	 * @param mixed[]  $data
 	 * @param string[] $include

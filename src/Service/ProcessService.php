@@ -67,10 +67,11 @@ final class ProcessService extends BaseService
 		int $processId,
 		string $variable,
 		string $fileName,
-		string $contents
+		string $contents,
+		?string $mode = null
 	): void
 	{
-		$response = $this->client->uploadFile($processId, $variable, $fileName, $contents);
+		$response = $this->client->uploadFile($processId, $variable, $fileName, $contents, $mode);
 
 		$this->assertResponse($response);
 	}
