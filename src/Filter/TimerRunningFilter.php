@@ -17,9 +17,9 @@ class TimerRunningFilter extends AbstractListFilter
 		return $this;
 	}
 
-	public function withTimer(?string $timer): self
+	public function withTitle(?string $title): self
 	{
-		$this->parameters['timer'] = $timer;
+		$this->parameters['title'] = $title;
 
 		return $this;
 	}
