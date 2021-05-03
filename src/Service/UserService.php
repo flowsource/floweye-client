@@ -70,4 +70,18 @@ final class UserService extends BaseService
 		$this->assertResponse($response);
 	}
 
+	public function newUserToken(int $id): array
+	{
+		$response = $this->client->newUserToken($id);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	public function newUserMail(int $id): void
+	{
+		$response = $this->client->newUserMail($id);
+
+		$this->assertResponse($response);
+	}
+
 }

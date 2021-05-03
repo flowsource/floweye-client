@@ -48,4 +48,14 @@ class UserClient extends AbstractClient
 		return $this->request('PUT', sprintf('%s/%s/password-reset', self::PATH, $id));
 	}
 
+	public function newUserToken(int $id): ResponseInterface
+	{
+		return $this->request('PUT', sprintf('%s/%s/new-user/token', self::PATH, $id));
+	}
+
+	public function newUserMail(int $id): ResponseInterface
+	{
+		return $this->request('PUT', sprintf('%s/%s/new-user/mail', self::PATH, $id));
+	}
+
 }

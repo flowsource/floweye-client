@@ -119,6 +119,8 @@ Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io
 | edit($id, $entity)           | `PUT /users/{id}`                |
 | oneTimeLogin($id)            | `PUT /users/{id}/one-time-login` |
 | passwordReset($id)           | `PUT /users/{id}/password-reset` |
+| newUserToken($id)            | `PUT /users/{id}/new-user/token` |
+| newUserMail($id)             | `PUT /users/{id}/new-user/mail`  |
 
 
 **UserGroupService**
