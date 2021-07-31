@@ -2,6 +2,8 @@
 
 namespace Floweye\Client\Client;
 
+use Floweye\Client\Entity\SnippetCreateEntity;
+use Floweye\Client\Entity\SnippetEditEntity;
 use Floweye\Client\Http\Utils\Helpers;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -44,14 +46,17 @@ class ApplicationClient extends AbstractClient
 		return $this->request('PUT', sprintf('%s/globals', self::PATH), ['json' => $globals]);
 	}
 
-	public function createSnippet(string $name, string $description, string $snippet): ResponseInterface
+	public function createSnippet(SnippetCreateEntity $entity): ResponseInterface
 	{
 		return $this->request('POST', sprintf('%s/snippets', self::PATH), [
-			'json' => [
-				'name' => $name,
-				'description' => $description,
-				'snippet' => $snippet,
-			],
+			'json' => $entity->toBody(),
+		]);
+	}
+
+	public function editSnippet(int $id, SnippetEditEntity $entity): ResponseInterface
+	{
+		return $this->request('PUT', sprintf('%s/snippets/%s', self::PATH, $id), [
+			'json' => $entity->toBody(),
 		]);
 	}
 

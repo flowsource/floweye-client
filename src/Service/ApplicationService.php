@@ -3,6 +3,8 @@
 namespace Floweye\Client\Service;
 
 use Floweye\Client\Client\ApplicationClient;
+use Floweye\Client\Entity\SnippetCreateEntity;
+use Floweye\Client\Entity\SnippetEditEntity;
 use Floweye\Client\Exception\Runtime\RequestException;
 use GuzzleHttp\Psr7\Utils;
 use Nette\Utils\Json;
@@ -67,9 +69,19 @@ class ApplicationService extends BaseService
 	/**
 	 * @return mixed[]
 	 */
-	public function createSnippet(string $name, string $description, string $snippet): array
+	public function createSnippet(SnippetCreateEntity $entity): array
 	{
-		$response = $this->client->createSnippet($name, $description, $snippet);
+		$response = $this->client->createSnippet($entity);
+
+		return $this->processResponse($response)->getData();
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function editSnippet(int $id, SnippetEditEntity $entity): array
+	{
+		$response = $this->client->editSnippet($id, $entity);
 
 		return $this->processResponse($response)->getData();
 	}

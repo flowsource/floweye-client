@@ -98,15 +98,16 @@ Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io
 
 **ApplicationService**
 
-| Method                                       | API                             |
-| -------------------------------------------- | ------------------------------- |
-| export($include)                             | `GET /application/export`       |
-| import($data)                                | `POST /application/import`      |
-| listGlobals($path)                           | `GET /application/globals`      |
-| editGlobals($globals)                        | `PUT /application/globals`      |
-| listSnippets($limit, $offset, $include)      | `GET /snippets`                 |
-| createSnippet($name, $description, $snippet) | `POST /snippets`                |
-| deleteSnippet($id)                           | `DELETE /snippets/{id}`         |
+| Method                                       | API                                 |
+| -------------------------------------------- | ----------------------------------- |
+| export($include)                             | `GET /application/export`           |
+| import($data)                                | `POST /application/import`          |
+| listGlobals($path)                           | `GET /application/globals`          |
+| editGlobals($globals)                        | `PUT /application/globals`          |
+| listSnippets($limit, $offset, $include)      | `GET /application/snippets`         |
+| createSnippet($entity)                       | `POST /application/snippets`        |
+| editSnippet($id, $entity)                    | `PUT /application/snippets/{id}`    |
+| deleteSnippet($id)                           | `DELETE /application/snippets/{id}` |
 
 
 **UserService**

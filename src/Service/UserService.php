@@ -70,6 +70,9 @@ final class UserService extends BaseService
 		$this->assertResponse($response);
 	}
 
+	/**
+	 * @return array<mixed>
+	 */
 	public function newUserToken(int $id): array
 	{
 		$response = $this->client->newUserToken($id);
