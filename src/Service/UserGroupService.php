@@ -39,6 +39,16 @@ class UserGroupService extends BaseService
 	}
 
 	/**
+	 * @param int[] $userIds
+	 */
+	public function detachUsers(string $gid, array $userIds): void
+	{
+		$response = $this->client->detachUsers($gid, $userIds);
+
+		$this->assertResponse($response);
+	}
+
+	/**
 	 * @param string[] $include
 	 * @return mixed[]
 	 */

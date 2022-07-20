@@ -38,6 +38,14 @@ class UserGroupClient extends AbstractClient
 	}
 
 	/**
+	 * @param int[] $userIds
+	 */
+	public function detachUsers(string $gid, array $userIds): ResponseInterface
+	{
+		return $this->request('PATCH', sprintf('%s/%s/detach-users', self::PATH, $gid), ['json' => ['ids' => $userIds]]);
+	}
+
+	/**
 	 * @param string[] $include
 	 */
 	public function findOne(string $gid, array $include = []): ResponseInterface

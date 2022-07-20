@@ -126,14 +126,15 @@ Configure default http client [Guzzle HTTP client](https://guzzle.readthedocs.io
 
 **UserGroupService**
 
-| Method                                                                 | API                                      |
-| ---------------------------------------------------------------------- | ---------------------------------------- |
-| listUserGroups($include)                                               | `GET /user-groups`                       |
-| createOne($entity)                                                     | `POST /user-groups`                      |
-| findOne($gid, $include)                                                | `GET /user-groups/{gid}`                 |
-| editOne($gid, $entity)                                                 | `PUT /user-groups/{gid}`                 |
-| deleteOne($gid)                                                        | `DELETE /user-groups/{gid}`              |
-| appendUsers($gid, $userIds, $includeSystemUsers, $includeBlockedUsers) | `PATCH /user-groups/{gid}/append-users`  |
+| Method                                                                 | API                                     |
+|------------------------------------------------------------------------|-----------------------------------------|
+| listUserGroups($include)                                               | `GET /user-groups`                      |
+| createOne($entity)                                                     | `POST /user-groups`                     |
+| findOne($gid, $include)                                                | `GET /user-groups/{gid}`                |
+| editOne($gid, $entity)                                                 | `PUT /user-groups/{gid}`                |
+| deleteOne($gid)                                                        | `DELETE /user-groups/{gid}`             |
+| appendUsers($gid, $userIds, $includeSystemUsers, $includeBlockedUsers) | `PATCH /user-groups/{gid}/append-users` |
+| detachUsers($gid, $userIds)                                            | `PATCH /user-groups/{gid}/detach-users` |
 
 
 **PlanService**
