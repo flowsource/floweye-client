@@ -64,6 +64,16 @@ class TemplateProcessService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
+	/**
+	 * @return mixed[]
+	 */
+	public function changeTemplate(int $id, string $template, ?int $revision = null): array
+	{
+		$response = $this->client->changeTemplate($id, $template, $revision);
+
+		return $this->processResponse($response)->getData();
+	}
+
 	public function deleteTemplate(int $templateId): void
 	{
 		$response = $this->client->deleteTemplate($templateId);
