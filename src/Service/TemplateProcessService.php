@@ -67,9 +67,9 @@ class TemplateProcessService extends BaseService
 	/**
 	 * @return mixed[]
 	 */
-	public function changeTemplate(int $id, string $template, ?int $revision = null): array
+	public function patchTemplate(int $id, string $template, ?int $revision = null): array
 	{
-		$response = $this->client->changeTemplate($id, $template, $revision);
+		$response = $this->client->patchTemplate($id, $template, $revision);
 
 		return $this->processResponse($response)->getData();
 	}

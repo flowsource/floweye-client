@@ -43,7 +43,7 @@ class TemplateProcessClient extends AbstractClient
 		return $this->request('PUT', sprintf('%s/%s', self::PATH, $id), ['json' => ['template' => $template]]);
 	}
 
-	public function changeTemplate(int $id, string $template, ?int $revision = null): ResponseInterface
+	public function patchTemplate(int $id, string $template, ?int $revision = null): ResponseInterface
 	{
 		return $this->request('PATCH', sprintf('%s/%s', self::PATH, $id), ['json' => ['template' => $template, 'revision' => $revision]]);
 	}
