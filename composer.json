@@ -19,8 +19,8 @@
   "require": {
     "php": ">=7.2",
     "ext-json": "*",
-    "contributte/utils": "^0.3.2 || ^0.4.0 || ^0.5.0",
-    "guzzlehttp/guzzle": "^7.1.0"
+    "guzzlehttp/guzzle": "^7.1.0",
+    "nette/utils": "^2.2 || ^3.0 || ^4.0"
   },
   "require-dev": {
     "nette/di": "^2.4.15 || ^3.0.0",
