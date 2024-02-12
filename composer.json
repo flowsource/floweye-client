@@ -12,12 +12,11 @@
   "homepage": "https://github.com/flowsource/floweye-client",
   "authors": [
     {
-      "name": "Milan Felix Šulc",
-      "homepage": "https://f3l1x.io"
+      "name": "Ing. Filip Šuška"
     }
   ],
   "require": {
-    "php": ">=7.2",
+    "php": ">=8.1",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.1.0",
     "nette/utils": "^2.2 || ^3.0 || ^4.0"
