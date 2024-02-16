@@ -3,11 +3,13 @@
 namespace Floweye\Client\DI;
 
 use Floweye\Client\Client\ApplicationClient;
+use Floweye\Client\Client\InstanceClient;
 use Floweye\Client\Client\UserClient;
 use Floweye\Client\Client\UserGroupClient;
 use Floweye\Client\Http\Guzzle\GuzzleFactory;
 use Floweye\Client\Http\HttpClient;
 use Floweye\Client\Service\ApplicationService;
+use Floweye\Client\Service\InstanceService;
 use Floweye\Client\Service\UserGroupService;
 use Floweye\Client\Service\UserService;
 use Nette\DI\CompilerExtension;
@@ -61,6 +63,9 @@ class FloweyeExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('client.userGroup'))
 			->setFactory(UserGroupClient::class, [$this->prefix('@http.client')]);
 
+		$builder->addDefinition($this->prefix('client.instance'))
+			->setFactory(InstanceClient::class, [$this->prefix('@http.client')]);
+
 		// #3 Services
 		$builder->addDefinition($this->prefix('service.application'))
 			->setFactory(ApplicationService::class, [$this->prefix('@client.application')]);
@@ -70,6 +75,9 @@ class FloweyeExtension extends CompilerExtension
 
 		$builder->addDefinition($this->prefix('service.userGroup'))
 			->setFactory(UserGroupService::class, [$this->prefix('@client.userGroup')]);
+
+		$builder->addDefinition($this->prefix('service.userGroup'))
+			->setFactory(InstanceService::class, [$this->prefix('@client.instance')]);
 	}
 
 }
