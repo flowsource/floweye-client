@@ -10,10 +10,7 @@ class BaseListFilter extends AbstractListFilter
 		parent::__construct();
 	}
 
-	/**
-	 * @return static
-	 */
-	public static function create(int $limit = 10, int $offset = 0): self
+	public static function create(int $limit = 10, int $offset = 0): static
 	{
 		$self = new static();
 

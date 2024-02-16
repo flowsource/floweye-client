@@ -5,11 +5,12 @@ namespace Floweye\Client\Filter;
 abstract class AbstractListFilter
 {
 
-	/** @var mixed[] */
-	protected $parameters = [];
+	/** @var array<mixed> */
+	protected array $parameters;
 
 	protected function __construct()
 	{
+		$this->parameters = [];
 	}
 
 	/**
