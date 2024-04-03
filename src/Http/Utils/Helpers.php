@@ -14,9 +14,7 @@ class Helpers
 			return '';
 		}
 
-		$parameters = array_filter($parameters, static function ($value): bool {
-			return $value !== null && $value !== '';
-		});
+		$parameters = array_filter($parameters, static fn ($value): bool => $value !== null && $value !== '');
 
 		return http_build_query($parameters, '', '&', PHP_QUERY_RFC3986);
 	}

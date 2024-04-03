@@ -6,7 +6,7 @@ class FloweyeExtension24 extends FloweyeExtension
 {
 
 	/** @var mixed[] */
-	private $defaults = [
+	private array $defaults = [
 		'debug' => false,
 		'http' => [
 			'http_errors' => false,
