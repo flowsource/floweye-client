@@ -75,6 +75,7 @@ class ApplicationClient extends AbstractClient
 			'offset' => $offset >= 0 ? $offset : 0,
 			'include' => implode(',', $include),
 		]);
+
 		return $this->request('GET', sprintf('%s/snippets?%s', self::PATH, $query));
 	}
 

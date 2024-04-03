@@ -6,7 +6,7 @@ abstract class AbstractBodyEntity
 {
 
 	/** @var mixed[] */
-	protected $body = [];
+	protected array $body = [];
 
 	protected function __construct()
 	{

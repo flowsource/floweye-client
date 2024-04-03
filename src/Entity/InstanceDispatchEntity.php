@@ -13,6 +13,9 @@ class InstanceDispatchEntity extends AbstractBodyEntity
 		return $self;
 	}
 
+	/**
+	 * @param array<mixed> $data
+	 */
 	public function withEvent(string $name, array $data): self
 	{
 		$this->body['events'][] = [

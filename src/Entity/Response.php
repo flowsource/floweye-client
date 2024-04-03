@@ -7,28 +7,23 @@ final class Response
 
 	private const STATUS_SUCCESS = 'success';
 
-	/** @var string|null */
-	private $status;
+	private ?string $status = null;
 
-	/** @var string|null */
-	private $message;
+	private ?string $message = null;
 
-	/** @var int|null */
-	private $code;
+	private ?int $code = null;
 
-	/** @var mixed|null */
-	private $data;
+	private mixed $data = null;
 
 	/** @var mixed[]|null */
-	private $context;
+	private ?array $context = null;
 
 	/**
-	 * @param mixed|null  $data
 	 * @param mixed[]|null  $context
 	 */
 	public function __construct(
 		string $status,
-		$data = null,
+		mixed $data = null,
 		?int $code = null,
 		?string $message = null,
 		?array $context = null
@@ -56,10 +51,7 @@ final class Response
 		return $this->code;
 	}
 
-	/**
-	 * @return mixed|null
-	 */
-	public function getData()
+	public function getData(): mixed
 	{
 		return $this->data;
 	}

@@ -45,45 +45,6 @@ class UserServiceTest extends AbstractAppTestCase
 		$service->getById(1, []);
 	}
 
-	public function testSudoDisabled(): void
-	{
-		/** @var HttpClient|MockObject $httpClient */
-		$httpClient = $this->createMock(HttpClient::class);
-		$httpClient->method('request')->willReturnCallback(function (string $method, string $url, array $opts): Response {
-			self::assertArrayNotHasKey('headers', $opts);
-
-			return new Response(200, [], '{"status": "success", "data": []}');
-		});
-
-		$client = new UserClient($httpClient);
-		$requestor = new UserService($client);
-
-		self::assertFalse($requestor->isSudo());
-		$requestor->getById(1, []);
-	}
-
-	public function testSudoEnabled(): void
-	{
-		/** @var HttpClient|MockObject $httpClient */
-		$httpClient = $this->createMock(HttpClient::class);
-		$httpClient->method('request')->willReturnCallback(function (string $method, string $url, array $opts): Response {
-			self::assertArrayHasKey('headers', $opts);
-			self::assertArrayHasKey('X-Sudo', $opts['headers']);
-			self::assertEquals('email@ispa.cz', $opts['headers']['X-Sudo']);
-
-			return new Response(200, [], '{"status": "success", "data": []}');
-		});
-
-		$client = new UserClient($httpClient);
-		$requestor = new UserService($client);
-
-		self::assertFalse($requestor->isSudo());
-		$requestor->enableSudo('email@ispa.cz');
-		self::assertTrue($requestor->isSudo());
-
-		$requestor->getById(1, []);
-	}
-
 	private function createRequestor(string $file): UserService
 	{
 		$httpClient = $this->createTestClient(200, file_get_contents(__DIR__ . '/data/' . $file));

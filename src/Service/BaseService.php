@@ -12,8 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 class BaseService
 {
 
-	/** @var AbstractClient */
-	protected $client;
+	protected AbstractClient $client;
 
 	public function __construct(AbstractClient $client)
 	{
