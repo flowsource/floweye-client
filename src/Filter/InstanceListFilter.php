@@ -8,6 +8,7 @@ use Floweye\Client\Filter\Enum\InstanceSort;
 class InstanceListFilter extends BaseListFilter
 {
 
+	/** @var array<mixed> */
 	protected array $criteria = [];
 
 	protected ?InstanceSort $sortColumn = null;
@@ -145,6 +146,9 @@ class InstanceListFilter extends BaseListFilter
 		return $this;
 	}
 
+	/**
+	 * @param array<mixed> $value
+	 */
 	protected function setCriterion(string $key, string $operator, array $value): void
 	{
 		$this->criteria = array_filter($this->criteria, static fn ($criterion): bool => $criterion['key'] !== $key);

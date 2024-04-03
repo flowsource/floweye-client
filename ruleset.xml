@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ruleset>
 	<!-- Base ruleset -->
-	<rule ref="./vendor/ninjify/coding-standard/contributte.xml"/>
+	<rule ref="./vendor/contributte/qa/ruleset.xml"/>
 
 	<!-- Package specific rules -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
@@ -12,5 +12,7 @@
 			"/>
 			<property name="extensions" type="array" value="php,phpt"/>
 		</properties>
+
+		<exclude name="SlevomatCodingStandard.Functions.DisallowEmptyFunction.EmptyFunction"/>
 	</rule>
 </ruleset>

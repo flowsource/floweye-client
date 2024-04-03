@@ -18,14 +18,12 @@ abstract class AbstractAppTestCase extends TestCase
 		return new class($status, $body, $headers) implements HttpClient
 		{
 
-			/** @var int */
-			private $status;
+			private int $status;
 
-			/** @var string */
-			private $body;
+			private string $body;
 
 			/** @var mixed[] */
-			private $headers;
+			private array $headers;
 
 			/**
 			 * @param mixed[] $headers

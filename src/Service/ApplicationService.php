@@ -46,10 +46,7 @@ class ApplicationService extends BaseService
 		$this->assertResponse($response);
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function listGlobals(string $path)
+	public function listGlobals(string $path): mixed
 	{
 		$response = $this->client->listGlobals($path);
 

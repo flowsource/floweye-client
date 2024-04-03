@@ -19,6 +19,25 @@ use Tests\Floweye\Client\Toolkit\ContainerTestCase;
 class FloweyeExtensionTest extends ContainerTestCase
 {
 
+	public function testServicesRegistration(): void
+	{
+		$container = $this->getContainer();
+
+		// CorePass
+		static::assertInstanceOf(GuzzleFactory::class, $container->getService('ispa.apis.guzzleFactory'));
+
+		// AppLotusPass
+		static::assertInstanceOf(HttpClient::class, $container->getService('ispa.apis.http.client'));
+
+		static::assertInstanceOf(ApplicationClient::class, $container->getService('ispa.apis.client.application'));
+		static::assertInstanceOf(UserClient::class, $container->getService('ispa.apis.client.user'));
+		static::assertInstanceOf(UserGroupClient::class, $container->getService('ispa.apis.client.userGroup'));
+
+		static::assertInstanceOf(ApplicationService::class, $container->getService('ispa.apis.service.application'));
+		static::assertInstanceOf(UserService::class, $container->getService('ispa.apis.service.user'));
+		static::assertInstanceOf(UserGroupService::class, $container->getService('ispa.apis.service.userGroup'));
+	}
+
 	protected function setUpCompileContainer(Compiler $compiler): void
 	{
 		parent::setUpCompileContainer($compiler);
@@ -37,25 +56,6 @@ class FloweyeExtensionTest extends ContainerTestCase
 				],
 			],
 		]);
-	}
-
-	public function testServicesRegistration(): void
-	{
-		$container = $this->getContainer();
-
-		// CorePass
-		static::assertInstanceOf(GuzzleFactory::class, $container->getService('ispa.apis.guzzleFactory'));
-
-		// AppLotusPass
-		static::assertInstanceOf(HttpClient::class, $container->getService('ispa.apis.http.client'));
-
-		static::assertInstanceOf(ApplicationClient::class, $container->getService('ispa.apis.client.application'));
-		static::assertInstanceOf(UserClient::class, $container->getService('ispa.apis.client.user'));
-		static::assertInstanceOf(UserGroupClient::class, $container->getService('ispa.apis.client.userGroup'));
-
-		static::assertInstanceOf(ApplicationService::class, $container->getService('ispa.apis.service.application'));
-		static::assertInstanceOf(UserService::class, $container->getService('ispa.apis.service.user'));
-		static::assertInstanceOf(UserGroupService::class, $container->getService('ispa.apis.service.userGroup'));
 	}
 
 }

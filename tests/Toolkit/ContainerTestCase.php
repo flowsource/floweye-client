@@ -10,12 +10,11 @@ use Nette\DI\Extensions\ExtensionsExtension;
 abstract class ContainerTestCase extends TestCase
 {
 
-	/** @var Container */
-	private $container;
+	private ?Container $container = null;
 
 	protected function getContainer(): Container
 	{
-		if (!$this->container) {
+		if ($this->container === null) {
 			$this->container = $this->createContainer();
 			$this->setUpContainer($this->container);
 		}

@@ -10,11 +10,9 @@ use Psr\Http\Message\ResponseInterface;
 abstract class AbstractClient
 {
 
-	/** @var string|null  */
-	protected $sudo;
+	protected ?string $sudo = null;
 
-	/** @var HttpClient */
-	protected $httpClient;
+	protected HttpClient $httpClient;
 
 	public function __construct(HttpClient $httpClient)
 	{
