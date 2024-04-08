@@ -76,7 +76,7 @@ class FloweyeExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('service.userGroup'))
 			->setFactory(UserGroupService::class, [$this->prefix('@client.userGroup')]);
 
-		$builder->addDefinition($this->prefix('service.userGroup'))
+		$builder->addDefinition($this->prefix('service.instance'))
 			->setFactory(InstanceService::class, [$this->prefix('@client.instance')]);
 	}
 
