@@ -58,17 +58,20 @@ final class InstanceService extends BaseService
 		return $this->processResponse($response)->getData();
 	}
 
+	/**
+	 * @return array<mixed>
+	 */
 	public function upload(
 		int $id,
 		string $collection,
 		string $fileName,
 		string $contents,
 		?string $mode = null
-	): void
+	): array
 	{
 		$response = $this->client->upload($id, $collection, $fileName, $contents, $mode);
 
-		$this->assertResponse($response);
+		return $this->processResponse($response)->getData();
 	}
 
 }
