@@ -2,9 +2,9 @@
 
 namespace Floweye\Client\Client;
 
-use Contributte\Utils\Validators;
 use Floweye\Client\Exception\LogicalException;
 use Floweye\Client\Http\HttpClient;
+use Nette\Utils\Validators;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractClient
