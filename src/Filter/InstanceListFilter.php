@@ -28,7 +28,7 @@ class InstanceListFilter extends BaseListFilter
 			$criteria[] = [
 				'key' => 'variables',
 				'operator' => InstanceCriterionOperator::equal,
-				'value' => $this->variablesFilter->toVariables(),
+				'value' => [json_encode($this->variablesFilter->toVariables())],
 			];
 		}
 
