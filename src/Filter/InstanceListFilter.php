@@ -109,7 +109,7 @@ class InstanceListFilter extends BaseListFilter
 	 */
 	public function withProcess(array $idents, InstanceCriterionOperator $operator = InstanceCriterionOperator::equal): static
 	{
-		$this->setCriterion('creator', $operator->value, $idents);
+		$this->setCriterion('process', $operator->value, $idents);
 
 		return $this;
 	}
